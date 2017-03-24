@@ -1,5 +1,11 @@
 package com.exercise1;
 
+/**
+ * 输出斐波那契数列的第n项
+ * 
+ * @author XIAO
+ *
+ */
 public class Fibonacci {
 	public int FibonacciSolution(int n) {
 		if (n == 0) {
