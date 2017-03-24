@@ -1,5 +1,7 @@
 package com.exercise1;
 
+import com.model.TreeNode;
+
 /**
  * 输入两颗二叉树A，B，判断B是不是A的子结构 /*思路：参考剑指offer 
  * 1、首先设置标志位result =false，因为一旦匹配成功result就设为true， 剩下的代码不会执行，如果匹配不成功，默认返回false

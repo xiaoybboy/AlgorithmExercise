@@ -1,6 +1,6 @@
 package com.exercise2;
 
-import com.exercise1.TreeNode;
+import com.model.TreeNode;
 
 /**
  * 判断一棵树是不是平衡二叉树

@@ -1,7 +1,7 @@
-package com.exercise1;
+package com.model;
 
 public class ListNode {
-	int val;
+	public int val;
 	ListNode next = null;
 
 	ListNode(int val) {

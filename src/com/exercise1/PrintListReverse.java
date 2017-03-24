@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 
+import com.model.ListNode;
+
 /**
  * 输入一个链表，从尾到头打印链表每个节点的值 思路：利用stack栈的特点，先把链表中节点的值压入栈，然后出栈。
  * 
