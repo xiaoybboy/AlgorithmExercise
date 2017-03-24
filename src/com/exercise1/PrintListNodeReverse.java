@@ -1,8 +1,8 @@
 package com.exercise1;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.Vector;
 
 import com.model.ListNode;
 
@@ -16,11 +16,12 @@ import com.model.ListNode;
  *         ListNode(int val) { this.val = val; } }
  */
 
-public class PrintListReverse {
+public class PrintListNodeReverse {
 	public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
 		Stack<Integer> stack = new Stack<>();
 		while (listNode != null) {
 			stack.push(listNode.val);
+			listNode = listNode.next;
 		}
 		ArrayList<Integer> list = new ArrayList<>();
 		while (!stack.isEmpty()) {
