@@ -51,7 +51,7 @@ public class LCSequence {
 		// 从b的右下角开始，沿着箭头的方向前进
 		if (b[i][j] == 0) {
 			Display(b, str, i - 1, j - 1);
-			System.out.print(str.charAt(i) + " ");
+			System.out.println(str.charAt(i-1) + " ");
 		} else if (b[i][j] == 1) {
 			Display(b, str, i - 1, j);
 		} else if (b[i][j] == -1) {
@@ -60,8 +60,8 @@ public class LCSequence {
 	}
 
 	public static void main(String[] args) {
-		String str1 = "BDCABA";
-		String str2 = "ABCBDAB";
+		String str1 = "BDCABAF";
+		String str2 = "ABCBDAF";
 		int result = LCS(str1, str2);
 		System.out.println(result);
 	}
