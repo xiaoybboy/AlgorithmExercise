@@ -1,4 +1,4 @@
-package com.baseAlgorithm;
+package com.company.ctrip;
 
 /**
  * 一个一维数组，记录n天中每天的携程股价。 股市交易规则如下：

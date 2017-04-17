@@ -1,6 +1,5 @@
 package com.company.netease;
 
-import java.util.Currency;
 import java.util.Scanner;
 
 /**

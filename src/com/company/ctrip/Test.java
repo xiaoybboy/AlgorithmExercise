@@ -1,4 +1,4 @@
-package com.baseAlgorithm;
+package com.company.ctrip;
 
 import java.util.ArrayList;
 import java.util.Scanner;

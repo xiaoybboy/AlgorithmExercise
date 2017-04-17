@@ -1,6 +1,5 @@
 package com.company.netease;
 
-import java.sql.SQLClientInfoException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
