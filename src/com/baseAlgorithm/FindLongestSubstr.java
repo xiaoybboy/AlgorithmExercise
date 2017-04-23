@@ -1,10 +1,8 @@
 package com.baseAlgorithm;
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 /**
  * 给定一个字符串，寻找这个字符串的最长不重复子串(子串里面没有重复字母)。例如：对于字符串“abcabcbb”，它的最长不重复子串是“abc”，长度为3；而对于字符串“bbbbb”，它的最长不重复子串是“b”，长度为1。
@@ -12,7 +10,7 @@ import java.util.regex.*;
  * @author XIAO
  *
  */
-public class Main2 {
+public class FindLongestSubstr {
 
 	/* 请完成下面这个函数，实现题目要求的功能 */
 	/* 当然，你也可以不按照下面这个模板来作答，完全按照自己的想法来 ^-^ */
@@ -20,16 +18,16 @@ public class Main2 {
 	static String calDuplicateString(String str) {
 		String maxLengthStr = "";
 		int maxLength = 0;
-		//遍历所有的字符串子串
+		// 遍历所有的字符串子串
 		for (int i = 0; i < str.length(); i++) {
-			for (int j = i+1; j < str.length(); j++) {
+			for (int j = i + 1; j < str.length(); j++) {
 				String temp = str.substring(i, j);
-				Set<Character> characters = new HashSet<>();//看子串里面是否有重复字符
+				Set<Character> characters = new HashSet<>();// 看子串里面是否有重复字符
 				for (int k = 0; k < temp.length(); k++) {
 					characters.add(temp.charAt(k));
 				}
-				if (characters.size()==temp.length()) {
-					if (characters.size()>maxLength) {
+				if (characters.size() == temp.length()) {
+					if (characters.size() > maxLength) {
 						maxLength = characters.size();
 						maxLengthStr = temp;
 					}
