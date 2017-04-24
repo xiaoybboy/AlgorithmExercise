@@ -15,10 +15,15 @@ import java.util.Scanner;
  * 
  * 输出 一个整数
  * 
+ * 思路： 根据题意，对于一个整数n，必然存在一个整数x，使得从n中分解出整数x可以使其最后获得最大乘积，这要求对n-x的分解也是最优解。
+ * 
+ * 我们用dp[i][j]表示从整数i分解出整数j的这种情况下，能达到的最大乘积。
+ * 
  * @author XIAO
  *
  */
 public class MaxMulti {
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		int n = in.nextInt();
@@ -26,7 +31,6 @@ public class MaxMulti {
 		System.out.println(result);
 	}
 
-	// 动态规划
 	public static int largestProductOfN(int n) {
 		int[][] dp = new int[n + 1][n + 1];
 		for (int i = 0; i <= n; i++) {
@@ -43,5 +47,4 @@ public class MaxMulti {
 
 		return dp[n][n];
 	}
-
 }
