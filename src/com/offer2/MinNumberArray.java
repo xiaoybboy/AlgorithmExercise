@@ -9,9 +9,11 @@ import java.util.Comparator;
  * 
  * 思路：真的思路太强。
  * 
- * 先将整型数组转换成String数组，然后将String数组排序，最后将排好序的字符串数组拼接出来。关键就是制定排序规则。  排序规则如下：  若ab >
- * ba 则 a > b，  若ab < ba 则 a < b， 若ab = ba 则 a = b；  解释说明： * 比如 "3" <"31" 但是
- * "331" > "313"，所以要将二者拼接起来进行比较
+ * 先将整型数组转换成String数组，然后将String数组排序，最后将排好序的字符串数组拼接出来。关键就是制定排序规则。 
+ * 
+ * 排序规则如下：  若ab > ba 则 a > b，  若ab < ba 则 a < b， 若ab = ba 则 a = b； 
+ * 
+ * 解释说明： * 比如 "3" <"31" 但是 "331" > "313"，所以要将二者拼接起来进行比较
  * 
  * @author XIAO
  *
@@ -38,7 +40,7 @@ public class MinNumberArray {
 			}
 		});
 		StringBuilder builder = new StringBuilder();
-		//把排序好的字符串拼接在一起
+		// 把排序好的字符串拼接在一起
 		for (int i = 0; i < strings.length; i++) {
 			builder.append(strings[i]);
 		}

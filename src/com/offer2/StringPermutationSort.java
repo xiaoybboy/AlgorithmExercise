@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串
- * abc,acb,bac,bca,cab和cba。
+ * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。
+ * 
+ * 例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串 abc,acb,bac,bca,cab和cba。
  * 
  * 思路：先求解字符串的全排列，然后对这些全排列进行排序。
  * 
@@ -38,7 +39,7 @@ public class StringPermutationSort {
 			for (int j = i; j <= charArray.length - 1; j++) {
 				if (j != i && charArray[j] == charArray[i])// 有重复字符时，跳过
 					continue;
-				swap(charArray, i, j);
+				swap(charArray, i, j);// 回溯法
 				Permutation(charArray, i + 1, result);
 				swap(charArray, i, j);
 			}
