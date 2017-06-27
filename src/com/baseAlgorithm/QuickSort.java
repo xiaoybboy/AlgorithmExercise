@@ -1,5 +1,11 @@
 package com.baseAlgorithm;
 
+/***
+ * 快速排序
+ * 
+ * @author XIAO
+ *
+ */
 public class QuickSort {
 
 	public static void main(String[] args) {

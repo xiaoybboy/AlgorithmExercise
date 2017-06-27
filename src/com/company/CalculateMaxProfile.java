@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 给你一个回顾历史的机会，已知一支股票连续n天的价格走势，以长度为n的整数数组表示，数组中第i个元素（prices[i]）代表该股票第i天的股价。
+ * 给你一个回顾历史的机会，已知一支股票连续n天的价格走势，以长度为n的整数数组表示，
+ * 
+ * 数组中第i个元素（prices[i]）代表该股票第i天的股价。
+ * 
  * 假设你一开始没有股票，但有至多两次买入1股而后卖出1股的机会，并且买入前一定要先保证手上没有股票。若两次交易机会都放弃，收益为0。
  * 设计算法，计算你能获得的最大收益。 输入数值范围：2<=n<=100,0<=prices[i]<=100
  * 
@@ -31,7 +34,6 @@ public class CalculateMaxProfile {
 	}
 
 	// 求最大start到end之间的最大利润函数
-	// 动态规划
 	public int getMax(int[] prices, int start, int end) {
 		int min = prices[start];
 		int max = 0;
