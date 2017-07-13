@@ -40,7 +40,6 @@ public class ThirdPriceHat {
 
 			if (index == 3) {
 				System.out.println(currentPrice);
-				break;
 			}
 		}
 
