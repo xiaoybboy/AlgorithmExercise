@@ -35,13 +35,12 @@ public final class LuckyNumber {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-
 		for (int i = 0; i < n; i++) {
 			long k = sc.nextLong();
 			StringBuilder sb = new StringBuilder();
 
 			while (k > 0) {
-				if ((k & 1) == 1) {// 如果k是奇数
+				if ((k % 2) == 1) {
 					sb.append('4');
 					k = (k - 1) / 2;// 向上回溯寻找父节点
 				} else {// 偶数
@@ -52,6 +51,5 @@ public final class LuckyNumber {
 
 			System.out.println(sb.reverse());
 		}
-
 	}
 }
