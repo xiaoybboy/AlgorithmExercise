@@ -10,7 +10,9 @@ import java.util.Scanner;
  * 
  * 样例输入
  * 
- * sogou 输出
+ * sogou
+ * 
+ * 输出
  * 
  * 最大回文前缀的长度。
  * 
@@ -25,9 +27,24 @@ public class MaxLengthPlalindrome {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
-		int max = getChildLen(str);
+		int max = getChildLen2(str);
 		System.out.println(max);
 		sc.close();
+	}
+
+	// 另一种方式
+	public static int getChildLen2(String str) {
+		int n = str.length();
+		int maxLength = 0;
+		for (int i = n; i >= 1; i--) {
+			String temp = str.substring(0, i);
+			StringBuffer buffer = new StringBuffer(temp);
+			if (buffer.reverse().toString().equals(temp)) {
+				maxLength = temp.length();
+				break;
+			}
+		}
+		return maxLength;
 	}
 
 	public static int getChildLen(String str) {
@@ -49,18 +66,4 @@ public class MaxLengthPlalindrome {
 		return n;
 	}
 
-	// 另一种方式，和上面思路相同,未AC,有待考虑
-	public static int getChildLen2(String str) {
-		int n = str.length();
-		int maxLength = 0;
-		for (int i = n - 1; i >= 1; i--) {
-			String temp = str.substring(0, i);
-			StringBuffer buffer = new StringBuffer(temp);
-			if (buffer.reverse().toString().equals(temp)) {
-				maxLength = temp.length();
-				break;
-			}
-		}
-		return maxLength;
-	}
 }
