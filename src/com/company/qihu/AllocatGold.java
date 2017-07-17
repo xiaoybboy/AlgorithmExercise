@@ -1,6 +1,5 @@
-package com.company.baidu;
+package com.company.qihu;
 
-import java.util.ArrayDeque;
 import java.util.Scanner;
 
 /**
