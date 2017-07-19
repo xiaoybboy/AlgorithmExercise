@@ -62,10 +62,10 @@ public class SetQuestion {
 				// 如果在10以内的情况
 			} else if (i + 1 < n) {
 				// 判断第三个数字比第二个数字大多少
-				// 10以内
+				// 10以内 //3个数刚好符合条件
 				if (i + 2 < n && arr[i + 2] - arr[i + 1] <= 10) {
 					i = i + 2;
-					// 10以外
+					// 10以外//需要出第三道题
 				} else if (i + 2 < n) {
 					res += 1;
 					i = i + 1;
@@ -81,5 +81,4 @@ public class SetQuestion {
 		}
 		System.out.println(res);
 	}
-
 }
