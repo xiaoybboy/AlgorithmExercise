@@ -1,4 +1,4 @@
-package com.baseAlgorithm;
+package com.baseAlgorithm.sort;
 
 /**
  * 选择排序
@@ -27,10 +27,10 @@ public class SelectionSort {
 				if (array[j] < array[midx]) {
 					midx = j;
 				}
-			}
-			// 每趟最多交换一次
-			if (midx != i) // 如果mix不等于当前的i,让最小值的和当前位置的值交换
-			{
+					}
+					// 每趟最多交换一次
+					if (midx != i) // 如果mix不等于当前的i,让最小值的和当前位置的值交换
+					{
 				swap(array, midx, i);
 			}
 

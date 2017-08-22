@@ -1,4 +1,4 @@
-package com.baseAlgorithm;
+package com.baseAlgorithm.sort;
 
 /**
  * 冒泡排序
@@ -9,6 +9,7 @@ public class BubbleSort {
     // 冒泡排序
     public static int[] bubbleSort(int[] data) {
         int length = data.length;
+        //每次排序都把最大值放到最后一位
         for (int i = 0; i < length - 1; i++) {
             // 如果data[j]和data[j+1]反向
             for (int j = 0; j < length - 1 - i; j++)
