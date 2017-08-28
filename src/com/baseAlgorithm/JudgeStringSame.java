@@ -6,6 +6,9 @@ import java.util.Scanner;
 /**
  * <p>由相同字符组成是指组成两个字符串的字母以及各个字母的个数相同，只是排列顺序不同。</p>
  * <p>例如：aaabbc和bcbaaa是由相同字符组成</p>
+ *
+ * @author XIAO
+ * @since 2017/8
  */
 public class JudgeStringSame {
     public static void main(String[] args) {

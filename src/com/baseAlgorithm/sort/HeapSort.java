@@ -1,5 +1,8 @@
 package com.baseAlgorithm.sort;
 
+/**
+ * 调整堆
+ */
 public class HeapSort {
     public static void main(String[] args) {
         int[] array = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3};
@@ -41,6 +44,7 @@ public class HeapSort {
             return;
         }
 
+        //从最后一个非叶子节点开始调整堆
         int half = array.length / 2;
         for (int i = half; i >= 0; i--) {
             maxHeap(array, array.length, i);
