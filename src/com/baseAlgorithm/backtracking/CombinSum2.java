@@ -10,33 +10,31 @@ import java.util.List;
 public class CombinSum2 {
 
     private static int num = 0;
+    private static List<List<Integer>> lists = new ArrayList<>();
 
     public static void main(String[] args) {
         int[] candidates = {2, 3, 4, 6, 7};
-        List<Integer> nums = new ArrayList<>();
-        for (int i = 0; i < candidates.length; i++) {
-            nums.add(candidates[i]);
-        }
-        backtracking(7, nums);
+        backtracking(candidates, 10, 0, new ArrayList<>());
         System.out.println(num);
     }
 
-    private static void backtracking(int target, List<Integer> nums) {
+    //不允许重复放入
+    private static void backtracking(int[] candidates, int target, int start, List<Integer> list) {
         if (target < 0) {
             return;
-        }
-        if (target == 0) {
-            num++;
-        }
-        for (int i = 0; i < nums.size(); i++) {
-            int temp = nums.get(i);
-            if (target >= temp) {
-                target -= temp;
-                nums.remove(i);
-                backtracking(target, nums);
-                target += temp;
-                nums.add(i, temp);
+        } //凑过头了
+        else if (target == 0) {
+            num++;//正好凑出答案
+            lists.add(list);
+            return;
+        } else {
+            for (int i = start; i < candidates.length; i++) {//循环试探每个数
+                list.add(candidates[i]);//尝试加入
+                //下一次凑target-candidates[i]，不允许重复，从i+1开始
+                backtracking(candidates, target - candidates[i], i + 1, list);
+                list.remove(list.size() - 1);//回退
             }
         }
     }
+
 }

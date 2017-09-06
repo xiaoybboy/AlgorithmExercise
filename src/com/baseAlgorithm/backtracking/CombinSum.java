@@ -18,6 +18,7 @@ import java.util.List;
  * [7],
  * [2,2, 3]
  * ]
+ * 每个数可以用多次
  *
  * @author XIAO
  * @create 2017-09-06 18:27

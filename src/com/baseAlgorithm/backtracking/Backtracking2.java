@@ -34,8 +34,8 @@ public class Backtracking2 {
         } else {
             for (int i = 0; i < nums.length; i++) {
                 if (tempList.contains(nums[i])) {// element already exists, skip
-                    continue;
-                }
+                continue;
+            }
                 tempList.add(nums[i]);
                 backtrack(list, tempList, nums);
                 tempList.remove(tempList.size() - 1);
