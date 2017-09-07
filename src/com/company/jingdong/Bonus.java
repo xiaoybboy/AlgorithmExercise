@@ -9,11 +9,11 @@ package com.company.jingdong;
  * <p>
  * 保证每个礼物价值大于100小于1000。
  * <p>
- * 思路动态规划：
+ * 思路动态规划
  *
  * @author XIAO
  */
-public class GetMostValue {
+public class Bonus {
     public int getMost(int[][] board) {
         int row = board.length;// 行长
         int col = board[0].length;// 列数
