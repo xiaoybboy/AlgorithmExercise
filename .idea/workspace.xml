@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f27ff1c-8161-4ad1-994e-9d0fb3d87b87" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/qunar/KeyWord.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/qunar/StringRepalce.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/qunar/BloodType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -30,16 +29,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StockDeal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/ctrip/StockDeal.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MaxMulti2.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/ctrip/MaxMulti2.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -120,11 +109,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KeyWord.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="KeyWord.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/qunar/KeyWord.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+            <state relative-caret-position="350">
+              <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BloodType.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/qunar/BloodType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -168,7 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/company/ctrip/MaxMulti2.java" />
         <option value="$PROJECT_DIR$/src/com/company/jingdong/Auction.java" />
         <option value="$PROJECT_DIR$/src/com/company/jingdong/BearApple.java" />
         <option value="$PROJECT_DIR$/src/com/company/jingdong/BirthDayPrize.java" />
@@ -219,6 +219,7 @@
         <option value="$PROJECT_DIR$/src/com/company/meituan/StockDeal.java" />
         <option value="$PROJECT_DIR$/src/com/company/qunar/StringRepalce.java" />
         <option value="$PROJECT_DIR$/src/com/company/qunar/KeyWord.java" />
+        <option value="$PROJECT_DIR$/src/com/company/qunar/BloodType.java" />
       </list>
     </option>
   </component>
@@ -670,12 +671,12 @@
       <workItem from="1504582751667" duration="11086000" />
       <workItem from="1504683036176" duration="1114000" />
       <workItem from="1504684189409" duration="9698000" />
-      <workItem from="1504749956674" duration="13456000" />
+      <workItem from="1504749956674" duration="13744000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67700000" />
+    <option name="totallyTimeSpent" value="67988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -723,13 +724,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/company/baidu/FractionsSum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://E:/Program Files/Java/jdk1.8.0_92/src.zip!/java/util/concurrent/BlockingQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3625">
@@ -1136,8 +1130,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/qunar/KeyWord.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        <state relative-caret-position="350">
+          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/qunar/BloodType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
