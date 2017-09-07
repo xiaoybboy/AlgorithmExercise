@@ -38,6 +38,7 @@ public class CombinSum {
         return result;//返回解的组合链表
     }
 
+    //允许重复放入
     private static void backtracking(int[] candidates, int target, int start, List<Integer> list) {
         if (target < 0) {
             return;

@@ -21,32 +21,32 @@ import java.util.Scanner;
  * @create 2017-09-06 15:13
  **/
 public class ArraySumCount {
-	public static void main(String args[]) {
-		Scanner s = new Scanner(System.in);
-		int n = s.nextInt();
-		int sum = s.nextInt();
-		int i, j;
-		int arr[] = new int[n];
-		for (i = 0; i < n; i++) {
-			arr[i] = s.nextInt();
-		}
-		// dp[i][j]表示用前i个值组成和为j的方案个数
-		long[][] dp = new long[n][sum + 1];
-		dp[0][0] = 1;
-		if (arr[0] <= sum) {
-			dp[0][arr[0]] = 1;
-		}
+    public static void main(String args[]) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int sum = s.nextInt();
+        int i, j;
+        int arr[] = new int[n];
+        for (i = 0; i < n; i++) {
+            arr[i] = s.nextInt();
+        }
+        // dp[i][j]表示用前i个值组成和为j的方案个数
+        long[][] dp = new long[n][sum + 1];
+        dp[0][0] = 1;
+        if (arr[0] <= sum) {
+            dp[0][arr[0]] = 1;
+        }
 
-		for (i = 1; i < n; i++) {
-			for (j = 0; j <= sum; j++) {
-				// 第j个数不放入
-				if (j - arr[i] < 0) {
-					dp[i][j] += dp[i - 1][j];
-				} else {// 把第j个数放入
-					dp[i][j] += dp[i - 1][j - arr[i]] + dp[i - 1][j];
-				}
-			}
-		}
-		System.out.println(dp[n - 1][sum]);
-	}
+        for (i = 1; i < n; i++) {
+            for (j = 0; j <= sum; j++) {
+                // 第j个数不放入
+                if (j - arr[i] < 0) {
+                    dp[i][j] += dp[i - 1][j];
+                } else {// 把第j个数放入
+                    dp[i][j] += dp[i - 1][j - arr[i]] + dp[i - 1][j];
+                }
+            }
+        }
+        System.out.println(dp[n - 1][sum]);
+    }
 }
