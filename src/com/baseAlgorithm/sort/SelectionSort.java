@@ -7,11 +7,11 @@ package com.baseAlgorithm.sort;
  */
 public class SelectionSort {
     public static void main(String[] args) {
-        /*int[] arr = { 1, 3, 2, 45, 65, 33, 12 };
+        int[] arr = { 1, 3, 2, 45, 65, 33, 12 };
 		selectSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.println(arr[i]);
-		}*/
+		}
         String s = "123";
         System.out.println(s.substring(0, 2));
     }
@@ -30,13 +30,10 @@ public class SelectionSort {
                 }
             }
             // 每趟最多交换一次
-            if (midx != i) // 如果mix不等于当前的i,让最小值的和当前位置的值交换
-            {
+            if (midx != i) // 如果mix不等于当前的i,让最小值的和当前位置的值交换{
                 swap(array, midx, i);
             }
-
         }
-    }
 
     /**
      * 交换数组元素
@@ -50,5 +47,4 @@ public class SelectionSort {
         array[mix] = array[i];
         array[i] = temp;
     }
-
 }

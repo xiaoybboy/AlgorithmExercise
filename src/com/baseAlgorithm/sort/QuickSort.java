@@ -68,10 +68,7 @@ public class QuickSort {
      * @param numbers 带排序数组
      */
     public static void quick(int[] numbers) {
-        if (numbers.length > 0) // 查看数组是否为空
-        {
+        if (numbers.length > 0) // 查看数组是否为空{
             quickSort(numbers, 0, numbers.length - 1);
         }
-    }
-
 }

@@ -22,7 +22,6 @@ public class KnapSack {
             }
         }
         // printPack(c, w, m, n);
-
     }
 
     /**
