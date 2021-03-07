@@ -11,7 +11,7 @@ import java.util.Queue;
  * @author XIAO
  *
  */
-public class QueueStack {
+public class TwoQueueStack {
 	Queue<Integer> queue1 = new ArrayDeque<>();
 	Queue<Integer> queue2 = new ArrayDeque<>();
 
