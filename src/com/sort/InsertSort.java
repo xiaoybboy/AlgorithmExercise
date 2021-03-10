@@ -14,7 +14,7 @@ public class InsertSort {
     }
 
     /**
-     * 快速排序
+     * 插入排序
      *
      * @param array
      */

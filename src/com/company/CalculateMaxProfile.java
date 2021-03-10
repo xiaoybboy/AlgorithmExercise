@@ -61,6 +61,5 @@ public class CalculateMaxProfile {
 			System.out.println(prices[i]);
 		}
 		System.out.println(new CalculateMaxProfile().calculateMax(prices));
-
 	}
 }

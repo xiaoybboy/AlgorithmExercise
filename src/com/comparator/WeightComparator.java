@@ -15,5 +15,4 @@ public class WeightComparator implements Comparator<Goods> {
 			return o2.getValue() - o1.getValue();
 		}
 	}
-
 }
