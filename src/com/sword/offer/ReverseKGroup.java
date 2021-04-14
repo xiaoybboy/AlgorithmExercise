@@ -32,7 +32,7 @@ public class ReverseKGroup {
         int i =0;
         while (head!=null){
             if (i <= k){
-                stack.push()
+                stack.push(head);
             }
             //保存当前节点的下一个节点
             next = head.next;

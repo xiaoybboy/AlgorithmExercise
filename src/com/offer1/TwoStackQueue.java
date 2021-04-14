@@ -13,22 +13,28 @@ package com.offer1;
 import java.util.Stack;
 
 public class TwoStackQueue {
-    Stack<Integer> stack1 = new Stack<Integer>();
-    Stack<Integer> stack2 = new Stack<Integer>();
+    
+    Stack<Integer> stackA = new Stack<Integer>();
+    Stack<Integer> stackB = new Stack<Integer>();
 
     public void push(int node) {
-        stack1.push(node);
+        stackA.push(node);
     }
 
+    /**
+     * 如果 B不为空，直接出栈。如果为空，把A中元素先出栈，再压栈到B
+     *
+     * @return
+     */
     public int pop() {
         int a;
-        if (!stack2.isEmpty()) {
-            a = stack2.pop();
+        if (!stackB.isEmpty()) {
+            a = stackB.pop();
         } else {
-            while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
+            while (!stackA.isEmpty()) {
+                stackB.push(stackA.pop());
             }
-            a = stack2.pop();
+            a = stackB.pop();
         }
         return a;
     }

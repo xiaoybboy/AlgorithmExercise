@@ -5,9 +5,9 @@ package com.baseAlgorithm.tree;
  * @since 2017-09-07 19:43
  **/
 public class TreeNode {
-    int val;
-    TreeNode left = null;
-    TreeNode right = null;
+    public int val;
+    public TreeNode left = null;
+    public TreeNode right = null;
 
     TreeNode(int _val) {
         this.val = _val;
