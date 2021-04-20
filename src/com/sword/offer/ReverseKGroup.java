@@ -16,35 +16,40 @@ import java.util.Stack;
  */
 public class ReverseKGroup {
 
-    /**
-     *
-     * @param head ListNode类
-     * @param k int整型
-     * @return ListNode类
-     */
-    public ListNode reverseKGroup (ListNode head, int k) {
-        if (head == null || k>=0){
-
-        }
-        ListNode pre = null;
-        ListNode next = null;
-        Stack<ListNode> stack = new Stack<>();
-        int i =0;
-        while (head!=null){
-            if (i <= k){
-                stack.push(head);
+    public ListNode reverseKGroup(ListNode head, int k) {
+        //定义一个栈
+        Stack<ListNode> stack = new Stack<ListNode>();
+        //初始化一个新的链表存放结果
+        ListNode ret = new ListNode(0);
+        //为新链表定义一个指针,防止后续操作改变链表头节点
+        ListNode p = ret;
+        //循环原有链表
+        while (true) {
+            //为每次反转计数
+            int count = 0;
+            //定义指针操作原始链表
+            ListNode tmp = head;
+            //循环入栈
+            while (tmp != null && count < k) {
+                stack.push(tmp);
+                tmp = tmp.next;
+                count++;
             }
-            //保存当前节点的下一个节点
-            next = head.next;
-            //当前节点的下一节点指向前一个节点
-            head.next = pre;
-            //前一节点的指针后移
-            pre = head;
-            //当前节点指针后移
-            head = next;
+            //判断该次反转是否达到要求，此处防止因tem==null跳出循环的条件
+            if (count != k) {
+                //表示剩下的节点不够k个，直接将剩余节点插入末尾结束
+                p.next = head;
+                break;
+            }
+            //出栈操作，反转链表
+            while (!stack.isEmpty()) {
+                p.next = stack.pop();
+                p = p.next;
+            }
+            //重置下一次操作的初始节点
+            p.next = tmp;
+            head = tmp;
         }
-        return pre;
+        return ret.next;
     }
-
-
 }
