@@ -11,41 +11,45 @@ import java.util.ArrayList;
  */
 public class PrintMatrix {
 
+    /**
+     * 螺旋打印矩阵
+     *
+     * @param matrix
+     * @return
+     */
     public ArrayList<Integer> printMatrix(int[][] matrix) {
-        ArrayList<Integer> result = new ArrayList<>();
-        if (matrix == null) return result;
-
-        int low = 0;
-        int high = matrix.length - 1;
+        ArrayList<Integer> list = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return list;
+        }
+        int top = 0;
+        int bottom = matrix.length - 1;
         int left = 0;
         int right = matrix[0].length - 1;
-        while (low <= high && left <= right) {
-
+        while (top <= bottom && left <= right) {
             //向右
-            for (int i = left; i <= right; i++)
-                result.add(matrix[low][i]);
-
+            for (int i = left; i <= right; i++) {
+                list.add(matrix[top][i]);
+            }
             //向下
-            for (int i = low + 1; i <= high; i++)
-                result.add(matrix[i][right]);
-
-            //向左 有可能出现特殊的情况只有一行，为了避免重复访问
-            if (low < high) {
-                for (int i = right - 1; i >= left; i--)
-                    result.add(matrix[high][i]);
+            for (int i = top + 1; i <= bottom; i++) {
+                list.add(matrix[i][right]);
             }
-
-            //向上 有可能出现特殊的情况只有一列，为了避免重复访问
-            if (left < right) {
-                for (int i = high - 1; i >= low + 1; i--)
-                    result.add(matrix[i][left]);
+            if (left < right && top < bottom) {
+                //向左
+                for (int i = right - 1; i >= left; i--) {
+                    list.add(matrix[bottom][i]);
+                }
+                //向上
+                for (int i = bottom - 1; i > top; i--) {
+                    list.add(matrix[i][left]);
+                }
             }
-
-            low++;//向下
-            high--;//向上
-            left++;//向左
-            right--;//向右
+            left++;
+            right--;
+            top++;
+            bottom--;
         }
-        return result;
+        return list;
     }
 }

@@ -4,6 +4,8 @@ package com.sword.offer;
  * 有一个整数数组，请你根据快速排序的思路，找出数组中第K大的数。
  * <p>
  * 给定一个整数数组a,同时给定它的大小n和要找的K(K在1到n之间)，请返回第K大的数，保证答案存在。
+ *
+ * 思路：快速排序思想，每次将数组分割成有序的两部分，比较中值的位置是否等于k
  */
 public class findKthNumInArray {
 
@@ -36,6 +38,14 @@ public class findKthNumInArray {
         return high;
     }
 
+    /**
+     * 分治
+     * @param arr
+     * @param left
+     * @param right
+     * @param k
+     * @return
+     */
     public int findK(int[] arr, int left, int right, int k) {
         if (left <= right) {
             int pivot = partition(arr, left, right);

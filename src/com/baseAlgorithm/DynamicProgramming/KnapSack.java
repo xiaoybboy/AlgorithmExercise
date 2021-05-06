@@ -6,6 +6,7 @@ package com.baseAlgorithm.DynamicProgramming;
  * @author XIAO
  */
 public class KnapSack {
+
     public static void main(String[] args) {
         int m = 10;
         int n = 3;
