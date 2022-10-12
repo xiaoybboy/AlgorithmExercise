@@ -33,8 +33,7 @@ public class GetLeastNumbers {
             if (maxHeap.size() != k) {
                 maxHeap.offer(input[i]);
             } else if (maxHeap.peek() > input[i]) {
-                Integer temp = maxHeap.poll();
-                temp = null;
+                maxHeap.poll();
                 maxHeap.offer(input[i]);
             }
         }

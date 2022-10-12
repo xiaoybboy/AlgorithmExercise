@@ -9,6 +9,7 @@ import java.util.Scanner;
  * @author XIAO
  */
 public class AllStringCombine {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
@@ -19,7 +20,6 @@ public class AllStringCombine {
         for (int i = 0; i < length; i++) {
             CombineRecursiveImpl(c, 0, i, buffer);
         }
-
     }
 
     //回朔法

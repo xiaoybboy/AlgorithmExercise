@@ -44,7 +44,6 @@ public class LCString {
                 } else {
                     temp[i][j] = 0;
                 }
-
             }
         }
         // 求出最长公共子串的起始点
