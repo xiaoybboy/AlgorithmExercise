@@ -1,4 +1,6 @@
-package com.baseAlgorithm.tree;
+package com.codetop;
+
+import com.baseAlgorithm.tree.TreeNode;
 
 import java.util.*;
 
