@@ -23,7 +23,7 @@ public class FindKthLargest {
 
         for (int j = k; j < nums.length; j++) {
             int top = minQue.peek();
-            if (nums[j]>top){
+            if (nums[j] > top) {
                 minQue.poll();
                 minQue.offer(nums[j]);
             }
