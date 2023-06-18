@@ -13,6 +13,22 @@ public class Permute {
 
     List<List<Integer>> result = new ArrayList<>();
 
+    /**
+     * void process(参数) {
+     *     if (终止条件) {
+     *         存放结果;
+     *         return;
+     *     }
+     *
+     *     for (选择：本次递归集合中元素（从开始下标到数组结尾）) {
+     *         处理节点;
+     *         process(参数); // 递归
+     *         回溯，撤销处理结果
+     *     }
+     * }
+     * @param nums
+     * @return
+     */
     public List<List<Integer>> permute(int[] nums) {
         if (nums.length == 0) {
             return result;
