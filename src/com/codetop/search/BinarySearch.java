@@ -1,4 +1,4 @@
-package com.codetop;
+package com.codetop.search;
 
 /**
  * 二分查找,有序数组中查找目标值

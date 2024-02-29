@@ -1,4 +1,4 @@
-package com.codetop;
+package com.codetop.listnode;
 
 import com.model.ListNode;
 
