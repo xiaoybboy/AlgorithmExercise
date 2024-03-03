@@ -25,7 +25,7 @@ public class SearchInRotateArray {
      * @param target
      * @return
      */
-    public int search(int[] nums, int target) {
+    public int searchTargetInRotateArray(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return -1;
         }
@@ -52,5 +52,45 @@ public class SearchInRotateArray {
             }
         }
         return -1;
+    }
+
+    /**
+     * 查找旋转数组中的最小值-数组中不存在重复元素
+     *
+     * @param array
+     * @return
+     */
+    public int findMinValueInRotateArray(int[] array) {
+        int low = 0, high = array.length - 1;
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (array[mid] < array[high]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return array[low];
+    }
+
+    /**
+     * 数组中可能存在重复元素
+     *
+     * @param array
+     * @return
+     */
+    public int findMinValueInRotateArray2(int[] array) {
+        int low = 0, high = array.length - 1;
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (array[mid] < array[high]) {
+                high = mid;
+            } else if (array[mid] > array[high]) {
+                low = mid + 1;
+            } else {
+                high--;
+            }
+        }
+        return array[low];
     }
 }
