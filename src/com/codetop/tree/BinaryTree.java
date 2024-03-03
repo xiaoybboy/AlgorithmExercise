@@ -122,6 +122,10 @@ public class BinaryTree {
 
     /**
      * 两个二叉树是否互为镜像
+     * <p>
+     * 互为镜像的条件：
+     * 1.它们的两个根结点具有相同的值
+     * 2.每个树的右子树都与另一个树的左子树镜像对称
      *
      * @param t1
      * @param t2
@@ -134,10 +138,7 @@ public class BinaryTree {
         if (t1 == null || t2 == null) {
             return false;
         }
-        if (t1.val != t2.val) {
-            return false;
-        }
-        return isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
+        return t1.val == t2.val && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
     }
 
     /**

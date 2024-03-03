@@ -1,4 +1,4 @@
-package com.codetop;
+package com.codetop.array;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -15,7 +15,6 @@ public class FindKthLargest {
     //堆满的时候，如果新读到的数小于等于堆顶，肯定不是我们要找的元素，只有新遍历到的数大于堆顶的时候，才
     //将堆顶拿出，然后放入新读到的数，进而让堆自己去调整内部结构。
     public int findKthLargest(int[] nums, int k) {
-
         PriorityQueue<Integer> minQue = new PriorityQueue<>(k, Comparator.comparingInt(a -> a));
         for (int i = 0; i < k; i++) {
             minQue.offer(nums[i]);

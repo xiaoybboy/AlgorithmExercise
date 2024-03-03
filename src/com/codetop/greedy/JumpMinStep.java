@@ -30,7 +30,7 @@ public class JumpMinStep {
      * @return
      */
     public int jump(int[] nums) {
-        int end = 0;
+        int end = 0;//多跳一步，能达到的最远距离
         int maxPosition = 0;//能到达的最远位置
         int steps = 0;
         for (int i = 0; i < nums.length - 1; i++) {
