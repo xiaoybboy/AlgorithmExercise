@@ -1,4 +1,4 @@
-package com.codetop;
+package com.codetop.tree;
 
 import com.baseAlgorithm.tree.TreeNode;
 
@@ -36,7 +36,6 @@ public class BinaryTree {
     private static int numOfTreeNode(TreeNode root) {
         if (root == null) {
             return 0;
-
         }
         int left = numOfTreeNode(root.left);
         int right = numOfTreeNode(root.right);

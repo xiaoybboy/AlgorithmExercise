@@ -1,4 +1,4 @@
-package com.codetop.search;
+package com.codetop.sort;
 
 public class QuickSort {
 
