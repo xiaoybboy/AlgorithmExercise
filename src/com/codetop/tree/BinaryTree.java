@@ -320,24 +320,18 @@ public class BinaryTree {
      * @return
      */
     public boolean isValidBST(TreeNode root) {
-        // write your code here
-        if (root == null) {
-            return true;
-        }
-        if (!isValidBST(root.left)) {
-            return false;
-        }
-        if (!firstNode && lastVal >= root.val) {
-            return false;
-        }
-        firstNode = false;
-        lastVal = root.val;
-        if (!isValidBST(root.right)) {
-            return false;
-        }
-        return true;
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
+    public boolean isValidBST(TreeNode node, long lower, long upper) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val <= lower || node.val >= upper) {
+            return false;
+        }
+        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
+    }
 
     /**
      * 获取二叉树的深度
