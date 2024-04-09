@@ -115,34 +115,4 @@ public class Combine {
             tempList.remove(tempList.size() - 1);
         }
     }
-
-    /**
-     * 给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。
-     */
-    public int combinationSum4(int[] nums, int target) {
-        backTrack4(0, nums, target, new ArrayList<>());
-        return result.size();
-    }
-
-    private void backTrack4(int start, int[] nums, int target, List<Integer> tempList) {
-        if (target == 0) {
-            result.add(new ArrayList<>(tempList));
-            return;
-        }
-        for (int i = start; i < nums.length; i++) {
-            if (target < 0) {
-                break;
-            }
-            tempList.add(nums[i]);
-            backTrack4(i, nums, target - nums[i], tempList);
-            tempList.remove(tempList.size() - 1);
-        }
-    }
-
-    public static void main(String[] args) {
-        Combine combine = new Combine();
-        int[] array = new int[]{1, 2, 3};
-        combine.combinationSum4(array, 4);
-        System.out.println(1);
-    }
 }
