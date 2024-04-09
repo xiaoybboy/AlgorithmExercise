@@ -10,11 +10,11 @@ public class PathSum {
     List<List<Integer>> result = new ArrayList<>();
 
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        dfs(root, targetSum, new ArrayList<>());
+        backTrack(root, targetSum, new ArrayList<>());
         return result;
     }
 
-    public void dfs(TreeNode node, int sum, List<Integer> tempList) {
+    public void backTrack(TreeNode node, int sum, List<Integer> tempList) {
         if (node == null) {
             return;
         }
@@ -23,8 +23,8 @@ public class PathSum {
         if (node.left == null && node.right == null && sum == 0) {
             result.add(new ArrayList<>(tempList));
         } else {
-            dfs(node.left, sum, tempList);
-            dfs(node.right, sum, tempList);
+            backTrack(node.left, sum, tempList);
+            backTrack(node.right, sum, tempList);
         }
         tempList.remove(tempList.size() - 1);
     }

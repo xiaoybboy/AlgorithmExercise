@@ -1,55 +1,70 @@
 package com.codetop.backtrack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * 全排列:给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
- * <p>
- * 输入：nums = [1,2,3]
- * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
- */
+
 public class Permute {
 
     List<List<Integer>> result = new ArrayList<>();
 
     /**
-     * void process(参数) {
-     *     if (终止条件) {
-     *         存放结果;
-     *         return;
-     *     }
-     *
-     *     for (选择：本次递归集合中元素（从开始下标到数组结尾）) {
-     *         处理节点;
-     *         process(参数); // 递归
-     *         回溯，撤销处理结果
-     *     }
-     * }
-     * @param nums
-     * @return
+     * 全排列:给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+     * <p>
+     * 输入：nums = [1,2,3]
+     * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
      */
     public List<List<Integer>> permute(int[] nums) {
-        if (nums.length == 0) {
-            return result;
-        }
-        backTrace(0, nums.length, nums);
+        backTrack(0, nums);
         return result;
     }
 
-    public void backTrace(int i, int len, int[] nums) {
-        if (i == len - 1) {
-            List<Integer> list = new ArrayList<>();
+    private void backTrack(int start, int[] nums) {
+        if (start == nums.length - 1) {
+            List<Integer> tempList = new ArrayList<>();
             for (int num : nums) {
-                list.add(num);
+                tempList.add(num);
             }
-            result.add(list);
+            result.add(tempList);
             return;
         }
-        for (int j = i; j < len; j++) {
-            swap(nums, i, j);
-            backTrace(i + 1, len, nums);
-            swap(nums, i, j);
+        for (int i = start; i < nums.length; i++) {
+            swap(nums, start, i);
+            backTrack(start + 1, nums);
+            swap(nums, i, start);
+        }
+    }
+
+    /**
+     * 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permute2(int[] nums) {
+        Arrays.sort(nums);
+        backTrack2(0, nums);
+        return result;
+    }
+
+    private void backTrack2(int start, int[] nums) {
+        if (start == nums.length - 1) {
+            List<Integer> tempList = new ArrayList<>();
+            for (int num : nums) {
+                tempList.add(num);
+            }
+            result.add(tempList);
+            return;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = start; i < nums.length; i++) {
+            if (set.contains(nums[i])) {
+                // 重复，因此剪枝
+                continue;
+            }
+            set.add(nums[i]);
+            swap(nums, start, i);
+            backTrack2(start + 1, nums);
+            swap(nums, i, start);
         }
     }
 
