@@ -33,6 +33,28 @@ public class DoublePointForArray {
     }
 
     /**
+     * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
+     *
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates2(int[] nums) {
+        int n = nums.length;
+        if (n <= 2) {
+            return n;
+        }
+        int slow = 2, fast = 2;
+        while (fast < n) {
+            if (nums[slow - 2] != nums[fast]) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+        return slow;
+    }
+
+    /**
      * 删除有序单链表中的重复元素
      *
      * @param head
