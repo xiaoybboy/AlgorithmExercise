@@ -19,13 +19,16 @@ public class Combine {
     }
 
     private void backTrack(int start, int n, int k, List<Integer> tempList) {
-        if (tempList.size() == k) {
+        if (k == 0) {
             result.add(new ArrayList<>(tempList));
             return;
         }
-        for (int i = start; i <= n; i++) {
+        //环结束条件默认为最大值到 n，这里可以优化进行剪枝，比如 n=4，k=3 时，
+        // 如果列表从 start=3 也就是 [3] 开始，那么该组合一定不存在，
+        // 因为至少要 k=3 个数据，所以剪枝临界点为 n-balance+1
+        for (int i = start; i <= n - k + 1; i++) {
             tempList.add(i);
-            backTrack(i + 1, n, k, tempList);
+            backTrack(i + 1, n, k - 1, tempList);
             tempList.remove(tempList.size() - 1);
         }
     }
