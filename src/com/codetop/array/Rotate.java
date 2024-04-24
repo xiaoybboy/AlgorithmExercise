@@ -25,4 +25,18 @@ public class Rotate {
             end -= 1;
         }
     }
+
+    public int findMin(int[] nums) {
+        int start = 0, end = nums.length - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            //如果右侧有序，则最小值在左边
+            if (nums[mid] < nums[end]) {
+                end = mid;
+            } else {
+                start = mid+1;
+            }
+        }
+        return nums[start];
+    }
 }

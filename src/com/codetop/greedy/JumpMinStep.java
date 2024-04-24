@@ -34,7 +34,7 @@ public class JumpMinStep {
         int maxPosition = 0;//能到达的最远位置
         int steps = 0;
         for (int i = 0; i < nums.length - 1; i++) {
-            //找能跳的最远的
+            //找能跳的最远的右边界
             maxPosition = Math.max(maxPosition, nums[i] + i);
             if (i == end) { //遇到边界，就更新边界，并且步数加一，如果已经遍历到了所能到达的范围的边界，此时必须进行一次跳跃，同时更新所能到达的范围的边界
                 end = maxPosition;
@@ -42,5 +42,32 @@ public class JumpMinStep {
             }
         }
         return steps;
+    }
+
+    /**
+     * 给你一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度。
+     * 判断你是否能够到达最后一个下标，如果可以，返回 true ；否则，返回 false 。
+     * <p>
+     * 对于每一个可以到达的位置 x，它使得 x+1,x+2,...,x+nums[x] 这些连续的位置都可以到达。
+     * 这样以来，我们依次遍历数组中的每一个位置，并实时维护最远可以到达的位置。
+     * 对于当前遍历到的位置 xxx，如果它在 最远可以到达的位置 的范围内，那么我们就可以从起点通过若干次跳跃到达该位置，
+     * 因此我们可以用 x+nums[x]更新最远可以到达的位置。
+     * <p>
+     * 在遍历的过程中，如果 最远可以到达的位置大于等于数组中的最后一个位置，那就说明最后一个位置可达，
+     * 我们就可以直接返回 True 作为答案。反之，如果在遍历结束后，最后一个位置仍然不可达，我们就返回 False 作为答案。
+     */
+    public boolean canJump(int[] nums) {
+        int right = nums[0];
+        int n = nums.length;
+
+        // 拓展右边界（当右边界不能继续拓展时，也会退出循环）
+        for (int i = 0; i <= right; ++i) {
+            right = Math.max(right, nums[i] + i);
+            if (right >= n - 1) {
+                // 右边界已经可以覆盖数组元素时，直接返回结果
+                return true;
+            }
+        }
+        return false;
     }
 }
