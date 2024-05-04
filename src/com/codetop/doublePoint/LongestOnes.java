@@ -7,10 +7,12 @@ public class LongestOnes {
     //问题等价于：P[right]−P[left−1]≤k;其中P[i]到下标i的前缀和
     public int longestOnes(int[] nums, int k) {
         int n = nums.length;
+        //lsum到左窗口的前缀和，rsum到右窗口的前缀和
         int left = 0, lsum = 0, rsum = 0;
         int ans = 0;
         for (int right = 0; right < n; right++) {
             rsum += 1 - nums[right];
+            //计算左窗口
             while (lsum < rsum - k) {
                 lsum += 1 - nums[left];
                 left++;
