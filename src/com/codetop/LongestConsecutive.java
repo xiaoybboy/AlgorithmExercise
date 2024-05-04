@@ -19,6 +19,7 @@ import java.util.Map;
  * 输出：9
  */
 public class LongestConsecutive {
+
     /**
      * 每次遍历到新数字时，去hashMap中寻找比它小1的数字和比它大1的数字对应的长度，记为min和max。
      * 如果min、max均为0，说明此时不存在上下界，直接记为1.

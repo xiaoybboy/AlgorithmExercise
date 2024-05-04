@@ -5,6 +5,9 @@ package com.codetop.dynamic;
  */
 public class FindMaxLength {
 
+
+
+
     public int findMaxLength(int[] nums) {
         int result = 0, n = nums.length;
         int[][] dp = new int[n][n];
