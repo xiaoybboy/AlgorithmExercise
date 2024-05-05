@@ -10,10 +10,6 @@ public class RotateRight {
     /**
      * 1.首先把链路从尾到头组成一个环
      * 2.找到断开连接的位置
-     *
-     * @param head
-     * @param k
-     * @return
      */
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null || head.next == null) return head;
@@ -28,11 +24,11 @@ public class RotateRight {
         }
         //从尾部把头部连成一个环
         tail.next = head;
+        //尾部向后移动k位，就是原头部向后移动n-k%n位
         int moveTime = n - k % n;
         if (moveTime == n) {
             return head;
         }
-
         // 找到断开环的位置
         for (int i = 0; i < moveTime; i++) {
             newTail = newTail.next;

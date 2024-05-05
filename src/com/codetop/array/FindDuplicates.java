@@ -10,6 +10,8 @@ import java.util.List;
 public class FindDuplicates {
     //1.找到数字i时，将位置i-1处的数字翻转为负数。
     //2.如果位置i-1 上的数字已经为负，则i是出现两次的数字。
+    //3.数组内数字都在[1-N]内，nums长度为n，利用nums作为索引
+    //4.把数组中每个元素对应的数字，在数组中的位置对应的数字翻转为负数。如果某个元素已经为负数，说明这个数字已经存在。
     public List<Integer> findDuplicates(int[] nums) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {

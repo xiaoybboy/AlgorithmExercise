@@ -2,11 +2,8 @@ package com.codetop.dynamic;
 
 /**
  * 给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
- * <p>
  * 请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。
- * <p>
  * 假设每一种面额的硬币有无限个。
- * <p>
  * 题目数据保证结果符合 32 位带符号整数。
  */
 public class CoinNum {
@@ -29,9 +26,9 @@ public class CoinNum {
         int[] dp = new int[amount + 1];    // dp[i]表示凑成金额i的组合数，初始都为0表示不可凑
         dp[0] = 1;      // 金额0有一种组合方式，由0枚硬币组成
         // 枚举每一种硬币
-        for(int c: coins){
+        for (int c : coins) {
             // 枚举每一个金额
-            for(int a = c; a <= amount; a++){
+            for (int a = c; a <= amount; a++) {
                 dp[a] += dp[a - c];     // 当使用面额为c的硬币时，a的状态取决于a-c
             }
         }
