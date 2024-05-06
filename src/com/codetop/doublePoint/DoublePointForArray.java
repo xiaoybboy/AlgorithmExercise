@@ -5,15 +5,11 @@ import com.model.ListNode;
 public class DoublePointForArray {
 
     /**
-     * 给你一个 非严格递增排列 的数组 nums ，请你 原地 删除重复出现的元素，
-     * * 使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。然后返回 nums 中唯一元素的个数。
+     * 给你一个 非严格递增排列 的数组 nums ，请你原地删除重复出现的元素，
+     * * 使每个元素只出现一次,返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。然后返回 nums 中唯一元素的个数。
      * <p>
      * 我们让慢指针 slow 走在后面，快指针 fast 走在前面探路，找到一个不重复的元素就赋值给 slow 并让 slow 前进一步。
-     * <p>
      * 这样，就保证了 nums[0..slow] 都是无重复的元素，当 fast 指针遍历完整个数组 nums 后，nums[0..slow] 就是整个数组去重之后的结果。
-     *
-     * @param nums
-     * @return
      */
     public int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -34,9 +30,6 @@ public class DoublePointForArray {
 
     /**
      * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
-     *
-     * @param nums
-     * @return
      */
     public int removeDuplicates2(int[] nums) {
         int n = nums.length;
@@ -56,9 +49,6 @@ public class DoublePointForArray {
 
     /**
      * 删除有序单链表中的重复元素
-     *
-     * @param head
-     * @return
      */
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) {
@@ -81,12 +71,7 @@ public class DoublePointForArray {
      * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
      * <p>
      * 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
-     * <p>
      * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
-     *
-     * @param nums
-     * @param val
-     * @return
      */
     public int removeElement(int[] nums, int val) {
         int slow = 0, fast = 0;
@@ -103,8 +88,6 @@ public class DoublePointForArray {
 
     /**
      * 把数组中所有的0移到数组最后面
-     *
-     * @param nums
      */
     public void moveZeroes(int[] nums) {
         int index = removeElement(nums, 0);
@@ -115,8 +98,6 @@ public class DoublePointForArray {
 
     /**
      * 翻转字符串
-     *
-     * @param s
      */
     public void reverseString(char[] s) {
         int left = 0, right = s.length - 1;
@@ -131,10 +112,6 @@ public class DoublePointForArray {
 
     /**
      * 排序数组两数之和
-     *
-     * @param nums
-     * @param target
-     * @return
      */
     public int[] twoSum(int[] nums, int target) {
         int left = 0, right = nums.length - 1;

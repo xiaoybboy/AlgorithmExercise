@@ -56,15 +56,15 @@ public class JumpMinStep {
      * 我们就可以直接返回 True 作为答案。反之，如果在遍历结束后，最后一个位置仍然不可达，我们就返回 False 作为答案。
      */
     public boolean canJump(int[] nums) {
-        int right = nums[0];
+        int maxPosition = 0;
         int n = nums.length;
-
-        // 拓展右边界（当右边界不能继续拓展时，也会退出循环）
-        for (int i = 0; i <= right; ++i) {
-            right = Math.max(right, nums[i] + i);
-            if (right >= n - 1) {
-                // 右边界已经可以覆盖数组元素时，直接返回结果
-                return true;
+        for (int i = 0; i < nums.length; i++) {
+            //i<=maxPosition，说明i的位置可以到达，否则不可达
+            if (i <= maxPosition) {
+                maxPosition = Math.max(maxPosition, nums[i] + i);
+                if (maxPosition > n - 1) {
+                    return true;
+                }
             }
         }
         return false;

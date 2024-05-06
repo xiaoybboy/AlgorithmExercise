@@ -27,7 +27,6 @@ public class LongestPalindrome2 {
                         maxLen = r - l + 1;
                         maxStart = l;
                         maxEnd = r;
-
                     }
                 }
             }
