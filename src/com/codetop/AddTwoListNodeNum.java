@@ -9,6 +9,7 @@ import com.model.ListNode;
  */
 public class AddTwoListNodeNum {
 
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode pre = new ListNode(0);
         ListNode cur = pre;

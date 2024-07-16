@@ -28,6 +28,42 @@ public class DoublePointForArray {
         return slow + 1;
     }
 
+    public ListNode rotateRight(ListNode head, int k) {
+        int n = 1;
+        ListNode iter = head;
+        while (iter != null) {
+            iter = iter.next;
+            n++;
+        }
+        int move = n - k % n;
+        if (move == n) {
+            return head;
+        }
+        //变成环-找到链表结尾
+        iter.next = head;
+        while (move-- > 0) {
+            iter = iter.next;
+        }
+        ListNode ret = iter.next;
+        iter.next = null;
+        return ret;
+    }
+
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if (n == 1) {
+            return nums[0];
+        }
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
+        }
+        return dp[n - 1];
+    }
+
     /**
      * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
      */
@@ -95,6 +131,7 @@ public class DoublePointForArray {
             nums[i] = 0;
         }
     }
+
 
     /**
      * 翻转字符串

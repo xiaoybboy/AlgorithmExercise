@@ -9,8 +9,26 @@ package com.codetop.dynamic;
  */
 public class FindLength {
 
+    public int findLength2(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[][] dp = new int[m + 1][n + 1];
+        int maxLen = 0;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (nums1[i] == nums2[j]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = 0;
+                }
+                maxLen = Math.max(maxLen, dp[i][j]);
+            }
+        }
+        return maxLen;
+    }
+
     /**
-     * dp[i][j] ：长度为i，末尾项为A[i-1]的子数组，与长度为j，末尾项为B[j-1]的子数组，二者的最大公共后缀子数组长度。
+     * dp[i][j] ：长度为i，末尾项为A[i-1]的子数组，与长度为j，末尾项为B[j-1]的子数组，
+     * 二者的最大公共后缀子数组长度。
      * 如果 A[i-1] != B[j-1]， 有 dp[i][j] = 0
      * 如果 A[i-1] == B[j-1] ， 有 dp[i][j] = dp[i-1][j-1] + 1
      */

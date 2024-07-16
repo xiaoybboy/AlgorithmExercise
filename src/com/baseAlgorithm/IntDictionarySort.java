@@ -1,20 +1,24 @@
 package com.baseAlgorithm;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class IntDictionarySort {
-	public static void main(String[] args) {
-		ArrayList<Integer> list = new ArrayList<>();
+    public String longestPalindrome(String s) {
+        //dp[i][j] = s[i] == s[j] && dp[i+1][j-1]
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
 
-		for (int i = 0; i < 50; i++) {
-			list.add(i);
-		}
-
-		Collections.sort(list, new IntDictionnaryComparator());
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-	}
+        int maxLength = 0;
+        String longestPalindrome = "";
+        for (int end = 1; end < n; end++) {
+            for (int start = 0; start < end; start++) {
+                if (s.charAt(start) == s.charAt(end)) {
+                    dp[start][end] = (end - start <= 1) || dp[start + 1][end - 1];
+                    if (dp[start][end] && (end - start + 1) > maxLength) {
+                        longestPalindrome = s.substring(start, end);
+                    }
+                }
+            }
+        }
+        return longestPalindrome;
+    }
 
 }
