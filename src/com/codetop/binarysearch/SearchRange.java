@@ -7,41 +7,33 @@ package com.codetop.binarysearch;
  */
 public class SearchRange {
 
-    /**
-     * 二分查找
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
-    public int[] searchRange(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
-        int p = -1;
-
-        while (start <= end) {
-            int mid = (start + end) / 2;
-            if (nums[mid] == target) {
-                p = mid;
-                break;
-            } else if (nums[mid] < target) {
-                start = mid + 1;
+    public static int[] searchRange(int[] nums, int target) {
+        //1.划分蓝红边界，蓝色<target,红色>=target
+        //2.返回值left
+        int start = -1, end = nums.length;
+        int n = nums.length;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] < target) {//checkBlue
+                start = mid;
             } else {
-                end = mid - 1;
+                end = mid;
             }
         }
-
-        if (p == -1) {
+        //start = n-1说明所有数字都比target小
+        if (start == n - 1) {
             return new int[]{-1, -1};
         } else {
-            int a = p, b = p;
-            while (a > 0 && nums[a - 1] == target) {
-                a--;
+            //<target的位置的数字，后一个数字不等于target，说明也不存在
+            if (nums[start + 1] != target) {
+                return new int[]{-1, -1};
+            } else {
+                int index = start + 1;
+                while (index < n && nums[index] == target) {
+                    index++;
+                }
+                return new int[]{start + 1, index - 1};
             }
-            while (b < nums.length - 1 && nums[b + 1] == target) {
-                b++;
-            }
-            return new int[]{a, b};
         }
     }
 }
