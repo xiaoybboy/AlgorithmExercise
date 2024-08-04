@@ -148,7 +148,7 @@ public class DoublePointForArray {
     }
 
     /**
-     * 排序数组两数之和
+     * 排序数组两数之和,等于target，返回下标
      */
     public int[] twoSum(int[] nums, int target) {
         int left = 0, right = nums.length - 1;

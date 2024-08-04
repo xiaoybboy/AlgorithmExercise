@@ -1,6 +1,9 @@
 package com.codetop.binarysearch;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BinarySearch {
 
@@ -175,5 +178,37 @@ public class BinarySearch {
         }
         //特殊情况，letters所有字符<target
         return start == n - 1 ? letters[0] : letters[end];
+    }
+
+    /**
+     * 给你一个非负整数数组 nums 。如果存在一个数 x ，使得 nums 中恰好有 x 个元素 大于或者等于 x ，那么就称 nums 是一个 特殊数组 ，而 x 是该数组的 特征值 。
+     * 注意： x 不必 是 nums 的中的元素。
+     * 如果数组 nums 是一个 特殊数组 ，请返回它的特征值 x 。否则，返回 -1 。可以证明的是，如果 nums 是特殊数组，那么其特征值 x 是 唯一的 。
+     *
+     * @param nums
+     * @return
+     */
+    public int specialArray(int[] nums) {
+        List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        //倒序排列
+        Collections.sort(list, (a, b) -> b - a);
+        //1.蓝红划分，蓝色x个元素>=x,红色<x
+        //2.return left
+        int left = -1, right = nums.length;
+        int n = list.size();
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            //下标mid，共mid+1个元素，即前mid+1个元素 >= mid+1
+            if (list.get(mid) >= mid + 1) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        //3.后置处理
+        if (left == -1 || (left + 1 != n && nums[left + 1] >= left + 1)) { // x 不存在 或者 大于 x 个元素 大于或者等于 x
+            return -1; // 排除
+        }
+        return left + 1; // x数量为下标+1
     }
 }
