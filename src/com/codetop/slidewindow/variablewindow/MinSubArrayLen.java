@@ -8,27 +8,23 @@ package com.codetop.slidewindow.variablewindow;
  */
 public class MinSubArrayLen {
 
-    /**
-     * 滑动窗口
-     */
     public int minSubArrayLen(int target, int[] nums) {
         int n = nums.length;
         if (n == 0) {
             return 0;
         }
-        int ans = Integer.MAX_VALUE;
         int start = 0, end = 0;
-        int sum = 0;
+        int sum = 0, result = Integer.MAX_VALUE;
         while (end < n) {
             sum += nums[end];
-            // 左指针一直移动直至不满足条件(窗口可能只有1个元素)
             while (sum >= target) {
-                ans = Math.min(ans, end - start + 1);
+                //窗口向右滑动
+                result = Math.min(result, end - start + 1);
                 sum -= nums[start];
                 start++;
             }
             end++;
         }
-        return ans == Integer.MAX_VALUE ? 0 : ans;
+        return result == Integer.MAX_VALUE ? 0 : result;
     }
 }

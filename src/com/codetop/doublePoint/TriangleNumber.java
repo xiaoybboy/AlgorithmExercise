@@ -7,18 +7,19 @@ import java.util.Arrays;
  */
 public class TriangleNumber {
 
-    /**
-     * 三角形有效条件：a+b>c
-     */
     public int triangleNumber(int[] nums) {
-        int result = 0;
         Arrays.sort(nums);
-        //从后面向前枚举
-        for (int i = nums.length - 1; i > 1; i--) {
+        int result = 0, n = nums.length;
+        //固定最后一个元素的好处时，当找到满足a+b>c的组合时，能立即找出所有本次满足的数量
+        for (int i = n - 1; i >= 0; i++) {
+            //双指针，一个指向第一个元素，一个指向最后一个元素的前一个元素
             int left = 0, right = i - 1;
             while (left < right) {
+                //组成三角形的条件，a+b>c
                 if (nums[left] + nums[right] > nums[i]) {
-                    result += right - left;
+                    //从left-right的所有位置，必然满足nums[left] + nums[right] > nums[i]
+                    //left指针移动到right
+                    result += (right - left);
                     right--;
                 } else {
                     left++;

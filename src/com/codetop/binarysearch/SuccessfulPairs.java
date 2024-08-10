@@ -11,26 +11,29 @@ import java.util.Arrays;
  */
 public class SuccessfulPairs {
 
-    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+    public static int[] successfulPairs(int[] spells, int[] potions, long success) {
         Arrays.sort(potions);
-        int[] pairs = new int[spells.length];
-        int m = potions.length;
-        for (int i = 0; i < spells.length; i++) {
-            long t = (success + spells[i] - 1) / spells[i] - 1;
-            pairs[i] = m - binary(potions, t, 0, m - 1);
+        int n = potions.length, m = spells.length;
+        int[] pairs = new int[m];
+        for (int i = 0; i < m; i++) {
+            //乘积>=success,需要的最小值
+            long target = success % spells[i] == 0 ? success / spells[i] : success / spells[i] + 1;
+            int first = binary(potions, target);
+            pairs[i] = (n - first);
         }
         return pairs;
     }
 
-    private int binary(int[] potions, long target, int start, int end) {
-        while (start < end) {
+    private static int binary(int[] potions, long target) {
+        int start = -1, end = potions.length;
+        while (start + 1 < end) {
             int mid = start + (end - start) / 2;
-            if (potions[mid] > target) {
-                end = mid - 1;
+            if (potions[mid] < target) {
+                start = mid;
             } else {
-                start = mid + 1;
+                end = mid;
             }
         }
-        return start;
+        return end;
     }
 }

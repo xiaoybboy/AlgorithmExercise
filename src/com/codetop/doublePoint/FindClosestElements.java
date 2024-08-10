@@ -9,23 +9,33 @@ import java.util.List;
  */
 public class FindClosestElements {
 
-    public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        int right = binarySearch(arr, x);
-        int left = right - 1;
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        findClosestElements(arr, 4, 3);
+    }
 
-        List<Integer> result = new ArrayList<>();
+    public static List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int n = arr.length;
+        //1.找到最接近x的下标
+        int left = binarySearch(arr, x);
+        //2.双指针查找元素
+        int right = left + 1;
         while (k > 0) {
+            //如果left,right已经到达边界处理
             if (left < 0) {
                 right++;
-            } else if (right >= arr.length) {
+            } else if (right >= n) {
                 left--;
-            } else if (x - arr[left] <= arr[right] - x) {
-                left--;
-            } else {
+            } else if (arr[right] - x < x - arr[left]) {
+                //如果右边数值比较接近
                 right++;
+            } else {
+                left--;
             }
             k--;
         }
+
+        List<Integer> result = new ArrayList<>();
         for (int i = left + 1; i < right; i++) {
             result.add(arr[i]);
         }
@@ -35,14 +45,15 @@ public class FindClosestElements {
     /**
      * 二分法查找离目标值最近的索引
      */
-    public int binarySearch(int[] arr, int target) {
-        int low = 0, high = arr.length - 1;
-        while (low < high) {
+    public static int binarySearch(int[] arr, int target) {
+        int low = -1, high = arr.length;
+        //1.蓝红边界，蓝色<target,红色>=target
+        while (low + 1 < high) {
             int mid = low + (high - low) / 2;
-            if (arr[mid] >= target) {
-                high = mid;
+            if (arr[mid] < target) {//isBlue
+                low = mid;
             } else {
-                low = mid + 1;
+                high = mid;
             }
         }
         return low;

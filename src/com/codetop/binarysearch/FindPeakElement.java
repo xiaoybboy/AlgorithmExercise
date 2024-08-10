@@ -8,25 +8,17 @@ package com.codetop.binarysearch;
  */
 public class FindPeakElement {
 
-    /**
-     * 根据左右指针计算中间位置 m，并比较 m 与 m+1 的值，
-     * 如果 m 较大，则左侧存在峰值，r = m，
-     * 如果 m + 1 较大，则右侧存在峰值，l = m + 1
-     * <p>
-     *
-     * @param nums
-     * @return
-     */
     public int findPeakElement(int[] nums) {
-        int left = 0, right = nums.length - 1;
-        while (left < right) {
+        int n = nums.length;
+        int left = -1, right = n - 1;
+        while (left + 1 < right) {
             int mid = (left + right) / 2;
-            if (nums[mid] > nums[mid + 1]) {
-                right = mid;
+            if (nums[mid] < nums[mid + 1]) {
+                left = mid;
             } else {
-                left = mid + 1;
+                right = mid;
             }
         }
-        return left;
+        return right;
     }
 }
