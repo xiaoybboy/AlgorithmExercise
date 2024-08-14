@@ -9,7 +9,29 @@ import com.baseAlgorithm.tree.TreeNode;
  * 例如，从根节点到叶节点的路径 1 -> 2 -> 3 表示数字 123 。
  */
 public class SumAllPathNumbers {
+
+    int totalSum = 0;
+    public int sumNumbers2(TreeNode root) {
+        path(root, 0);
+        return totalSum;
+    }
+
+    private void path(TreeNode curNode, int preSum) {
+        preSum = preSum * 10 + curNode.val;
+        if (curNode.left == null && curNode.right == null) {
+            totalSum += preSum;
+            return;
+        }
+        if (curNode.left != null) {
+            path(curNode.left, preSum);
+        }
+        if (curNode.right != null) {
+            path(curNode.right, preSum);
+        }
+    }
+
     int sum = 0;
+
     public int sumNumbers(TreeNode root) {
         dfs(0, root);
         return sum;

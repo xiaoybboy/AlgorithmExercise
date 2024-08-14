@@ -12,19 +12,22 @@ public class DetectCycle {
 
     /**
      * b,c 根据相遇点分成的两部分
-     * a + b（环） + c(环)
-     * f = a + n(b + c)+b
-     * slow = a + b
-     * f = 2slow
+     * a + b（环） + c(环)(b是环上快慢指针的相遇点)
+     * <p>
+     * 1.fast = a + n(b + c)+b
+     * 2.slow = a + b
+     * 3.fast = 2slow
      * a + n(b + c)+b = 2(a+b)
      * a = c + (n-1)(b+c)
      * 也就是说，从第一次相遇点往后. fast指向head,fast和slow一起前进的话，fast走了a,此时slow走c+(n-1)(b+c)
      * 刚好到达环的入口处
      * <p>
      */
-    public ListNode detectCycle(ListNode head) {
+    public ListNode detectCycle2(ListNode head) {
+        //1.快慢指针法，得到环的位置
         ListNode fast = head, slow = head;
         while (true) {
+            //fast,slow没有相遇，这时没有环
             if (fast == null || fast.next == null) {
                 return null;
             }
@@ -34,19 +37,17 @@ public class DetectCycle {
                 break;
             }
         }
+        //2.fast指向头节点，和slow一起移动,当两者相遇时，就是环的入口
         fast = head;
-        while (slow != fast) {
-            slow = slow.next;
+        while (fast == slow) {
             fast = fast.next;
+            slow = slow.next;
         }
         return fast;
     }
 
     /**
      * 监测链路表中是否包含环
-     *
-     * @param head
-     * @return
      */
     private boolean hasCycle(ListNode head) {
         // 快慢指针初始化指向 head

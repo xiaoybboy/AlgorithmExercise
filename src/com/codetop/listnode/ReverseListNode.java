@@ -74,35 +74,29 @@ public class ReverseListNode {
      * 执行操作 ③：把 pre 的下一个节点指向 next。
      * <p>
      * 注意，在移动的过程中，cur和pre都不变，变的只有next
-     *
-     * @param head
-     * @param left
-     * @param right
-     * @return
      */
     public ListNode reverseBetween(ListNode head, int left, int right) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
+        //找到要翻转的链表头节点
+        ListNode prev = dummy;
+        //注意是left-1,就是要找到前一个节点
         for (int i = 0; i < left - 1; i++) {
-            pre = pre.next;
+            prev = prev.next;
         }
-
-        ListNode curr = pre.next;
-        ListNode next;
-        //pre永远指向区间内的前一个节点
+        //prev永远指向区间内的前一个节点
         //curr指向刚开始的，区间内的第一个节点，后面curr会向中间移动
         //next指向curr的下一个节点
-        for (int j = 0; j < right - left; j++) {
-            next = curr.next;
-            //开始翻转
-            //①
-            curr.next = next.next;
-            //注意不能是next.next = curr.因为移动的过程中curr不会再是头部了，而pre.next一定是头部
-            //②
-            next.next = pre.next;
-            //③
-            pre.next = next;
+        ListNode cur = prev.next;
+        ListNode next = null;
+        for (int i = 0; i < right - left; i++) {
+            next = cur.next;//记录下一个节点
+            //把next节点断开
+            cur.next = next.next;
+            //next节点翻转，指向区间的头节点，注意不是cur
+            next.next = prev.next;
+            //区间内第一个节点指向next
+            prev.next = next;
         }
         return dummy.next;
     }

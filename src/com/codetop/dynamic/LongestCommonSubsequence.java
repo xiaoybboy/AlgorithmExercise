@@ -26,28 +26,15 @@ package com.codetop.dynamic;
  */
 public class LongestCommonSubsequence {
 
-    /**
-     * 动态规划：
-     * dp[i][j]
-     * if t1 = t2;dp[i−1][j−1]+1,
-     * max(dp[i−1][j],dp[i][j−1]),
-     * <p>
-     * 从左上角到右下角更新值
-     *
-     * @param text1
-     * @param text2
-     * @return
-     */
-    public int longestCommonSubsequence(String text1, String text2) {
+    public int longestCommonSubsequence2(String text1, String text2) {
         int m = text1.length(), n = text2.length();
         int[][] dp = new int[m + 1][n + 1];
-
-        //i和j从1开始遍历，是因为dp[i][j]依赖dp[i-1][j-1],如果从0开始，数组越界
-        //dp[0][j]和dp[i][0]都可认为是不存在的，为0
-        for (int i = 1; i < m + 1; i++) {
-            for (int j = 1; j < n + 1; j++) {
-                // 获取两个串字符
-                char c1 = text1.charAt(i - 1), c2 = text2.charAt(j - 1);
+        //if(text1[i] == text2[j]) dp[i][j] = dp[i-1][j-1]+1;
+        //否则dp[i][j] = max(dp[i-1][j] = dp[i][j-1])
+        for (int i = 1; i <= m; i++) {
+            char c1 = text1.charAt(i);
+            for (int j = 1; j <= n; j++) {
+                char c2 = text2.charAt(j);
                 if (c1 == c2) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {

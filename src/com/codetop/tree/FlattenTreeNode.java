@@ -11,6 +11,7 @@ import java.util.Stack;
  * 展开后的单链表应该与二叉树 先序遍历 顺序相同。
  */
 public class FlattenTreeNode {
+
     public void flatten(TreeNode root) {
         if (root == null) {
             return;

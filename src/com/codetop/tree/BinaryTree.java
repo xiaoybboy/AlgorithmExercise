@@ -272,41 +272,39 @@ public class BinaryTree {
     /**
      * 锯齿型遍历
      * 给你二叉树的根节点 root ，返回其节点值的 锯齿形层序遍历 。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）
-     *
-     * @param root
-     * @return
      */
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> ans = new LinkedList<List<Integer>>();
+        List<List<Integer>> ans = new ArrayList<>();
         if (root == null) {
             return ans;
         }
+        //双端队列
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean isLeftOrder = true;
 
-        Queue<TreeNode> nodeQueue = new LinkedList<TreeNode>();
-        nodeQueue.offer(root);
-        boolean isOrderLeft = true;
-
-        while (!nodeQueue.isEmpty()) {
-            Deque<Integer> levelList = new LinkedList<Integer>();
-            int size = nodeQueue.size();
-            for (int i = 0; i < size; ++i) {
-                TreeNode curNode = nodeQueue.poll();
-                if (isOrderLeft) {
-                    levelList.offerLast(curNode.val);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            Deque<Integer> tempQueue = new ArrayDeque<>(size);
+            for (int i = 0; i < size; i++) {
+                TreeNode curNode = queue.poll();
+                //根据当前遍历方式，把数据放入双端队列
+                if (isLeftOrder) {
+                    tempQueue.offerLast(curNode.val);
                 } else {
-                    levelList.offerFirst(curNode.val);
+                    tempQueue.offerFirst(curNode.val);
                 }
+                //队列中放入左右子节点
                 if (curNode.left != null) {
-                    nodeQueue.offer(curNode.left);
+                    queue.offer(curNode.left);
                 }
                 if (curNode.right != null) {
-                    nodeQueue.offer(curNode.right);
+                    queue.offer(curNode.right);
                 }
             }
-            ans.add(new LinkedList<Integer>(levelList));
-            isOrderLeft = !isOrderLeft;
+            isLeftOrder = !isLeftOrder;
+            ans.add(new ArrayList<>(tempQueue));
         }
-
         return ans;
     }
 

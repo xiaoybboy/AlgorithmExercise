@@ -87,20 +87,18 @@ public class DoublePointForArray {
      * 删除有序单链表中的重复元素
      */
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-        ListNode slow = head, fast = head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode slow = head, fast = head.next;
         while (fast != null) {
-            if (slow.val != fast.val) {
+            if (fast.val != slow.val) {
                 slow.next = fast;
                 slow = slow.next;
             }
             fast = fast.next;
         }
-        //断开链表
         slow.next = null;
-        return head;
+        return dummy.next;
     }
 
     /**

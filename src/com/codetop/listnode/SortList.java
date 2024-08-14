@@ -7,6 +7,44 @@ import com.model.ListNode;
  */
 public class SortList {
 
+    public ListNode sortList2(ListNode head) {
+        //当分割只剩一个节点的时候，停止
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode l1 = head;
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode l2 = slow.next;
+        slow.next = null;
+        return merge(sortList2(l1), sortList2(l2));
+    }
+
+    public ListNode merge2(ListNode l1, ListNode l2) {
+        ListNode newNodeDummy = new ListNode(-1);
+        ListNode cur = newNodeDummy;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        if (l1 != null) {
+            cur.next = l1;
+        }
+        if (l2 != null) {
+            cur.next = l2;
+        }
+        return newNodeDummy.next;
+    }
+
     /**
      * 分割 cut 环节： 找到当前链表 中点，并从 中点 将链表断开（以便在下次递归 cut 时，链表片段拥有正确边界）；
      * 我们使用 fast,slow 快慢双指针法，奇数个节点找到中点，偶数个节点找到中心左边的节点。

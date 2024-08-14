@@ -9,46 +9,39 @@ import java.util.List;
  */
 public class NumSum {
 
+    //三个数之和
+    List<List<Integer>> result = new ArrayList<>();
 
-    /**
-     * 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]]
-     * 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请
-     * <p>
-     * 你返回所有和为 0 且不重复的三元组。
-     * 双指针法
-     */
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
-
-        int length = nums.length;
-        //k < nums.length - 2是为了保证后面还能存在两个数字
-        for (int k = 0; k < length - 2; k++) {
-            if (nums[k] > 0) {
+        int n = nums.length;
+        for (int i = 0; i < n - 2; i++) {
+            //提前终止条件
+            if (nums[i] > 0) {
                 break;
             }
-            if (k > 0 && nums[k] == nums[k - 1]) {
+            //去除i的重复
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            int i = k + 1, j = length - 1;
-            while (i < j) {
-                int sum = nums[i] + nums[j] + nums[k];
-                if (sum < 0) {
-                    i++;
-                } else if (sum > 0) {
-                    j--;
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                int tempSum = nums[i] + nums[j] + nums[k];
+                if (tempSum == 0) {
+                    result.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
+                    //要求不重复
+                    while (j < k && nums[j] == nums[j + 1]) {
+                        j++;
+                    }
+                    while (j < k && nums[k] == nums[k - 1]) {
+                        k--;
+                    }
+                    j++;
+                    k--;
+                } else if (tempSum < 0) {
+                    j++;
                 } else {
-                    result.add(new ArrayList<>(Arrays.asList(nums[k], nums[i], nums[j])));
-                    //左指针前进并去重
-                    while (i < j && nums[i] == nums[i + 1]) {
-                        i++;
-                    }
-                    //右指针后退并去重
-                    while (i < j && nums[j] == nums[j - 1]) {
-                        j--;
-                    }
-                    i++;
-                    j--;
+                    k--;
                 }
             }
         }
@@ -61,9 +54,6 @@ public class NumSum {
      * 返回这三个数的和。
      */
     public int threeSumClosest(int[] nums, int target) {
-        if (nums == null || nums.length < 3) {
-            return 0;
-        }
         Arrays.sort(nums);
         int n = nums.length;
         int min = Integer.MAX_VALUE;
