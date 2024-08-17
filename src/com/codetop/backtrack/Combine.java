@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Combine {
 
-    List<List<Integer>> result = new ArrayList<>();
+    private static List<List<Integer>> result = new ArrayList<>();
 
     /**
      * 给定两个整数 n 和 k，返回范围 [1, n] 中所有可能的 k 个数的组合。
@@ -43,24 +43,32 @@ public class Combine {
      * 输入：candidates = [2,3,6,7], target = 7
      * * 输出：[[2,2,3],[7]]
      */
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        backTrack2(0, candidates, target, new ArrayList<>());
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        backTrack(candidates, 0, target, new ArrayList<>());
         return result;
     }
 
-    private void backTrack2(int start, int[] candidates, int target, List<Integer> tempList) {
-        if (target < 0) {
-            return;
-        }
-        if (target == 0) {
+    private static void backTrack(int[] candidates, int start, int curTarget, List<Integer> tempList) {
+        if (curTarget == 0) {
             result.add(new ArrayList<>(tempList));
         }
+        if (curTarget < 0) {
+            return;
+        }
         for (int i = start; i < candidates.length; i++) {
+            if (curTarget - candidates[i] < 0) {
+                return;
+            }
             tempList.add(candidates[i]);
-            //可重复选取，所以这里还从i开始
-            backTrack2(i, candidates, target - candidates[i], tempList);
+            //这里同一个数字可以被无限次选择，所以仍然从i开始
+            backTrack(candidates, i, curTarget - candidates[i], tempList);
             tempList.remove(tempList.size() - 1);
         }
+    }
+
+    public static void main(String[] args) {
+        int[] candidates = {2, 3, 4, 6, 7};
+        combinationSum(candidates, 7);
     }
 
     /**

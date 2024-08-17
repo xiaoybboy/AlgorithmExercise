@@ -119,42 +119,6 @@ public class BinarySearch {
     }
 
     /**
-     * 给你两个整数数组 arr1 ， arr2 和一个整数 d ，请你返回两个数组之间的 距离值 。
-     * <p>
-     * 「距离值」 定义为符合此距离要求的元素数目：对于元素 arr1[i] ，不存在任何元素 arr2[j] 满足 |arr1[i]-arr2[j]| <= d 。
-     * <p>
-     * 在arr2中找与arr[i]最相近的数，如果连最相近的数绝对值差都大于d，那么其他就更不用考虑了
-     */
-    public static int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
-        Arrays.sort(arr2);
-        int result = 0, n = arr2.length;
-        for (int x : arr1) {
-            int index = binarySearch(arr2, x);
-            int lowerValue = index == -1 ? arr2[0] : arr2[index];
-            int higherValue = index == n - 1 ? arr2[n - 1] : arr2[index + 1];
-            if (Math.abs(x - lowerValue) > d && Math.abs(x - higherValue) > d) {
-                result++;
-            }
-
-        }
-        return result;
-    }
-
-    //查找<=target的数下标
-    public static int binarySearch(int[] arr, int target) {
-        int low = -1, high = arr.length;
-        while (low + 1 < high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] <= target) {
-                low = mid;
-            } else {
-                high = mid;
-            }
-        }
-        return low;
-    }
-
-    /**
      * 给你一个字符数组 letters，该数组按非递减顺序排序，以及一个字符 target。letters 里至少有两个不同的字符。
      * <p>
      * 返回 letters 中大于 target 的最小的字符。如果不存在这样的字符，则返回 letters 的第一个字符。

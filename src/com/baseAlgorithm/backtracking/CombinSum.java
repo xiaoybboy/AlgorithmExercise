@@ -53,6 +53,5 @@ public class CombinSum {
                 list.remove(list.size() - 1);//回退
             }
         }
-
     }
 }

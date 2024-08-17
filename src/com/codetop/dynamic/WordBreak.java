@@ -12,16 +12,13 @@ import java.util.Set;
 public class WordBreak {
     //dp[i]:s的前i个字符是否可以用字典拼出
     //dp[i] = dp[j] && check(s[j,i])
-    public boolean wordBreak(String s, List<String> wordDict) {
+    public static boolean wordBreak(String s, List<String> wordDict) {
         int n = s.length();
+        Set<String> wordDictSet = new HashSet<>(wordDict);
         boolean[] dp = new boolean[n + 1];
-
-        //1.字典
-        Set<String> wordDictSet = new HashSet(wordDict);
         dp[0] = true;
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             for (int j = 0; j < i; j++) {
-                //剪枝
                 if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
                     dp[i] = true;
                     break;

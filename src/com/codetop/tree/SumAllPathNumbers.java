@@ -11,6 +11,7 @@ import com.baseAlgorithm.tree.TreeNode;
 public class SumAllPathNumbers {
 
     int totalSum = 0;
+
     public int sumNumbers2(TreeNode root) {
         path(root, 0);
         return totalSum;
@@ -27,30 +28,6 @@ public class SumAllPathNumbers {
         }
         if (curNode.right != null) {
             path(curNode.right, preSum);
-        }
-    }
-
-    int sum = 0;
-
-    public int sumNumbers(TreeNode root) {
-        dfs(0, root);
-        return sum;
-    }
-
-    public void dfs(int preSum, TreeNode node) {
-        preSum = preSum * 10 + node.val;
-        //如果到达叶子节点，加上路径的值并返回
-        if (node.left == null && node.right == null) {
-            sum += preSum;
-            return;
-        }
-        //左子树
-        if (node.left != null) {
-            dfs(preSum, node.left);
-        }
-        //右子树
-        if (node.right != null) {
-            dfs(preSum, node.right);
         }
     }
 }

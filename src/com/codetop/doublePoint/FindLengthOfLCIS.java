@@ -9,17 +9,16 @@ package com.codetop.doublePoint;
 public class FindLengthOfLCIS {
 
     public int findLengthOfLCIS(int[] nums) {
-        int l = 0; // 起点
-        int r = 0; // 终点
-        int maxLen = 0; // 待返回的最长长度
-
-        while (r < nums.length)
-            if (r == l || nums[r - 1] < nums[r]) { // 保持递增
-                maxLen = Math.max(maxLen, r - l + 1); // 比较取大
-                r++; // 终点前进
-            } else // 递增中断
-                l = r; // 更新起点
-
-        return maxLen;
+        int n = nums.length;
+        int ans = 0;
+        int start = 0;
+        for (int i = 0; i < n; i++) {
+            //如果找到不满足条件，重置start
+            if (i > 0 && nums[i] <= nums[i - 1]) {
+                start = i;
+            }
+            ans = Math.max(ans, i - start + 1);
+        }
+        return ans;
     }
 }

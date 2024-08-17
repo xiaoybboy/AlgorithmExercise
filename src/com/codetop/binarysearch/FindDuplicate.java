@@ -17,29 +17,29 @@ public class FindDuplicate {
      * @return
      */
     public int findDuplicate(int[] nums) {
-        int len = nums.length; // n + 1 = len, n = len - 1
-
-        // 在 [1..n] 查找 nums 中重复的元素
-        int left = 1;
-        int right = len - 1;
-        while (left < right) {
-            int mid = (left + right) / 2;
-
-            // nums 中小于等于 mid 的元素的个数
-            int count = 0;
-            for (int num : nums) {
-                if (num <= mid) {
-                    count++;
-                }
-            }
-            if (count > mid) {
-                // 下一轮搜索的区间 [left..mid]
+        int left = -1, right = nums.length;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (checkBlue(nums, mid)) {
                 right = mid;
             } else {
-                // 下一轮搜索的区间 [mid + 1..right]
-                left = mid + 1;
+                left = mid;
             }
         }
-        return left;
+        return right;
+    }
+
+    private boolean checkBlue(int[] nums, int target) {
+        int count = 0;
+        for (int x : nums) {
+            if (x <= target) {
+                count++;
+                //小于等于target的数字>target，说明重复的数字一定在右侧
+                if (count > target) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

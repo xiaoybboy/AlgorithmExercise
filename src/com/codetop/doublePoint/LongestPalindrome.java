@@ -6,16 +6,19 @@ package com.codetop.doublePoint;
  */
 public class LongestPalindrome {
 
+    public static void main(String[] args) {
+        String s = "a";
+        longestPalindrome(s);
+    }
+
     /**
      * 双指针法-中心扩散
      * 如果回文串的长度为奇数，则它有一个中心字符；如果回文串的长度为偶数，则可以认为它有两个中心字符
      */
-    public String longestPalindrome(String s) {
+    public static String longestPalindrome(String s) {
         String res = "";
         for (int i = 0; i < s.length(); i++) {
-            // 以 s[i] 为中心的最长回文子串
             String s1 = palindrome(s, i, i);
-            // 以 s[i] 和 s[i+1] 为中心的最长回文子串
             String s2 = palindrome(s, i, i + 1);
             res = res.length() > s1.length() ? res : s1;
             res = res.length() > s2.length() ? res : s2;
@@ -24,16 +27,11 @@ public class LongestPalindrome {
     }
 
     // 在 s 中寻找以 s[l] 和 s[r] 为中心的最长回文串
-    public String palindrome(String s, int l, int r) {
-        // 防止索引越界
-        while (l >= 0 && r < s.length()) {
-            if (s.charAt(l) == s.charAt(r)) {
-                // 双指针，向两边展开
-                l--;
-                r++;
-            }
+    public static String palindrome(String s, int l, int r) {
+        while (l >= 0 && r < s.length() && l <= r && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
         }
-        // 返回以 s[l] 和 s[r] 为中心的最长回文串
         return s.substring(l + 1, r);
     }
 }

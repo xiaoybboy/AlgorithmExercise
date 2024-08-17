@@ -1,4 +1,4 @@
-package com.codetop.listnode;
+package com.codetop.doublePoint;
 
 import com.model.ListNode;
 
@@ -27,10 +27,6 @@ public class GetIntersectionNode {
      * 因为有a+(b−c)=b+(a−c)
      * 若两链表 有 公共尾部 (即 c>0 ) ：指针 A , B 同时指向「第一个公共节点」node 。
      * 若两链表 无 公共尾部 (即 c=0 ) ：指针 A , B 同时指向 nullnullnull
-     *
-     * @param headA
-     * @param headB
-     * @return
      */
     public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
         ListNode A = headA, B = headB;
