@@ -1,5 +1,6 @@
 package com.codetop.monotonicstack;
 
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -8,33 +9,37 @@ import java.util.Deque;
  */
 public class RemoveKdigits {
 
-    public String removeKdigits(String num, int k) {
-        if (num.length() <= k) {
+    public static void main(String[] args) {
+        String num = "1432219";
+        removeKdigits(num, 5);
+    }
+
+    public static String removeKdigits(String num, int k) {
+        int n = num.length();
+        if (k >= n) {
             return "0";
         }
-        //stack中保留最终要留的字符
-        Deque<Character> stack = new ArrayDeque<>();
-        for (int i = 0; i < num.length(); i++) {
-            char ch = num.charAt(i);
-            //如果之前已经有字符大于当前字符，那么一定要移除
-            while (!stack.isEmpty() && k > 0 && stack.peek() > ch) {
-                stack.pop();
+        Deque<Character> deque = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            char cur = num.charAt(i);
+            while (!deque.isEmpty() && cur < deque.peek() && k > 0) {
+                deque.pop();
                 k--;
             }
-            //去除前导0
-            if (ch != '0' || !stack.isEmpty()) {
-                stack.push(ch);
+            //这里是为了排查前置0的影响
+            if (cur != '0' || !deque.isEmpty()) {
+                deque.push(cur);
             }
         }
-        // k仍不为 0，处理
-        while (k-- > 0 && !stack.isEmpty()) {
-            stack.pop();
+        //如果栈已经正序排列了，k还没有用完，从后删除最大的数
+        while (k > 0 && !deque.isEmpty()) {
+            deque.pop();
+            k--;
         }
-        StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.append(stack.pollLast());
+        StringBuilder builder = new StringBuilder();
+        while (!deque.isEmpty()) {
+            builder.append(deque.pollLast());
         }
-        String res = sb.toString();
-        return "".equals(res) ? "0" : res;
+        return builder.length() == 0 ? "0" : builder.toString();
     }
 }

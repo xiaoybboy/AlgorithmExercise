@@ -1,6 +1,7 @@
 package com.codetop.backtrack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Permute {
@@ -34,39 +35,6 @@ public class Permute {
         }
     }
 
-    /**
-     * 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
-     *
-     * @param nums
-     * @return
-     */
-    public List<List<Integer>> permute2(int[] nums) {
-        Arrays.sort(nums);
-        backTrack2(0, nums);
-        return result;
-    }
-
-    private void backTrack2(int start, int[] nums) {
-        if (start == nums.length - 1) {
-            List<Integer> tempList = new ArrayList<>();
-            for (int num : nums) {
-                tempList.add(num);
-            }
-            result.add(tempList);
-            return;
-        }
-        Set<Integer> set = new HashSet<>();
-        for (int i = start; i < nums.length; i++) {
-            if (set.contains(nums[i])) {
-                // 重复，因此剪枝
-                continue;
-            }
-            set.add(nums[i]);
-            swap(nums, start, i);
-            backTrack2(start + 1, nums);
-            swap(nums, i, start);
-        }
-    }
 
     public void swap(int[] nums, int i, int j) {
         int temp = nums[i];

@@ -13,22 +13,17 @@ package com.codetop.binarysearch;
 public class FindMin {
 
     public int findMin(int[] nums) {
-        //1.蓝红划分，蓝色区域值大与右边界，红色<=右边界
-        //2.return end
         int n = nums.length;
-        int start = -1, end = n;
-        while (start + 1 < end) {
-            int mid = start + (end - start) / 2;
-            int target = end == n ? nums[n - 1] : nums[end];
-            if (nums[mid] > target) {
-                start = mid;
-            } else if (nums[mid] < target) {
-                end = mid;
+        int left = -1;
+        int right = n - 1; // 开区间 (-1, n-1)
+        while (left + 1 < right) { // 开区间不为空
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[n - 1]) {
+                right = mid;
             } else {
-                //特殊情况处理=右边界的值缩小红色区域
-                end--;
+                left = mid;
             }
         }
-        return nums[end];
+        return nums[right];
     }
 }
