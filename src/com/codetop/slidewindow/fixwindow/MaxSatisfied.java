@@ -18,22 +18,35 @@ public class MaxSatisfied {
      * 最终答案为 s0+maxS
      */
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
-        int total = 0;
-        int n = customers.length;
-        for (int i = 0; i < n; i++) {
+        //1.获取当前不生气最大满意客户数
+        int total = 0;//原本不生气的最大客户数
+        for (int i = 0; i < customers.length; i++) {
             if (grumpy[i] == 0) {
                 total += customers[i];
             }
         }
+        //2.控制minutes不生气窗口获得的增量
         int increase = 0;
-        for (int i = 0; i < minutes; i++) {
-            increase += customers[i] * grumpy[i];
-        }
-        int maxIncrease = increase;
-        for (int i = minutes; i < n; i++) {
-            increase = increase - customers[i - minutes] * grumpy[i - minutes] + customers[i] * grumpy[i];
-            maxIncrease = Math.max(maxIncrease, increase);
+        int start = 0, end = 0;
+        int maxIncrease = 0;
+        while (end < customers.length) {
+            //2.1还未到达窗口右边界
+            if (end < minutes) {
+                increase += getIncrease(end, customers, grumpy);
+            } else {
+                increase = increase + getIncrease(end, customers, grumpy) - getIncrease(start, customers, grumpy);
+                start++;
+            }
+            maxIncrease = Math.max(increase, maxIncrease);
+            end++;
         }
         return total + maxIncrease;
+    }
+
+    private int getIncrease(int i, int[] customers, int[] grumpy) {
+        if (grumpy[i] == 1) {
+            return customers[i];
+        }
+        return 0;
     }
 }

@@ -10,14 +10,14 @@ package com.codetop.slidewindow.fixwindow;
 public class MinimumRecolors {
 
     public int minimumRecolors(String blocks, int k) {
-        int n = blocks.length();
+        int start = 0;
         int whiteCount = 0;
         for (int i = 0; i < k; i++) {
             whiteCount += isWhite(blocks.charAt(i));
         }
         int ans = whiteCount;
-        for (int j = k; j < n; j++) {
-            whiteCount = whiteCount - isWhite(blocks.charAt(j - k)) + isWhite(blocks.charAt(j));
+        for (int j = k; j < blocks.length(); j++) {
+            whiteCount = whiteCount + isWhite(blocks.charAt(j)) - isWhite(blocks.charAt(j - k));
             ans = Math.min(whiteCount, ans);
         }
         return ans;

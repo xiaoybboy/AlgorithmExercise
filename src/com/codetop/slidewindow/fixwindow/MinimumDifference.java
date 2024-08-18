@@ -14,12 +14,13 @@ public class MinimumDifference {
     public int minimumDifference(int[] nums, int k) {
         Arrays.sort(nums);
         int start = 0, end = k - 1;
-        int minDiff = nums[end] - nums[start];
+
+        int ans = nums[end] - nums[start];
         while (end < nums.length) {
-            minDiff = Math.min(minDiff, nums[end] - nums[start]);
+            ans = Math.min(ans, nums[end] - nums[start]);
             start++;
             end++;
         }
-        return minDiff;
+        return ans;
     }
 }

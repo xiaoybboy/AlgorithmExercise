@@ -13,28 +13,30 @@ import java.util.Map;
 public class MaxSum {
 
     public long maxSum(List<Integer> nums, int m, int k) {
+        int start = 0, end = 0;
         long sum = 0;
-        Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
-        int n = nums.size();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < k; i++) {
-            int num = nums.get(i);
+            Integer num = nums.get(i);
             sum += num;
-            counts.put(num, counts.getOrDefault(num, 0) + 1);
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
-        long maximumSum = counts.size() >= m ? sum : 0;
-        for (int i = k; i < n; i++) {
-            int prevNum = nums.get(i - k), currNum = nums.get(i);
-            sum -= prevNum;
-            sum += currNum;
-            counts.put(prevNum, counts.get(prevNum) - 1);
-            if (counts.get(prevNum) == 0) {
-                counts.remove(prevNum);
+        long maxSum = map.keySet().size() >= m ? sum : 0;
+        for (int j = k; j < nums.size(); j++) {
+            Integer num = nums.get(j);
+            Integer leftNum = nums.get(j - k);
+            sum = sum + num - leftNum;
+            map.put(num, map.getOrDefault(num, 0) + 1);
+            int newLeftNum = map.get(leftNum) - 1;
+            if (newLeftNum == 0) {
+                map.remove(leftNum);
+            } else {
+                map.put(leftNum, newLeftNum);
             }
-            counts.put(currNum, counts.getOrDefault(currNum, 0) + 1);
-            if (counts.size() >= m) {
-                maximumSum = Math.max(maximumSum, sum);
+            if (map.keySet().size() >= m) {
+                maxSum = Math.max(maxSum, sum);
             }
         }
-        return maximumSum;
+        return maxSum;
     }
 }

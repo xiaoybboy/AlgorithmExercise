@@ -9,22 +9,32 @@ package com.codetop.slidewindow.fixwindow;
  */
 public class MaxVowels {
 
-    public int maxVowels(String s, int k) {
+    public static void main(String[] args) {
+        String s = "ibpbhixfiouhdljnjfflpapptrxgcomvnb";
+        maxVowels(s, 33);
+    }
+
+    public static int maxVowels(String s, int k) {
         int n = s.length();
-        int vowel_count = 0;
-        for (int i = 0; i < k; i++) {
-            vowel_count += isVowel(s.charAt(i));
-        }
-        int ans = vowel_count;
-        //窗口滑动
-        for (int j = k; j < n; j++) {
-            vowel_count = vowel_count - isVowel(s.charAt(j - k)) + isVowel(s.charAt(j));
-            ans = Math.max(ans, vowel_count);
+        int start = 0, end = 0, count = 0;
+        int ans = 0;
+        while (end < n) {
+            //窗口大小不满足k
+            if (end < k) {
+                count += isVowel(s.charAt(end));
+            } else {
+                //窗口移动，不断更新中间变量的值
+                count = count + isVowel(s.charAt(end)) - isVowel(s.charAt(start));
+                start++;
+            }
+            //更新最终结果
+            ans = Math.max(ans, count);
+            end++;
         }
         return ans;
     }
 
-    private int isVowel(char ch) {
+    private static int isVowel(char ch) {
         return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ? 1 : 0;
     }
 }

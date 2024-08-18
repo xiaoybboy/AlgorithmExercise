@@ -12,23 +12,21 @@ package com.codetop.slidewindow.fixwindow;
  */
 public class FindMaxAverage {
 
-    public double findMaxAverage(int[] nums, int k) {
-        if (nums == null || nums.length < k) {
-            return 0d;
+    public static void main(String[] args) {
+        int[] nums = {-1};
+        findMaxAverage(nums, 1);
+    }
+
+    public static double findMaxAverage(int[] nums, int k) {
+        int sum = 0;
+        for (int i = 0; i < k; ++i) {
+            sum += nums[i];
         }
-        int start = 0, end = k - 1;
-        int curSum = 0;
-        for (int i = 0; i <= end; i++) {
-            curSum += nums[i];
+        int maxSum = sum;
+        for (int i = k; i < nums.length; ++i) {
+            sum += nums[i] - nums[i - k];
+            maxSum = Math.max(maxSum, sum);
         }
-        int maxSum = curSum;
-        while (end < nums.length - 1) {
-            curSum -= nums[start];
-            start++;
-            end++;
-            curSum += nums[end];
-            maxSum = Math.max(maxSum, curSum);
-        }
-        return 1.0 * maxSum / k;
+        return maxSum * 1.0 / k;
     }
 }

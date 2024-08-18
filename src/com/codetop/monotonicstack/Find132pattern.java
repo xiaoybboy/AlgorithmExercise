@@ -15,14 +15,16 @@ public class Find132pattern {
         //贪心思想，我们总是希望3是最大值，2是比3小一点的最大值，1尽可能小
         Deque<Integer> deque = new ArrayDeque<>();
         int n = nums.length;
-        int last2 = Integer.MIN_VALUE;//记录最大的2的值
+        int numj = Integer.MIN_VALUE;//记录最大的2的值
         for (int i = n - 1; i >= 0; i--) {
             //如果nums[i] < last2，说明找到了一个满足条件的1
-            if (nums[i] < last2) {
+            if (nums[i] < numj) {
                 return true;
             }
+            //总是希望numk尽可能的大，而numj是k右边小于numk的最大值
+            //栈顶始终保持numk的最大值，而numj为小于numk的最大值
             while (!deque.isEmpty() && deque.peek() < nums[i]) {
-                last2 = deque.pop();
+                numj = deque.pop();
             }
             deque.push(nums[i]);
         }
