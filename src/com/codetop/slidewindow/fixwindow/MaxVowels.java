@@ -9,11 +9,6 @@ package com.codetop.slidewindow.fixwindow;
  */
 public class MaxVowels {
 
-    public static void main(String[] args) {
-        String s = "ibpbhixfiouhdljnjfflpapptrxgcomvnb";
-        maxVowels(s, 33);
-    }
-
     public static int maxVowels(String s, int k) {
         int n = s.length();
         int start = 0, end = 0, count = 0;

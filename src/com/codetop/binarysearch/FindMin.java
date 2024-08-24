@@ -7,23 +7,22 @@ package com.codetop.binarysearch;
  * 注意，数组 [a[0], a[1], a[2], ..., a[n-1]] 旋转一次 的结果为数组 [a[n-1], a[0], a[1], a[2], ..., a[n-2]] 。
  * <p>
  * 给你一个可能存在 重复 元素值的数组 nums ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。请你找出并返回数组中的 最小元素 。
- * <p>
  * 你必须尽可能减少整个过程的操作步骤。
  */
 public class FindMin {
 
     public int findMin(int[] nums) {
         int n = nums.length;
-        int left = -1;
-        int right = n - 1; // 开区间 (-1, n-1)
-        while (left + 1 < right) { // 开区间不为空
-            int mid = left + (right - left) / 2;
-            if (nums[mid] < nums[n - 1]) {
-                right = mid;
+        int start = -1, end = n;
+
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] > nums[n - 1]) {
+                start = mid;
             } else {
-                left = mid;
+                end = mid;
             }
         }
-        return nums[right];
+        return nums[end];
     }
 }

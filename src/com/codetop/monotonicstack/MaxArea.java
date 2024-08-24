@@ -15,14 +15,17 @@ public class MaxArea {
      * 2.每次往内移动短板，面积才有可能增大
      */
     public int maxArea(int[] height) {
-        int left = 0, right = height.length - 1;
+        int start = 0, end = height.length - 1;
+
         int ans = 0;
-        while (left < right) {
-            ans = Math.max(ans, Math.min(height[left], height[right]) * (right - left));
-            if (height[left] < height[right]) {
-                left++;
+        while (start < end) {
+            int curArea = Math.min(height[start], height[end]) * (end - start );
+            ans = Math.max(ans, curArea);
+
+            if (height[start] < height[end]) {
+                start++;
             } else {
-                right--;
+                end--;
             }
         }
         return ans;

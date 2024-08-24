@@ -7,20 +7,42 @@ import java.util.*;
  */
 public class PermuteUnique {
 
-    public static void main(String[] args) {
-        int[] nums = {1,1,2};
-        permuteUnique(nums);
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> tempList = new LinkedList<>();
+    boolean[] used;
+
+    public List<List<Integer>> permuteUnique2(int[] nums) {
+        used = new boolean[nums.length];
+        permuteUniqueHelper(nums);
+        return result;
     }
 
-    static List<List<Integer>> result = new ArrayList<>();
+    public void permuteUniqueHelper(int[] nums) {
+        if (tempList.size() == nums.length) {
+            result.add(new ArrayList<>(tempList));
+            return;
+        }
+        Set<Integer> brother = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i] || brother.contains(nums[i])) {
+                continue;
+            }
+            brother.add(nums[i]);
+            tempList.add(nums[i]);
+            used[i] = true;
+            permuteUniqueHelper(nums);
+            tempList.removeLast();
+            used[i] = false;
+        }
+    }
 
-    public static List<List<Integer>> permuteUnique(int[] nums) {
+    public List<List<Integer>> permuteUnique(int[] nums) {
         Arrays.sort(nums);
         backTrack(nums, 0);
         return result;
     }
 
-    private static void backTrack(int[] nums, int start) {
+    private void backTrack(int[] nums, int start) {
         if (start == nums.length - 1) {
             List<Integer> tempList = new ArrayList<>();
             for (int num : nums) {

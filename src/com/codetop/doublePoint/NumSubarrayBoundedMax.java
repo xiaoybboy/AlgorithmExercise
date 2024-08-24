@@ -13,19 +13,28 @@ public class NumSubarrayBoundedMax {
      * 当nums[i]>=left的时候更新i1
      * 当Nums[i]>right的时候更新i2
      */
-    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+    public int numSubarrayBoundedMax2(int[] nums, int left, int right) {
+        int n = nums.length;
         int ans = 0;
-        int j = -1, k = -1;//j表示第一次满足nums[i]在left-right之间的位置;k表示最近一次nums[i]大于right的位置
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > right) {
-                k = i;//num[i]>rigth,不可能存在以num[i]为子数组右边界，且满足条件的子数组
-            } else {
-                if (nums[i] < left) {
-                    if (j > k) ans += j - k;//nums[i]不满足，需要其他元素满足
-                } else {
-                    ans += i - k;//nums[i]本身已经满足在left-right之间，只需要找到上一个>right位置，中间i-k的元素都是满足条件的子数组
-                    j = i;//更新j
+        //overRightIndex表示上一个大于right的下标，mathIndex表示上一个满足条件的下标
+        int overRightIndex = -1, mathIndex = -1;
+        for (int i = 0; i < n; i++) {
+            int curNum = nums[i];
+            if (curNum > right) {
+                //记录元素值大于right的下标
+                overRightIndex = i;
+                continue;
+            } else if (curNum < left) {
+                //小于left的时候，需要左边的元素来满足最大值在left-right之间
+                if (curNum < left) {
+                    if (mathIndex > overRightIndex) {
+                        ans += mathIndex - overRightIndex;
+                    }
                 }
+            } else {
+                //nums[i]本身已经满足在left-right之间，只需要找到上一个>right位置，中间i-k的元素都是满足条件的子数组
+                ans += i - overRightIndex;
+                mathIndex = i;
             }
         }
         return ans;

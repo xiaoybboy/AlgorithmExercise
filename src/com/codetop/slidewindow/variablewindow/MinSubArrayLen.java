@@ -9,22 +9,19 @@ package com.codetop.slidewindow.variablewindow;
 public class MinSubArrayLen {
 
     public int minSubArrayLen(int target, int[] nums) {
-        int n = nums.length;
-        if (n == 0) {
-            return 0;
-        }
         int start = 0, end = 0;
-        int sum = 0, result = Integer.MAX_VALUE;
-        while (end < n) {
+        int sum = 0;
+        int ans = Integer.MAX_VALUE;
+        while (end < nums.length) {
             sum += nums[end];
+            //窗口滑动-不断收缩左窗口
             while (sum >= target) {
-                //窗口向右滑动
-                result = Math.min(result, end - start + 1);
+                ans = Math.min(ans, end - start + 1);
                 sum -= nums[start];
                 start++;
             }
             end++;
         }
-        return result == Integer.MAX_VALUE ? 0 : result;
+        return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 }

@@ -11,17 +11,19 @@ public class DailyTemperatures {
     public int[] dailyTemperatures(int[] temperatures) {
         Deque<Temperature> deque = new ArrayDeque<>();
         int n = temperatures.length;
-        int[] ans = new int[n];
+        int[] answer = new int[n];
         for (int i = 0; i < n; i++) {
-            //寻找比栈里的元素大的
-            //例如2,1,3,4;2和1的下一个更高温度都是3
-            while (!deque.isEmpty() && temperatures[i] > deque.peek().value) {
+            while (!deque.isEmpty() && deque.peek().value < temperatures[i]) {
                 Temperature temperature = deque.pop();
-                ans[temperature.index] = i - temperature.index;
+                answer[temperature.index] = i - temperature.index;
             }
             deque.push(new Temperature(temperatures[i], i));
         }
-        return ans;
+        while (!deque.isEmpty()) {
+            Temperature temperature = deque.pop();
+            answer[temperature.index] = 0;
+        }
+        return answer;
     }
 
     class Temperature {

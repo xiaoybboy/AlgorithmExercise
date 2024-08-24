@@ -278,32 +278,31 @@ public class BinaryTree {
         if (root == null) {
             return ans;
         }
-        //双端队列
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        boolean isLeftOrder = true;
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.offer(root);
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            Deque<Integer> tempQueue = new ArrayDeque<>(size);
+        boolean order = true;
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            Deque<Integer> tempList = new ArrayDeque<>(size);
             for (int i = 0; i < size; i++) {
-                TreeNode curNode = queue.poll();
-                //根据当前遍历方式，把数据放入双端队列
-                if (isLeftOrder) {
-                    tempQueue.offerLast(curNode.val);
+                TreeNode treeNode = deque.poll();
+                if (order) {
+                    //正向
+                    tempList.offer(treeNode.val);
                 } else {
-                    tempQueue.offerFirst(curNode.val);
+                    //反向
+                    tempList.offerFirst(treeNode.val);
                 }
-                //队列中放入左右子节点
-                if (curNode.left != null) {
-                    queue.offer(curNode.left);
+                if (treeNode.left != null) {
+                    deque.offer(treeNode.left);
                 }
-                if (curNode.right != null) {
-                    queue.offer(curNode.right);
+                if (treeNode.right != null) {
+                    deque.offer(treeNode.right);
                 }
             }
-            isLeftOrder = !isLeftOrder;
-            ans.add(new ArrayList<>(tempQueue));
+            ans.add(new ArrayList<>(tempList));
+            order = !order;
         }
         return ans;
     }

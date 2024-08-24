@@ -10,28 +10,25 @@ import java.util.Deque;
 public class RemoveKdigits {
 
     public static void main(String[] args) {
-        String num = "1432219";
-        removeKdigits(num, 5);
+        String num = "1111111";
+        removeKdigits(num, 3);
     }
 
     public static String removeKdigits(String num, int k) {
-        int n = num.length();
-        if (k >= n) {
-            return "0";
-        }
         Deque<Character> deque = new ArrayDeque<>();
+        int n = num.length();
         for (int i = 0; i < n; i++) {
-            char cur = num.charAt(i);
-            while (!deque.isEmpty() && cur < deque.peek() && k > 0) {
+            char ch = num.charAt(i);
+            while (!deque.isEmpty() && deque.peek() > ch && k > 0) {
                 deque.pop();
                 k--;
             }
             //这里是为了排查前置0的影响
-            if (cur != '0' || !deque.isEmpty()) {
-                deque.push(cur);
+            if (ch != '0' || !deque.isEmpty()) {
+                deque.push(ch);
             }
         }
-        //如果栈已经正序排列了，k还没有用完，从后删除最大的数
+        //如果k还没有用完,此时栈内必然已经排序
         while (k > 0 && !deque.isEmpty()) {
             deque.pop();
             k--;

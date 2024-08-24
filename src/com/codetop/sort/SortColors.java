@@ -33,7 +33,7 @@ public class SortColors {
             } else if (nums[i] == 1) {
                 i++;
             } else {
-                //如果找到2，就将2和right(0的左边界)互换
+                //如果找到2，就将2和right(2的左边界)互换
                 swap(nums, i, right);
                 right--;
             }

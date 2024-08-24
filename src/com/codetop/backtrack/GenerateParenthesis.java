@@ -8,33 +8,27 @@ import java.util.List;
  */
 public class GenerateParenthesis {
 
-    /**
-     * 回溯法
-     *
-     * @param n
-     * @return
-     */
+    List<String> result = new ArrayList<>();
+
     public List<String> generateParenthesis(int n) {
-        List<String> result = new ArrayList<>();
-        dfs("", 0, 0, result, n);
+        backTrack("", 0, 0, n);
         return result;
     }
 
-    public static void dfs(String buffer, int left, int right, List<String> result, int n) {
+    public void backTrack(String buffer, int left, int right, int n) {
         if (buffer.length() == 2 * n) {
             result.add(buffer);
             return;
         }
+        //剪枝
         if (left < right) {
-            // 如果当前已使用左括号的数量小于右括号的数量，则无法形成有效的括号。直接return。
             return;
         }
         if (left < n) {
-            dfs(buffer + "(", left + 1, right, result, n);
+            backTrack(buffer + "(", left + 1, right, n);
         }
-
         if (right < n) {
-            dfs(buffer + ")", left, right + 1, result, n);
+            backTrack(buffer + ")", left, right + 1, n);
         }
     }
 }

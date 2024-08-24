@@ -34,15 +34,15 @@ public class LetterCombinations {
     private void backTrack(int index, String digits, StringBuffer combination) {
         if (index == digits.length()) {
             result.add(combination.toString());
-        } else {
-            char digit = digits.charAt(index);
-            String letters = phoneMap.get(digit);
-            int lettersCount = letters.length();
-            for (int i = 0; i < lettersCount; i++) {
-                combination.append(letters.charAt(i));
-                backTrack(index + 1, digits, combination);
-                combination.deleteCharAt(index);
-            }
+            return;
+        }
+        char digit = digits.charAt(index);
+        String letters = phoneMap.get(digit);
+        int lettersCount = letters.length();
+        for (int i = 0; i < lettersCount; i++) {
+            combination.append(letters.charAt(i));
+            backTrack(index + 1, digits, combination);
+            combination.deleteCharAt(index);
         }
     }
 }

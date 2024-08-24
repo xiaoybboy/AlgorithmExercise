@@ -5,20 +5,26 @@ package com.codetop.doublePoint;
  */
 public class LongestOnes {
 
-    //问题等价于：P[right]−P[left−1]≤k;其中P[i]到下标i的前缀和
     public int longestOnes(int[] nums, int k) {
         int n = nums.length;
-        //lsum到左窗口的前缀和，rsum到右窗口的前缀和
-        int left = 0, lsum = 0, rsum = 0;
         int ans = 0;
-        for (int right = 0; right < n; right++) {
-            rsum += 1 - nums[right];
-            //计算左窗口
-            while (lsum < rsum - k) {
-                lsum += 1 - nums[left];
+
+        int left = 0, right = 0;
+        int curZeroNum = 0;
+        while (right < n) {
+            if (nums[right] == 0) {
+                curZeroNum++;
+            }
+
+            //移动左窗口，满足条件窗口内0的数量<=k
+            while (curZeroNum > k) {
+                if (nums[left] == 0) {
+                    curZeroNum--;
+                }
                 left++;
             }
             ans = Math.max(ans, right - left + 1);
+            right++;
         }
         return ans;
     }

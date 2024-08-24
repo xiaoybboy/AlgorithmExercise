@@ -6,7 +6,6 @@ import java.util.Deque;
 /**
  * 给你一个整数数组 nums ，数组中共有 n 个整数。132 模式的子序列 由三个整数 nums[i]、nums[j] 和 nums[k] 组成，
  * 并同时满足：i < j < k 和 nums[i] < nums[k] < nums[j] 。
- * <p>
  * 如果 nums 中存在 132 模式的子序列 ，返回 true ；否则，返回 false 。
  */
 public class Find132pattern {
@@ -22,7 +21,7 @@ public class Find132pattern {
                 return true;
             }
             //总是希望numk尽可能的大，而numj是k右边小于numk的最大值
-            //栈顶始终保持numk的最大值，而numj为小于numk的最大值
+            //考虑57896的情况，当栈顶元素为9的时候，然后遇到8和7，就没必要更新numj了
             while (!deque.isEmpty() && deque.peek() < nums[i]) {
                 numj = deque.pop();
             }
