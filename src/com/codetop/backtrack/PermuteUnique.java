@@ -24,15 +24,16 @@ public class PermuteUnique {
         }
         Set<Integer> brother = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
+            //剪枝
             if (used[i] || brother.contains(nums[i])) {
                 continue;
             }
-            brother.add(nums[i]);
-            tempList.add(nums[i]);
             used[i] = true;
+            tempList.add(nums[i]);
+            brother.add(nums[i]);
             permuteUniqueHelper(nums);
-            tempList.removeLast();
             used[i] = false;
+            tempList.removeLast();
         }
     }
 

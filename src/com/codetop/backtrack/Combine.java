@@ -1,9 +1,6 @@
 package com.codetop.backtrack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Combine {
@@ -17,13 +14,16 @@ public class Combine {
      * 你可以按 任何顺序 返回答案。
      */
     public List<List<Integer>> combine(int n, int k) {
-        backTrack(1, n, k, new ArrayList<>());
+        backTrack(1, n, k);
         return result;
     }
 
-    private void backTrack(int start, int n, int k, List<Integer> tempList) {
+    private void backTrack(int start, int n, int k) {
         if (tempList.size() == k) {
             result.add(new ArrayList<>(tempList));
+            return;
+        }
+        if (start > n) {
             return;
         }
         for (int i = start; i <= n; i++) {
@@ -32,8 +32,8 @@ public class Combine {
                 break;
             }
             tempList.add(i);
-            backTrack(i + 1, n, k, tempList);
-            tempList.remove(tempList.size() - 1);
+            backTrack(i + 1, n, k);
+            tempList.removeLast();
         }
     }
 
@@ -72,68 +72,62 @@ public class Combine {
      * 给你一个无重复元素 的整数数组 candidates 和一个目标整数 target ，
      * 找出 candidates 中可以使数字和为目标数 target 的 所有 不同组合 ，并以列表形式返回。
      * 你可以按 任意顺序 返回这些组合。
-     * <p>
      * candidates 中的 同一个 数字可以 无限制重复被选取 。如果至少一个数字的被选数量不同，则两种组合是不同的。
-     * <p>
      * 输入：candidates = [2,3,6,7], target = 7
      * * 输出：[[2,2,3],[7]]
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        backTrack(candidates, 0, target);
+        backTrack(candidates, 0, 0, target);
         return result;
     }
 
-    private void backTrack(int[] candidates, int start, int curTarget) {
-        if (curTarget == 0) {
+    private void backTrack(int[] candidates, int start, int curSum, int target) {
+        if (curSum == target) {
             result.add(new ArrayList<>(tempList));
+            return;
         }
-        if (curTarget < 0) {
+        if (curSum > target) {
             return;
         }
         for (int i = start; i < candidates.length; i++) {
             tempList.add(candidates[i]);
-            backTrack(candidates, i, curTarget - candidates[i]);
-            tempList.remove(tempList.size() - 1);
+            curSum += candidates[i];
+            backTrack(candidates, i, curSum, target);
+            tempList.removeLast();
+            curSum -= candidates[i];
         }
     }
 
     /**
-     * 给定一个候选人编号的集合 candidates 和一个目标数 target,
-     * 找出 candidates 中所有可以使数字和为 target 的组合。
-     * <p>
+     * 给定一个候选人编号的集合 candidates 和一个目标数 target,找出 candidates 中所有可以使数字和为 target 的组合。
      * candidates 中的每个数字在每个组合中只能使用 一次 。
      */
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        Arrays.sort(candidates); // 对 candidates 进行排序
-        backtrack(target, candidates, 0);
+        Arrays.sort(candidates);
+        backtrack2(target, candidates, 0);
         return result;
     }
 
-    private void backtrack(int target, int[] candidates, int start) {
-        // 子集和等于 target 时，记录解
+    private void backtrack2(int target, int[] candidates, int start) {
         if (target == 0) {
             result.add(new ArrayList<>(tempList));
             return;
         }
-        // 遍历所有选择
-        // 剪枝二：从 start 开始遍历，避免生成重复子集
-        // 剪枝三：从 start 开始遍历，避免重复选择同一元素
+        Set<Integer> brother = new HashSet<>();
         for (int i = start; i < candidates.length; i++) {
-            // 剪枝一：若子集和超过 target ，则直接结束循环
-            // 这是因为数组已排序，后边元素更大，子集和一定超过 target
+            //剪枝，同一层的重复元素剪掉
+            if (brother.contains(candidates[i])) {
+                continue;
+            }
+            //数组已经排序，越右边越大，剪枝
             if (target - candidates[i] < 0) {
                 break;
             }
-            // 剪枝四：如果该元素与左边元素相等，说明该搜索分支重复，直接跳过
-            if (i > start && candidates[i] == candidates[i - 1]) {
-                continue;
-            }
-            // 尝试：做出选择，更新 target, start
             tempList.add(candidates[i]);
-            // 进行下一轮选择
-            backtrack(target - candidates[i], candidates, i + 1);
-            // 回退：撤销选择，恢复到之前的状态
-            tempList.remove(tempList.size() - 1);
+            brother.add(candidates[i]);
+            //注意要求每个元素最少使用一次，所以这里要从start+1开始
+            backtrack2(target - candidates[i], candidates, i + 1);
+            tempList.removeLast();
         }
     }
 }

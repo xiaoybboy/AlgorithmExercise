@@ -29,7 +29,7 @@ public class FurthestBuilding {
                     //把最低差的替换成砖头
                     bricks -= queue.poll();
                 }
-
+                //砖块也没有了
                 if (bricks < 0) {
                     return i - 1;
                 }

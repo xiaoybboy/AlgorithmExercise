@@ -23,13 +23,12 @@ public class Subsets {
         for (int i = start; i < nums.length; i++) {
             tempList.add(nums[i]);
             backTrack(i + 1, nums);
-            tempList.remove(tempList.size() - 1);
+            tempList.removeLast();
         }
     }
 
     /**
-     * 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的
-     * 子集（幂集）。
+     * 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。
      * 解集 不能 包含重复的子集。返回的解集中，子集可以按 任意顺序 排列。
      */
     public List<List<Integer>> subsetsWithDup(int[] nums) {
@@ -40,14 +39,16 @@ public class Subsets {
 
     private void backTrack2(int start, int[] nums) {
         result.add(new ArrayList<>(tempList));
+        Set<Integer> brother = new HashSet<>();
         for (int i = start; i < nums.length; i++) {
-            // 剪枝逻辑，值相同的相邻树枝，只遍历第一条
-            if (i > start && nums[i] == nums[i - 1]) {
+            //横向剪枝
+            if (brother.contains(nums[i])) {
                 continue;
             }
+            brother.add(nums[i]);
             tempList.add(nums[i]);
             backTrack2(i + 1, nums);
-            tempList.remove(tempList.size() - 1);
+            tempList.removeLast();
         }
     }
 

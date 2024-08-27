@@ -28,15 +28,15 @@ public class Permute {
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            //排除已经选择过的元素
+            //防止重复选择
             if (used[i]) {
                 continue;
             }
-            tempList.add(nums[i]);
             used[i] = true;
+            tempList.add(nums[i]);
             backTrack1(nums);
-            used[i] = false;
             tempList.removeLast();
+            used[i] = false;
         }
     }
 

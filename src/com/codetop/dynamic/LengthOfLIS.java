@@ -11,11 +11,6 @@ import java.util.Arrays;
  */
 public class LengthOfLIS {
 
-    public static void main(String[] args) {
-        int[] nums = {1, 3, 6, 7, 9, 4, 10, 5, 6};
-        lengthOfLIS(nums);
-    }
-
     //dp[i]表示以i为结尾的子序列的长度
     //转移方程：for j in [0, i){ dp[i] = max(dp[i], dp[j] + 1) }
     public static int lengthOfLIS(int[] nums) {
