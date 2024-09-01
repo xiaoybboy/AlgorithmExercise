@@ -14,27 +14,7 @@ public class MaxSubArray {
      * 如果 sum > 0，sum + 当前值一定大于当前值；则说明 sum 对结果有增益效果，则 sum 保留并加上当前遍历数字
      * 如果 sum <= 0，sum + 当前值一定小于当前值；则说明 sum 对结果无增益效果，需要舍弃，则 sum 直接更新为当前遍历数字
      * 每次比较 sum 和 ans的大小，将最大值置为ans，遍历结束返回结果
-     * <p>
-     *
-     * @param nums
-     * @return
      */
-    public int maxSubArray(int[] nums) {
-        int ans = nums[0];
-        int length = nums.length;
-        int sum = 0;
-
-        for (int i = 0; i < length; i++) {
-            if (sum > 0) {
-                sum += nums[i];
-            } else {
-                sum = nums[i];
-            }
-            ans = Math.max(ans, sum);
-        }
-        return ans;
-    }
-
     public int maxSubArray2(int[] nums) {
         int n = nums.length;
         int[] dp = new int[n];

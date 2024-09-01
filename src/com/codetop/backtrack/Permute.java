@@ -28,12 +28,11 @@ public class Permute {
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            //防止重复选择
             if (used[i]) {
                 continue;
             }
-            used[i] = true;
             tempList.add(nums[i]);
+            used[i] = true;
             backTrack1(nums);
             tempList.removeLast();
             used[i] = false;

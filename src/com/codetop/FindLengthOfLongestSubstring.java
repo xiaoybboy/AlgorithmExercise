@@ -1,7 +1,9 @@
 package com.codetop;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 获取字符串的最长不重复子串
@@ -31,5 +33,22 @@ public class FindLengthOfLongestSubstring {
             map.put(endChar, end);
         }
         return maxLength;
+    }
+
+
+    public int lengthOfLongestSubstring2(String s) {
+        Set<Character> set = new HashSet<>();
+        int start = 0;
+        int ans = 0;
+        for (int end = 0; end < s.length(); end++) {
+            char ch = s.charAt(end);
+            while (set.contains(ch)) {
+                set.remove(s.charAt(start));
+                start++;
+            }
+            set.add(ch);
+            ans = Math.max(ans, end - start + 1);
+        }
+        return ans;
     }
 }

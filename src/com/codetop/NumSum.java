@@ -15,33 +15,31 @@ public class NumSum {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         int n = nums.length;
-        for (int i = 0; i < n - 2; i++) {
-            //提前终止条件
-            if (nums[i] > 0) {
+        for (int start = 0; start < n - 2; start++) {
+            if (nums[start] > 0) {
                 break;
             }
             //去除i的重复
-            if (i > 0 && nums[i] == nums[i - 1]) {
+            if (start > 0 && nums[start] == nums[start - 1]) {
                 continue;
             }
-            int j = i + 1, k = n - 1;
-            while (j < k) {
-                int tempSum = nums[i] + nums[j] + nums[k];
-                if (tempSum == 0) {
-                    result.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
-                    //要求不重复
-                    while (j < k && nums[j] == nums[j + 1]) {
-                        j++;
-                    }
-                    while (j < k && nums[k] == nums[k - 1]) {
-                        k--;
-                    }
-                    j++;
-                    k--;
-                } else if (tempSum < 0) {
-                    j++;
+            int mid = start + 1, end = n - 1;
+            while (mid < end) {
+                int sum = nums[start] + nums[mid] + nums[end];
+                if (sum < 0) {
+                    mid++;
+                } else if (sum > 0) {
+                    end--;
                 } else {
-                    k--;
+                    result.add(Arrays.asList(nums[start], nums[mid], nums[end]));
+                    while (mid < end && nums[mid + 1] == nums[mid]) {
+                        mid++;
+                    }
+                    while (mid < end && nums[end - 1] == nums[end]) {
+                        end--;
+                    }
+                    mid++;
+                    end--;
                 }
             }
         }
