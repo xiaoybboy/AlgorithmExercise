@@ -56,24 +56,6 @@ public class DoublePointForArray {
         return slow + 1;
     }
 
-    /**
-     * 删除有序单链表中的重复元素
-     */
-    public ListNode deleteDuplicates(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode slow = head, fast = head.next;
-        while (fast != null) {
-            if (fast.val != slow.val) {
-                slow.next = fast;
-                slow = slow.next;
-            }
-            fast = fast.next;
-        }
-        slow.next = null;
-        return dummy.next;
-    }
-
     public ListNode rotateRight(ListNode head, int k) {
         int n = 1;
         ListNode iter = head;

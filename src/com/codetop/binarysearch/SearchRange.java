@@ -7,6 +7,27 @@ package com.codetop.binarysearch;
  */
 public class SearchRange {
 
+    public static int[] searchRange2(int[] nums, int target) {
+        int start = -1, end = nums.length;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] <= target) {
+                start = mid;
+            } else {
+                end = mid;
+            }
+        }
+        if (start == -1 || start == nums.length || nums[start] != target) {
+            return new int[]{-1, -1};
+        }
+        int cur = start;
+        while (cur > nums.length && nums[start] == target) {
+            cur--;
+        }
+        return new int[]{cur, start};
+    }
+
+
     public static int[] searchRange(int[] nums, int target) {
         //1.划分蓝红边界，蓝色<target,红色>=target
         //2.返回值left

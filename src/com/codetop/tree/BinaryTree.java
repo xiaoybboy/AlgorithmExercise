@@ -159,51 +159,6 @@ public class BinaryTree {
     }
 
     /**
-     * 求两个二叉树的最低公共祖先节点
-     *
-     * @param root
-     * @param t1
-     * @param t2
-     * @return
-     */
-    TreeNode getLastCommonParent(TreeNode root, TreeNode t1, TreeNode t2) {
-        if (findNode(root.left, t1)) {
-            if (findNode(root.right, t2)) {
-                return root;
-            } else {
-                return getLastCommonParent(root.left, t1, t2);
-            }
-        } else {
-            if (findNode(root.left, t2)) {
-                return root;
-            } else {
-                return getLastCommonParent(root.right, t1, t2);
-            }
-        }
-    }
-
-    /**
-     * 查找节点node是否在当前二叉树中
-     *
-     * @param root
-     * @param node
-     * @return
-     */
-    boolean findNode(TreeNode root, TreeNode node) {
-        if (root == null || node == null) {
-            return false;
-        }
-        if (root == node) {
-            return true;
-        }
-        boolean found = findNode(root.left, node);
-        if (!found) {
-            found = findNode(root.right, node);
-        }
-        return found;
-    }
-
-    /**
      * 输入一个二叉树和一个整数，打印出二叉树中节点值的和等于输入整数所有的路径
      *
      * @param root
@@ -316,7 +271,7 @@ public class BinaryTree {
      * @param root
      * @return
      */
-    public boolean isValidBST(TreeNode root) {
+    public boolean isValidBST2(TreeNode root) {
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 

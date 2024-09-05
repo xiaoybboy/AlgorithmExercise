@@ -10,6 +10,7 @@ import java.util.Set;
  * 注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。
  */
 public class WordBreak {
+
     //dp[i]:s的前i个字符是否可以用字典拼出
     //dp[i] = dp[j] && check(s[j,i])
     public static boolean wordBreak(String s, List<String> wordDict) {

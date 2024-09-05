@@ -7,35 +7,31 @@ package com.codetop.dynamic;
  * <p>
  * 例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。
  * 两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列。
- * <p>
  * 示例 1：
- * <p>
  * 输入：text1 = "abcde", text2 = "ace"
  * 输出：3
  * 解释：最长公共子序列是 "ace" ，它的长度为 3 。
  * 示例 2：
- * <p>
  * 输入：text1 = "abc", text2 = "abc"
  * 输出：3
  * 解释：最长公共子序列是 "abc" ，它的长度为 3 。
  * 示例 3：
- * <p>
  * 输入：text1 = "abc", text2 = "def"
  * 输出：0
  * 解释：两个字符串没有公共子序列，返回 0 。
  */
 public class LongestCommonSubsequence {
 
-    public int longestCommonSubsequence2(String text1, String text2) {
+    //if chi = chj:dp[i][j] = dp[i-1][j-1]+1
+    //否则dp[i][j] = math.max(dp[i-1][j],dp[i][j-1])
+    public int longestCommonSubsequence(String text1, String text2) {
         int m = text1.length(), n = text2.length();
         int[][] dp = new int[m + 1][n + 1];
-        //if(text1[i] == text2[j]) dp[i][j] = dp[i-1][j-1]+1;
-        //否则dp[i][j] = max(dp[i-1][j] = dp[i][j-1])
         for (int i = 1; i <= m; i++) {
-            char c1 = text1.charAt(i);
+            char ch = text1.charAt(i - 1);
             for (int j = 1; j <= n; j++) {
-                char c2 = text2.charAt(j);
-                if (c1 == c2) {
+                char ch2 = text2.charAt(j - 1);
+                if (ch == ch2) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);

@@ -1,7 +1,9 @@
 package com.codetop;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
@@ -17,20 +19,20 @@ import java.util.Map;
 public class LongestConsecutive {
 
     public int longestConsecutive2(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            set.add(x);
+        }
         int maxLen = 0;
-        for (int num : nums) {
-            if (map.containsKey(num)) {
+        for (int x : set) {
+            if (set.contains(x - 1)) {
                 continue;
             }
-            int smaller = map.getOrDefault(num - 1, 0);
-            int bigger = map.getOrDefault(num + 1, 0);
-            int currentLength = smaller + bigger + 1;
-
-            map.put(num + bigger, currentLength);
-            map.put(num - smaller, currentLength);
-            map.put(num, currentLength);
-            maxLen = Math.max(maxLen, currentLength);
+            int len = 1;
+            while (set.contains(++x)) {
+                len++;
+            }
+            maxLen = Math.max(maxLen, len);
         }
         return maxLen;
     }

@@ -1,6 +1,7 @@
 package com.codetop.array;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的子数组的个数 。
@@ -14,6 +15,24 @@ import java.util.HashMap;
  * 输出：2
  */
 public class SubarraySum {
+
+    public int subarraySum(int[] nums, int k) {
+        int n = nums.length;
+        int[] sum = new int[n + 1];
+        sum[0] = 0;
+        for (int i = 0; i < n; i++) {
+            sum[i + 1] = sum[i] + nums[i];
+        }
+        int count = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i <= n; i++) {
+            if (map.containsKey(sum[i] - k)) {
+                count += map.get(sum[i] - k);
+            }
+            map.put(sum[i], map.getOrDefault(sum[i], 0) + 1);
+        }
+        return count;
+    }
 
     /**
      * 假设数组的前缀和数组为prefixSum，其中prefixSum[i]表示从数组起始位置到第i个位置的元素之和。那么对于任意的两个下标i和j（i < j），

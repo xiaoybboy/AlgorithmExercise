@@ -20,10 +20,6 @@ public class FindFromEnd {
 
     /**
      * 双指针法
-     *
-     * @param head
-     * @param k
-     * @return
      */
     // 返回链表的倒数第 k 个节点
     ListNode findFromEnd(ListNode head, int k) {

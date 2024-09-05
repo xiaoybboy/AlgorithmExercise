@@ -9,16 +9,15 @@ package com.codetop.binarysearch;
 public class FindPeakElement {
 
     public int findPeakElement(int[] nums) {
-        int n = nums.length;
-        int left = -1, right = n - 1;
-        while (left + 1 < right) {
-            int mid = (left + right) / 2;
+        int start = -1, end = nums.length - 1;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
             if (nums[mid] < nums[mid + 1]) {
-                left = mid;
+                start = mid;
             } else {
-                right = mid;
+                end = mid;
             }
         }
-        return right;
+        return end;
     }
 }

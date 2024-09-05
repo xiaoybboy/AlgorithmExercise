@@ -10,9 +10,6 @@ public class MinPathSum {
     /**
      * 动态规划
      * dp[i][j] = min(dp[i-1][j],dp[i][j-1])+grid[i][j]
-     *
-     * @param grid
-     * @return
      */
     public int minPathSum(int[][] grid) {
         int rows = grid.length;

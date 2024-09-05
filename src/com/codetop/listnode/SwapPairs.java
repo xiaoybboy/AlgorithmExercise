@@ -11,15 +11,17 @@ public class SwapPairs {
     public ListNode swapPairs(ListNode head) {
         ListNode dummy = new ListNode(0, head);
 
-        head = dummy;
-        while (head.next != null && head.next.next != null) {
+        ListNode cur = dummy;
+        while (head != null && head.next != null) {
             ListNode node1 = head.next;
             ListNode node2 = head.next.next;
-
+            //链表指针反向
+            cur.next = node1;
+            node1.next = head;
             head.next = node2;
-            node1.next = node2.next;
-            node2.next = node1;
-            head = node1;
+            //更新head和cur
+            head = node2;
+            cur = cur.next.next;
         }
         return dummy.next;
     }
