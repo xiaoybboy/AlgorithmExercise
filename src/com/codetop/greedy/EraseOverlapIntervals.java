@@ -1,7 +1,6 @@
 package com.codetop.greedy;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * 给定一个区间的集合 intervals ，其中 intervals[i] = [starti, endi] 。
@@ -12,18 +11,17 @@ import java.util.Comparator;
  */
 public class EraseOverlapIntervals {
 
-    /**
-     * 贪心
-     */
-    public int eraseOverlapIntervals(int[][] intervals) {
-        if (intervals.length == 0) {
-            return 0;
-        }
-        Arrays.sort(intervals, Comparator.comparingInt(o -> o[1]));
+    public static void main(String[] args) {
+        int[][] nums = {{1, 2}, {2, 3}, {3, 4}, {1, 3}};
+        eraseOverlapIntervals(nums);
+    }
+
+    public static int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
         int n = intervals.length;
         int right = intervals[0][1];
-        int ans = 1;//ans是剩下的集合
-        for (int i = 1; i < n; ++i) {
+        int ans = 1;
+        for (int i = 1; i < n; i++) {
             if (intervals[i][0] >= right) {
                 ans++;
                 right = intervals[i][1];

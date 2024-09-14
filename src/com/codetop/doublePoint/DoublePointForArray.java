@@ -28,34 +28,6 @@ public class DoublePointForArray {
         return slow + 1;
     }
 
-    public static void main(String[] args) {
-        int[] nums = {1, 1, 1, 2, 2, 3};
-        removeDuplicates2(nums);
-    }
-
-    /**
-     * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
-     */
-    public static int removeDuplicates2(int[] nums) {
-        int slow = 0, fast = 1;
-        int curCount = 1;
-        while (fast < nums.length) {
-            if (nums[fast] != nums[slow]) {
-                slow++;
-                nums[slow] = nums[fast];
-                curCount = 1;
-            } else {
-                curCount++;
-                if (curCount <= 2) {
-                    slow++;
-                    nums[slow] = nums[fast];
-                }
-            }
-            fast++;
-        }
-        return slow + 1;
-    }
-
     public ListNode rotateRight(ListNode head, int k) {
         int n = 1;
         ListNode iter = head;

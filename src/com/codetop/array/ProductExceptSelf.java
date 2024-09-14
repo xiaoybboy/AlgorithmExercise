@@ -8,27 +8,22 @@ package com.codetop.array;
  */
 public class ProductExceptSelf {
 
-    public int[] productExceptSelf(int[] nums) {
-        int length = nums.length;
-        int[] left = new int[length];
-        int[] right = new int[length];
-
-        int[] ans = new int[length];
-        if (nums.length == 0) {
-            return ans;
-        }
-        //左侧
+    public int[] productExceptSelf2(int[] nums) {
+        int n = nums.length;
+        //不包含本节点的左侧所有乘积
+        int[] left = new int[n];
         left[0] = 1;
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < n; i++) {
             left[i] = left[i - 1] * nums[i - 1];
         }
-        //右侧
-        right[length - 1] = 1;
-        for (int j = length - 2; j >= 0; j--) {
-            right[j] = nums[j + 1] * right[j + 1];
+        //不包含本节点的右侧所有数乘积
+        int[] right = new int[n];
+        right[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            right[i] = right[i + 1] * nums[i + 1];
         }
-
-        for (int i = 0; i < length; i++) {
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
             ans[i] = left[i] * right[i];
         }
         return ans;

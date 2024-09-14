@@ -12,6 +12,7 @@ public class Find132pattern {
 
     public boolean find132pattern(int[] nums) {
         //贪心思想，我们总是希望3是最大值，2是比3小一点的最大值，1尽可能小
+        //deque从栈顶到栈底，是单调递减的
         Deque<Integer> deque = new ArrayDeque<>();
         int n = nums.length;
         int numj = Integer.MIN_VALUE;//记录最大的2的值

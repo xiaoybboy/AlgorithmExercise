@@ -52,7 +52,7 @@ public class SumSubarrayMins {
         // 第二次循环找到所有元素的右边界
         stack.clear();
         for (int i = n - 1; i >= 0; i--) {
-            // 向右找第一个小于E的元素
+            // 向右找第一个小于E的元素,这里>=，避免重复
             while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
                 stack.pop();
             }
