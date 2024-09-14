@@ -15,17 +15,14 @@ public class MaxSubArray {
      * 如果 sum <= 0，sum + 当前值一定小于当前值；则说明 sum 对结果无增益效果，需要舍弃，则 sum 直接更新为当前遍历数字
      * 每次比较 sum 和 ans的大小，将最大值置为ans，遍历结束返回结果
      */
-    public int maxSubArray2(int[] nums) {
+    public int maxSubArray(int[] nums) {
         int n = nums.length;
         int[] dp = new int[n];
         dp[0] = nums[0];
-        int ans = nums[0];
+
+        int ans = dp[0];
         for (int i = 1; i < n; i++) {
-            if (dp[i - 1] > 0) {
-                dp[i] = dp[i - 1] + nums[i];
-            } else {
-                dp[i] = nums[i];
-            }
+            dp[i] = dp[i - 1] < 0 ? nums[i] : dp[i - 1] + nums[i];
             ans = Math.max(ans, dp[i]);
         }
         return ans;

@@ -4,36 +4,35 @@ package com.codetop.tree;
 import com.model.TreeNode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。
  */
 public class BuildTree {
 
-    int[] preorder;
-    HashMap<Integer, Integer> map = new HashMap<>();
+    Map<Integer, Integer> inOrderMap = new HashMap<>();
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        this.preorder = preorder;
+    public TreeNode deduceTree(int[] preorder, int[] inorder) {
         for (int i = 0; i < inorder.length; i++) {
-            map.put(inorder[i], i);
+            inOrderMap.put(inorder[i], i);
         }
-        return rebuild(0, 0, inorder.length - 1);
+        return buildTree(preorder, 0, 0, inorder.length - 1);
     }
 
-    //rootPreIndex: 根节点在前序遍历中的下标
-    //left: 中序遍历中的左边界
-    //right: 中序遍历中的右边界
-    public TreeNode rebuild(int rootPreIndex, int left, int right) {
-        if (left > right) {
+    public TreeNode buildTree(int[] preorder, int rootPreOrderIndex, int start, int end) {
+        if (start > end) {
             return null;
         }
-        //根节点在中序遍历中的下标
-        int rootMidIndex = map.get(preorder[rootPreIndex]);
-        TreeNode rootNode = new TreeNode(preorder[rootPreIndex]);
-        rootNode.left = rebuild(rootPreIndex + 1, left, rootMidIndex - 1);
-        //左子树的元素个数 rootMidIndex - left
-        rootNode.right = rebuild(rootPreIndex + rootMidIndex - left + 1, rootMidIndex + 1, right);
-        return rootNode;
+        int rootVal = preorder[rootPreOrderIndex];
+        TreeNode root = new TreeNode(rootVal);
+        //获取根节点在中序遍历位置
+        int inOrderRootIndex = inOrderMap.get(rootVal);
+        //递归构造左子树和右子树
+        //前序序列中，某个根节点的下一个节点，一定是左子树的根节点的位置
+        root.left = buildTree(preorder, rootPreOrderIndex + 1, start, inOrderRootIndex - 1);
+        //前序序列中，左子树的长度为inOrderRootIndex-start+1,所以右子树根节点的位置就是 rootPreOrderIndex + (inOrderRootIndex - start + 1)
+        root.right = buildTree(preorder, rootPreOrderIndex + (inOrderRootIndex - start + 1), inOrderRootIndex + 1, end);
+        return root;
     }
 }

@@ -9,6 +9,27 @@ import java.util.List;
  * 也就是说，如果正位于当前行的下标 i ，那么下一步可以移动到下一行的下标 i 或 i + 1 。
  */
 public class MinimumTotal {
+
+    public int minimumTota2(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int[][] dp = new int[n][n];
+        dp[0][0] = triangle.get(0).get(0);
+
+        for (int i = 1; i < triangle.size(); i++) {
+            dp[i][0] = dp[i - 1][0] + triangle.get(i).get(0);
+            for (int j = 1; j < i; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j - 1]) + triangle.get(i).get(j);
+            }
+            dp[i][i] = dp[i - 1][i - 1] + triangle.get(i).get(i);
+        }
+        int result = Integer.MAX_VALUE;
+        for (int k = 0; k < n; k++) {
+            result = Math.min(result, dp[n - 1][k]);
+        }
+        return result;
+    }
+
+
     /**
      * dp[i][j] = min(dp[i-1][j],dp[i-1][j-1])+c[i][j]
      */

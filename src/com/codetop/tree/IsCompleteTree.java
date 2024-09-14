@@ -17,17 +17,20 @@ public class IsCompleteTree {
      */
     public boolean isCompleteTree(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
-        TreeNode prev = root;
-        queue.add(root);
+        queue.offer(root);
+
+        TreeNode prevNode = root;
         while (!queue.isEmpty()) {
-            TreeNode node = queue.remove();
-            if (prev == null && node != null)
+            TreeNode node = queue.poll();
+            //前置节点为空，后面节点不为空
+            if (prevNode == null && node != null) {
                 return false;
-            if (node != null) {
-                queue.add(node.left);
-                queue.add(node.right);
             }
-            prev = node;
+            if (node != null) {
+                queue.offer(node.left);
+                queue.offer(node.right);
+            }
+            prevNode = node;
         }
         return true;
     }

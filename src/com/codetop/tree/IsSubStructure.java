@@ -8,6 +8,23 @@ import com.model.TreeNode;
  */
 public class IsSubStructure {
 
+    public boolean isSubStructure2(TreeNode A, TreeNode B) {
+        if (A == null || B == null) {
+            return false;
+        }
+        return isContains(A, B) || isSubStructure2(A.left, B) || isSubStructure2(A.right, B);
+    }
+
+    private boolean isContains(TreeNode A, TreeNode B) {
+        if (B == null) {
+            return true;
+        }
+        if (A == null || A.val != B.val) {
+            return false;
+        }
+        return isContains(A.left, B.left) && isContains(A.right, B.right);
+    }
+
     public boolean isSubStructure(TreeNode A, TreeNode B) {
         if (A == null || B == null) {
             return false;

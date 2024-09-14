@@ -2,34 +2,40 @@ package com.codetop.binarysearch;
 
 public class SearchInRotateArray {
 
-    int n = 0;
-    public int search(int[] nums, int target) {
-        n = nums.length;
-        int left = -1, right = n;
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 1, 1, 1, 2, 1, 1, 1};
+        search(nums, 2);
+    }
+
+    public static int search(int[] nums, int target) {
+        int n = nums.length;
+        int left = -1, right = nums.length;
         while (left + 1 < right) {
             int mid = left + (right - left) / 2;
-            if (check(nums, mid, target)) {
-                left = mid;
-            } else {
-                right = mid;
+            int cur = nums[mid];
+            if (cur == target) {
+                return mid;
+            }
+            //左侧
+            if (target > nums[n - 1]) {
+                if (cur > nums[n - 1] && cur < target) {
+                    left = mid;
+                } else {
+                    right = mid;
+                }
+            }
+            //右侧
+            else if (target <= nums[n - 1]) {
+                if (cur <= nums[n - 1] && cur <= target) {
+                    left = mid;
+                } else {
+                    right = mid;
+                }
             }
         }
         if (nums[right] == target) {
             return right;
         }
         return -1;
-    }
-
-    //判断mid是否在target左侧
-    private boolean check(int[] nums, int mid, int target) {
-        int end = nums[n - 1];
-        //如果target在左侧序列
-        if (target > end) {
-            //要求mid也必须在左侧，并且<target
-            return nums[mid] > end && nums[mid] < target;
-        } else {
-            //要求mid在左侧序列，或者在右侧序列，小于target
-            return nums[mid] > end || nums[mid] < target;
-        }
     }
 }

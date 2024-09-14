@@ -1,5 +1,7 @@
 package com.codetop.dynamic;
 
+import java.util.Arrays;
+
 /**
  * 给你一个整数数组 nums，返回 nums 中最长等差子序列的长度。
  * <p>
@@ -9,32 +11,23 @@ package com.codetop.dynamic;
 public class LongestArithSeqLength {
 
     public int longestArithSeqLength(int[] nums) {
-        int n = nums.length, ans = 0;
-        int[][] dp = new int[n][1010];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                // 表示nums[i]与nums[j]以差为d构成等差数列
-                int d = nums[i] - nums[j] + 500;
-                // dp[i][d]表示：nums[i]以差为d能与前面的数构成的等差数列的长度
-                dp[i][d] = Math.max(dp[i][d], dp[j][d] + 1);
-                ans = Math.max(ans, dp[i][d]);
+        int minv = Arrays.stream(nums).min().getAsInt();
+        int maxv = Arrays.stream(nums).max().getAsInt();
+        //最大差值
+        int diff = maxv - minv;
+        int ans = 1;
+        for (int d = -diff; d <= diff; d++) {
+            int[] f = new int[maxv + 1];
+            Arrays.fill(f, -1);
+            for (int num : nums) {
+                int prev = num - d;
+                if (prev >= minv && prev <= maxv && f[prev] != -1) {
+                    f[num] = Math.max(f[num], f[prev] + 1);
+                    ans = Math.max(ans, f[num]);
+                }
+                f[num] = Math.max(f[num], 1);
             }
         }
-        return ans + 1;
-    }
-
-    //2,3,1,1,4
-    public int jump(int[] nums) {
-        int end = 0;
-        int step = 0;
-        int maxPosition = 0;
-        for (int i = 0; i < nums.length - 1; i++) {
-            maxPosition = Math.max(maxPosition, nums[i] + i);
-            if (i == end) {
-                end = maxPosition;
-                step++;
-            }
-        }
-        return step;
+        return ans;
     }
 }

@@ -9,45 +9,23 @@ import java.util.Deque;
  */
 public class RemoveKdigits {
 
-
     public static String removeKdigits(String num, int k) {
+        char[] charArray = num.toCharArray();
         Deque<Character> deque = new ArrayDeque<>();
-        int n = num.length();
+        int n = charArray.length;
         for (int i = 0; i < n; i++) {
-            char ch = num.charAt(i);
+            char ch = charArray[i];
+            //移除前面比当前字符大的
             while (!deque.isEmpty() && deque.peek() > ch && k > 0) {
-                k--;
                 deque.pop();
+                k--;
             }
+            //排除前置0
             if (!deque.isEmpty() || ch != '0') {
                 deque.push(ch);
             }
         }
-        while (k > 0 && !deque.isEmpty()) {
-            deque.pop();
-        }
-        StringBuilder builder = new StringBuilder();
-        while (!deque.isEmpty()) {
-            builder.append(deque.pollLast());
-        }
-        return builder.length() == 0 ? "0" : builder.toString();
-    }
-
-    public static String removeKdigits2(String num, int k) {
-        Deque<Character> deque = new ArrayDeque<>();
-        int n = num.length();
-        for (int i = 0; i < n; i++) {
-            char ch = num.charAt(i);
-            while (!deque.isEmpty() && deque.peek() > ch && k > 0) {
-                deque.pop();
-                k--;
-            }
-            //这里是为了排查前置0的影响
-            if (ch != '0' || !deque.isEmpty()) {
-                deque.push(ch);
-            }
-        }
-        //如果k还没有用完,此时栈内必然已经排序
+        //如果k还有值
         while (k > 0 && !deque.isEmpty()) {
             deque.pop();
             k--;

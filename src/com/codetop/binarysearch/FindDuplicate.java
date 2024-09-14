@@ -8,34 +8,30 @@ package com.codetop.binarysearch;
 public class FindDuplicate {
 
     /**
-     * 「二分查找」的思路是先猜一个数（搜索范围 [left..right] 里位于中间的数 mid），然后统计原始数组中 小于等于 mid 的元素的个数 count：
-     * <p>
-     * 如果 count 严格大于 mid。根据 抽屉原理，重复元素就在区间 [left..mid] 里；
-     * 否则，重复元素可以在区间 [mid + 1..right] 里找到
-     *
-     * @param nums
-     * @return
+     * 1.随便猜一个数target（取数组中间的数次数少），判断整个数组中≤target的数量count。
+     * 2.显然，如果没有重复,count的数量应该≤target.如果>,必然存在重复。
+     * 3.划分蓝红区域：蓝色count>target，也就是左侧存在重复。
+     * 4.right就是我们要找的重复数
      */
     public int findDuplicate(int[] nums) {
-        int left = -1, right = nums.length;
-        while (left + 1 < right) {
-            int mid = left + (right - left) / 2;
-            if (checkBlue(nums, mid)) {
-                right = mid;
+        int start = -1, end = nums.length;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (isDuplicate(nums, mid)) {
+                end = mid;
             } else {
-                left = mid;
+                start = mid;
             }
         }
-        return right;
+        return end;
     }
 
-    private boolean checkBlue(int[] nums, int target) {
+    private boolean isDuplicate(int[] nums, int mid) {
         int count = 0;
         for (int x : nums) {
-            if (x <= target) {
+            if (x <= mid) {
                 count++;
-                //小于等于target的数字>target，说明重复的数字一定在右侧
-                if (count > target) {
+                if (count > mid) {
                     return true;
                 }
             }

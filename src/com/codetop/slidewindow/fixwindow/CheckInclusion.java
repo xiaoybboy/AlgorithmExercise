@@ -7,6 +7,7 @@ package com.codetop.slidewindow.fixwindow;
  * s1.s2只包含小写字母
  */
 public class CheckInclusion {
+
     /**
      * 滑动窗口-在上s2上一个长度为s1.length的滑动窗口，
      * 观察滑动窗口中的每个字符的数量，是否与s1 中每个字符数量一致。

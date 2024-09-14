@@ -1,33 +1,11 @@
 package com.codetop.dynamic;
 
+import com.model.TreeNode;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Rob {
-
-    /**
-     * 让我们用桶排的思想预先处理输入数组。
-     * 设置数组bucket[10001]用于存放范围为[1, 10000]的nums[i],bucket[nums[i]]的值为所有等于nums[i]的数的总和，这样，“打家劫舍”的模型已经完全建好~
-     * 最后，用dp[i]表示“遍历到数字i时，所能获取的最大的分数”，转移方程很显然：
-     * <p>
-     * dp[i] = Math.max(dp[i - 2] + bucket[i], dp[i - 1]);//取数字i则加上dp[i - 2],或者不取数字i维持dp[i - 1]
-     * 边界条件：
-     * dp[1] = bucket[1];
-     */
-    public int deleteAndEarn(int[] nums) {
-        int maxVal = 0;
-        for (int val : nums) {
-            maxVal = Math.max(maxVal, val);
-        }
-        int[] bucket = new int[maxVal + 1];
-        for (int val : nums) {
-            bucket[val] += val;
-        }
-
-        int[] dp = new int[maxVal + 1];
-        dp[1] = bucket[1];
-        for (int i = 2; i <= maxVal; i++) {
-            dp[i] = Math.max(dp[i - 2] + bucket[i], dp[i - 1]);
-        }
-        return dp[maxVal];
-    }
 
     /**
      * if k == 0 ,dp = 0
@@ -93,5 +71,31 @@ public class Rob {
             dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[start + i]);
         }
         return dp[n - 1];
+    }
+
+    /**
+     * 小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 root 。
+     * 除了 root 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果 两个直接相连的房子在同一天晚上被打劫 ，房屋将自动报警。
+     * 给定二叉树的 root 。返回 在不触动警报的情况下 ，小偷能够盗取的最高金额 。
+     */
+    Map<TreeNode, Integer> memo = new HashMap<>();
+
+    public int rob(TreeNode root) {
+        if (root == null)
+            return 0;
+        if (memo.containsKey(root))
+            return memo.get(root);
+        //如果抢当前节点，那只能抢左右子树的左右节点
+        int money = root.val;
+        if (root.left != null) {
+            money += rob(root.left.left) + rob(root.left.right);
+        }
+        if (root.right != null) {
+            money += rob(root.right.left) + rob(root.right.right);
+        }
+        //如果不抢当前节点，可以抢左节点或者右节点
+        int res = Math.max(money, rob(root.left) + rob(root.right));
+        memo.put(root, res);
+        return res;
     }
 }

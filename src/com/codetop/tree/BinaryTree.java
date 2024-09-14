@@ -224,6 +224,36 @@ public class BinaryTree {
         return result;
     }
 
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Deque<List<Integer>> deque = new ArrayDeque<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            ArrayList<Integer> level = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            deque.push(level);
+        }
+        while (!deque.isEmpty()) {
+            result.add(deque.pop());
+        }
+        return result;
+    }
+
     /**
      * 锯齿型遍历
      * 给你二叉树的根节点 root ，返回其节点值的 锯齿形层序遍历 。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）
@@ -264,26 +294,6 @@ public class BinaryTree {
 
     public int lastVal = Integer.MAX_VALUE;
     public boolean firstNode = true;
-
-    /**
-     * 判断二叉树是否是合法的二叉查找树(BST)
-     *
-     * @param root
-     * @return
-     */
-    public boolean isValidBST2(TreeNode root) {
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-
-    public boolean isValidBST(TreeNode node, long lower, long upper) {
-        if (node == null) {
-            return true;
-        }
-        if (node.val <= lower || node.val >= upper) {
-            return false;
-        }
-        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
-    }
 
     /**
      * 获取二叉树的深度

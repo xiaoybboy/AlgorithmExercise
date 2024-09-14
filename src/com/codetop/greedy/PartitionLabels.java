@@ -1,9 +1,7 @@
 package com.codetop.greedy;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 给你一个字符串 s 。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。
@@ -13,20 +11,22 @@ import java.util.Set;
 public class PartitionLabels {
 
     public List<Integer> partitionLabels(String s) {
-        List<Integer> result = new ArrayList<>();
-        Set<Character> set = new HashSet<>();
-        int left = 0;
-        for (int right = 0; right < s.length(); right++) {
-            char ch = s.charAt(right);
-            if (set.contains(ch)) {
-                result.add(right - left);
-                while (set.contains(ch)) {
-                    left++;
-                    set.remove(ch);
-                }
-            }
-            set.add(ch);
+        //1.记录每个字符最后出现的位置下标
+        int[] last = new int[26];
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            last[chars[i] - 'a'] = i;
         }
-        return result;
+        List<Integer> ans = new ArrayList<>();
+        //循环遍历，根据贪心策略划分边界
+        int start = 0, end = 0;
+        for (int j = 0; j < s.length(); j++) {
+            end = Math.max(end, last[s.charAt(j) - 'a']);
+            if (j == end) {
+                ans.add(end - start + 1);
+                start = end + 1;
+            }
+        }
+        return ans;
     }
 }

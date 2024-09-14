@@ -29,12 +29,20 @@ public class JumpMinStep {
      * @return
      */
     public int jump(int[] nums) {
-        int end = 0;//多跳一步，能达到的最远距离
-        int maxPosition = 0;//能到达的最远位置
+        if (nums == null || nums.length == 0 || nums.length == 1) {
+            return 0;
+        }
+        int end = 0;//当前一步的最大覆盖范围
+        int maxPosition = 0;//下一步的最大覆盖范围
         int steps = 0;
         for (int i = 0; i < nums.length - 1; i++) {
-            //找能跳的最远的右边界
+            //当前找能跳的最远的右边界
             maxPosition = Math.max(maxPosition, nums[i] + i);
+            //如果下一步的右边界，已经能覆盖数组终点了，那么不需要遍历了，加上一步就可以了
+            if (maxPosition >= nums.length - 1) {
+                steps++;
+                break;
+            }
             if (i == end) { //遇到边界，就更新边界，并且步数加一，如果已经遍历到了所能到达的范围的边界，此时必须进行一次跳跃，同时更新所能到达的范围的边界
                 end = maxPosition;
                 steps++;
@@ -56,17 +64,17 @@ public class JumpMinStep {
      * 我们就可以直接返回 True 作为答案。反之，如果在遍历结束后，最后一个位置仍然不可达，我们就返回 False 作为答案。
      */
     public boolean canJump(int[] nums) {
-        int maxPosition = 0;
+        int maxPosition = 0;//维护一个当前可以到达的最大位置
         int n = nums.length;
-        for (int i = 0; i < nums.length; i++) {
-            //i<=maxPosition，说明i的位置可以到达，否则不可达
-            if (i <= maxPosition) {
-                maxPosition = Math.max(maxPosition, nums[i] + i);
-                if (maxPosition > n - 1) {
-                    return true;
-                }
+        for (int i = 0; i < n; i++) {
+            if (i > maxPosition) { // 无法到达 i
+                return false;
             }
+            if (maxPosition > n - 1) {
+                return true;
+            }
+            maxPosition = Math.max(maxPosition, i + nums[i]); // 从 i 最右可以跳到 i + nums[i]
         }
-        return false;
+        return true;
     }
 }

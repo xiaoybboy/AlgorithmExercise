@@ -58,6 +58,10 @@ public class NumSum {
         int resultSum = 0;
         //固定左边的元素
         for (int i = 0; i < n; i++) {
+            //剪枝
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
             int left = i + 1;//固定元素的下一个元素
             int right = n - 1;//右边的元素
             while (left < right) {
