@@ -1,9 +1,9 @@
-package com.codetop;
+package com.codetop.stackqueue;
 
 import java.util.Stack;
 
 /**
- * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+ * 给定一个只包括 '('，')'，'{'，'}'，'['，']'的字符串 s ，判断字符串是否有效。
  * <p>
  * 有效字符串需满足：
  * <p>
