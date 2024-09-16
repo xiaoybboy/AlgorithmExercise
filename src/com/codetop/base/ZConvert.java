@@ -12,13 +12,13 @@ package com.codetop.base;
 public class ZConvert {
 
     public String convert(String s, int numRows) {
-        if (numRows == 1) {
+        if (numRows < 2) {
             return s;
         }
         String[] rows = new String[numRows];
         for (int i = 0; i < numRows; i++) rows[i] = "";
 
-        boolean down = false;
+        boolean down = false;//循环中反向
         int rowIndex = 0;//字符串数组rows中的位置
         for (int i = 0; i < s.length(); i++) {
             rows[rowIndex] += s.charAt(i);//每行新增字符

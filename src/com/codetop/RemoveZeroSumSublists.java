@@ -12,21 +12,6 @@ import java.util.Map;
  */
 public class RemoveZeroSumSublists {
 
-    public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        ListNode head1 = new ListNode(2);
-        ListNode head2 = new ListNode(3);
-        ListNode head3 = new ListNode(-3);
-        ListNode head4 = new ListNode(-2);
-        head.next = head1;
-        head1.next = head2;
-        head2.next = head3;
-        head3.next = head4;
-
-        removeZeroSumSublists(head);
-    }
-
-
     public static ListNode removeZeroSumSublists(ListNode head) {
         ListNode dummy = new ListNode(0, head);
 

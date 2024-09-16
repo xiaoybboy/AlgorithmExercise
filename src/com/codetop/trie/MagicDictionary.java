@@ -1,7 +1,8 @@
 package com.codetop.trie;
 
 /**
- * 设计一个使用单词列表进行初始化的数据结构，单词列表中的单词 互不相同 。 如果给出一个单词，请判定能否只将这个单词中一个字母换成另一个字母，使得所形成的新单词存在于你构建的字典中。
+ * 设计一个使用单词列表进行初始化的数据结构，单词列表中的单词 互不相同 。
+ * 如果给出一个单词，请判定能否只将这个单词中一个字母换成另一个字母，使得所形成的新单词存在于你构建的字典中。
  * 实现 MagicDictionary 类：
  * MagicDictionary() 初始化对象
  * void buildDict(String[] dictionary) 使用字符串数组 dictionary 设定该数据结构，dictionary 中的字符串互不相同
@@ -21,16 +22,18 @@ public class MagicDictionary {
     }
 
     private void insert(String word) {
-        TrieNode node = root;
+        TrieNode cur = root;
         int n = word.length();
         for (int i = 0; i < n; i++) {
             int id = word.charAt(i) - 'a';
-            if (node.childNodes[id] == null) {
-                node.childNodes[id] = new TrieNode();
+            TrieNode node = cur.childNodes[id];
+            if (node == null) {
+                node = new TrieNode();
+                node.childNodes[id] = node;
             }
-            node = node.childNodes[id];
+            cur = node;
         }
-        node.isEnd = true;
+        cur.isEnd = true;
     }
 
     TrieNode root;

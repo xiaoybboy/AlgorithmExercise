@@ -27,41 +27,47 @@ public class Trie {
     }
 
     public void insert(String word) {
-        TrieNode node = root;
+        TrieNode cur = root;
         for (int i = 0; i < word.length(); i++) {
             // 将当前字符添加到当前节点对应的子节点位置，然后递归更新
             int id = word.charAt(i) - 'a';
+            TrieNode node = cur.childNodes[id];
             //判断子节点中是否存在这个字符，如果不存在的话加进去
-            if (node.childNodes[id] == null) {
-                node.childNodes[id] = new TrieNode();
+            if (node == null) {
+                node = new TrieNode();
+                cur.childNodes[id] = node;
             }
             //接着往下继续构造前缀树结构
-            node = node.childNodes[id];
+            cur = node;
         }
         //字符串遍历完成之后，把当前节点是否是重点设置成true
-        node.isEnd = true;
+        cur.isEnd = true;
     }
 
     public boolean search(String word) {
-        TrieNode node = root;
+        //从根节点开始搜索
+        TrieNode cur = root;
         for (int i = 0; i < word.length(); i++) {
             int id = word.charAt(i) - 'a';
-            if (node.childNodes[id] == null) {
+            TrieNode node = cur.childNodes[id];
+            //如果某个字母在前缀树中不存在
+            if (node == null) {
                 return false;
             }
-            node = node.childNodes[id];
+            cur = node;
         }
-        return node.isEnd;
+        return cur.isEnd;
     }
 
     public boolean startsWith(String prefix) {
-        TrieNode node = root;
+        TrieNode cur = root;
         for (int i = 0; i < prefix.length(); i++) {
             int id = prefix.charAt(i) - 'a';
-            if (node.childNodes[id] == null) {
+            TrieNode node = cur.childNodes[id];
+            if (node == null) {
                 return false;
             }
-            node = node.childNodes[id];
+            cur = node;
         }
         return true;
     }
