@@ -24,7 +24,7 @@ public class SortColors {
         int right = nums.length - 1;//right表示2的左边界
         //left和right之间为1的范围
         int i = 0;
-        while (left < right && i <= right) {
+        while (i <= right) {
             if (nums[i] == 0) {
                 //如果找到0，就将0和left(0的右边界)互换
                 swap(nums, i, left);

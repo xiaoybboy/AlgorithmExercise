@@ -19,10 +19,6 @@ public class TreeKthSmallest {
      * midOrder(node.left);
      * // do something...
      * midOrder(node.right);
-     *
-     * @param root
-     * @param k
-     * @return
      */
     public int kthSmallest(TreeNode root, int k) {
         this.k = k;

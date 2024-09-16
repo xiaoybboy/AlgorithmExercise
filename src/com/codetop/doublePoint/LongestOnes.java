@@ -15,7 +15,6 @@ public class LongestOnes {
             if (nums[right] == 0) {
                 curZeroNum++;
             }
-
             //移动左窗口，满足条件窗口内0的数量<=k
             while (curZeroNum > k) {
                 if (nums[left] == 0) {

@@ -11,13 +11,13 @@ public class RemoveDuplicateLetters {
 
     public String removeDuplicateLetters(String s) {
         //1.记录每个字符出现的次数
-        int[] chCount = new int[26];
+        int[] chCount = new int[256];
         for (char c : s.toCharArray()) {
             chCount[c]++;
         }
-        //deque中单调自增的字符
+        //deque中单调自增的字符,从栈底到栈顶是单调递增的
         Deque<Character> deque = new ArrayDeque<>();
-        boolean[] isInStack = new boolean[26];
+        boolean[] isInStack = new boolean[256];
         for (char c : s.toCharArray()) {
             // 每遍历过一个字符，都将对应的计数减一
             chCount[c]--;

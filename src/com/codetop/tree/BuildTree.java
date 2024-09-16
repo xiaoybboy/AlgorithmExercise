@@ -12,8 +12,7 @@ import java.util.Map;
 public class BuildTree {
 
     Map<Integer, Integer> inOrderMap = new HashMap<>();
-
-    public TreeNode deduceTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
         for (int i = 0; i < inorder.length; i++) {
             inOrderMap.put(inorder[i], i);
         }

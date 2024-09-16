@@ -8,7 +8,6 @@ public class IsInterleave {
     //1.如果 s1的第 i 个元素和 s3的第 i+j 个元素相等，那么 s1的前i 个元素和 s2的前 j 个元素是否能交错组成 s3的前 i+j 个元素
     // 取决于 s1的前 i−1 个元素和 s2 的前 j 个元素是否能交错组成 s3的前 i+j−1 个元素，即此时 f(i,j)取决于 f(i−1,j)
     // 在此情况下如果 f(i−1,j)为真，则 f(i,j)也为真。
-    //
     // 同样的，如果 s2的第 j 个元素和 s3的第 i+j个元素相等并且 f(i,j−1) 为真，则 f(i,j) 也为真
     public boolean isInterleave(String s1, String s2, String s3) {
         //dp[i][j] 代表 s1 前 i 个字符与 s2 前 j 个字符拼接成 s3 的 i+j 字符

@@ -7,11 +7,8 @@ package com.codetop.recursion;
  */
 public class LongestSubstring {
 
-    /**
-     * 递归
-     */
     public int longestSubstring(String s, int k) {
-        final int n = s.length();
+        int n = s.length();
         // 特殊情况处理
         if (k == 1) {
             return n;

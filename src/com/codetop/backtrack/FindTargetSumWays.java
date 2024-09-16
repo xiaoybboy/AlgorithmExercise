@@ -10,6 +10,7 @@ public class FindTargetSumWays {
      * 返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。
      */
     int result = 0;
+
     public int findTargetSumWays(int[] nums, int target) {
         backTrack(nums, 0, 0, target);
         return result;
@@ -22,7 +23,13 @@ public class FindTargetSumWays {
             }
             return;
         }
-        backTrack(nums, index + 1, sum + nums[index + 1], target);
-        backTrack(nums, index + 1, sum - nums[index + 1], target);
+        //递归+
+        sum += nums[index + 1];
+        backTrack(nums, index + 1, sum, target);
+        sum -= nums[index + 1];
+        //递归-
+        sum -= nums[index + 1];
+        backTrack(nums, index + 1, sum, target);
+        sum += nums[index + 1];
     }
 }

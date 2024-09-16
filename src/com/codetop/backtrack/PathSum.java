@@ -45,9 +45,10 @@ public class PathSum {
         sum -= node.val;
         if (node.left == null && node.right == null && sum == 0) {
             result.add(new ArrayList<>(tempList));
+        } else {
+            dfs(node.left, sum);
+            dfs(node.right, sum);
         }
-        dfs(node.left, sum);
-        dfs(node.right, sum);
         tempList.removeLast();
     }
 }

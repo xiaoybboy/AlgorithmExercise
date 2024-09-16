@@ -8,16 +8,16 @@ package com.codetop.base;
 public class NthUglyNumber {
 
     public int nthUglyNumber(int n) {
-        int a = 0, b = 0, c = 0;
         int[] res = new int[n];
         res[0] = 1;
+        int p2 = 0, p3 = 0, p5 = 0;
         for (int i = 1; i < n; i++) {
-            int n2 = res[a] * 2, n3 = res[b] * 3, n5 = res[c] * 5;
+            int n2 = res[p2] * 2, n3 = res[p3] * 3, n5 = res[p5] * 5;
             res[i] = Math.min(Math.min(n2, n3), n5);
-            if (res[i] == n2) a++;
-            if (res[i] == n3) b++;
-            if (res[i] == n5) c++;
+            if (res[i] == n2) p2++;
+            if (res[i] == n3) p3++;
+            if (res[i] == n5) p5++;
         }
-        return res[n - 1];
+        return res[n-1];
     }
 }

@@ -15,30 +15,6 @@ import java.util.Map;
  */
 public class NextGreaterElement2 {
 
-    public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int[] ans = new int[n];
-
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            map.put(nums1[i], i);
-        }
-
-        Deque<Integer> deque = new ArrayDeque<>();
-        for (int x : nums2) {
-            while (!deque.isEmpty() && deque.peek() < x) {
-                ans[map.get(deque.pop())] = x;
-            }
-            if (map.containsKey(x)) {
-                deque.push(x);
-            }
-        }
-        while (!deque.isEmpty()) {
-            ans[map.get(deque.pop())] = -1;
-        }
-        return ans;
-    }
-
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int n = nums1.length;
         int[] ans = new int[n];

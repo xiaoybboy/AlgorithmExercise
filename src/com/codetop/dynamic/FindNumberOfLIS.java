@@ -10,23 +10,34 @@ public class FindNumberOfLIS {
 
     public int findNumberOfLIS(int[] nums) {
         int n = nums.length;
-        int[] dp = new int[n];
-        int[] count = new int[n];
+        int[] dp = new int[n];//以i为结尾的最长子序列的长度
+        int[] count = new int[n];//到i结尾最长子序列的数量
         Arrays.fill(dp, 1);
         Arrays.fill(count, 1);
-        int maxLength = 0;
 
-        int ans = 1;
+        int maxLen = 1;
         for (int i = 1; i < n; i++) {
+            int curIMaxLen = 1;
             for (int j = 0; j < i; j++) {
-                if (dp[i] > dp[j]) {
-                    dp[i] = dp[j] + 1;
-                    count[i] = count[j];
-                } else {
-                    count[i] = count[j];
+                if (nums[i] > nums[j]) {
+                    //长度边长了，数量等于count[j]
+                    if (dp[j] + 1 > curIMaxLen) {
+                        curIMaxLen = dp[j] + 1;
+                        count[i] = count[j];
+                    } else if (dp[j] + 1 == curIMaxLen) {
+                        //如果长度没变，那么数量+count[j]
+                        count[i] += count[j];
+                    }
                 }
             }
-            ans += dp[i];
+            dp[i] = curIMaxLen;
+            maxLen = Math.max(maxLen, curIMaxLen);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] == maxLen) {
+                ans += count[i];
+            }
         }
         return ans;
     }

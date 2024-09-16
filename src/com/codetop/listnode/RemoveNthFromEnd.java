@@ -5,7 +5,7 @@ import com.model.ListNode;
 /**
  * 返回链表的导数第K个节点
  */
-public class FindFromEnd {
+public class RemoveNthFromEnd {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
         // 虚拟头结点
