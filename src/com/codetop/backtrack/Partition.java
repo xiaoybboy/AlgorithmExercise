@@ -13,27 +13,26 @@ public class Partition {
     LinkedList<String> tempList = new LinkedList<>();
 
     public List<List<String>> partition(String s) {
-        backTracking(s, 0);
+        backTrack(s, 0);
         return lists;
     }
 
-    private void backTracking(String s, int start) {
-        //找到一种切割方法
+    private void backTrack(String s, int start) {
         if (start == s.length()) {
             lists.add(new ArrayList<>(tempList));
             return;
         }
         for (int i = start; i < s.length(); i++) {
-            //从i处切割，看能不能构成回文串
-            if (isPalindrome(s, start, i)) {
-                tempList.add(s.substring(start, i + 1));
-                backTracking(s, i + 1);
-                tempList.removeLast();
+            //如果构不成回文串
+            if (!isPalindrome(s, start, i)) {
+                continue;
             }
+            tempList.add(s.substring(start, i + 1));
+            backTrack(s, i + 1);
+            tempList.removeLast();
         }
     }
 
-    //判断是否是回文串
     private boolean isPalindrome(String s, int start, int end) {
         while (start <= end && s.charAt(start) == s.charAt(end)) {
             start++;

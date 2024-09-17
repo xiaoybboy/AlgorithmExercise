@@ -1,6 +1,6 @@
 package com.codetop.bfs;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
@@ -12,37 +12,36 @@ import java.util.Queue;
  * 返回 直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 -1 。
  */
 public class OrangesRotting {
-    //BFS，从每个腐烂的橘子开始，向四周腐烂
     public int orangesRotting(int[][] grid) {
-        int M = grid.length;
-        int N = grid[0].length;
-        Queue<int[]> queue = new LinkedList<>();
-
-        int count = 0; // count 表示新鲜橘子的数量
-        for (int r = 0; r < M; r++) {
-            for (int c = 0; c < N; c++) {
-                if (grid[r][c] == 1) {
+        int m = grid.length, n = grid[0].length;
+        Queue<int[]> queue = new ArrayDeque<>();
+        //先遍历一遍，记录新鲜桔子的数量，以及腐烂桔子的位置
+        int count = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
                     count++;
-                } else if (grid[r][c] == 2) {
-                    queue.add(new int[]{r, c});
+                } else if (grid[i][j] == 2) {
+                    queue.add(new int[]{i, j});
                 }
             }
         }
-
-        int round = 0; // round 表示腐烂的轮数，或者分钟数
+        //当还有新鲜桔子的时候循环
+        int round = 0;
         while (count > 0 && !queue.isEmpty()) {
             round++;
-            int n = queue.size();
-            for (int i = 0; i < n; i++) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
                 int[] orange = queue.poll();
                 int r = orange[0];
                 int c = orange[1];
+                //四周腐烂
                 if (r - 1 >= 0 && grid[r - 1][c] == 1) {
                     grid[r - 1][c] = 2;
                     count--;
                     queue.add(new int[]{r - 1, c});
                 }
-                if (r + 1 < M && grid[r + 1][c] == 1) {
+                if (r + 1 < m && grid[r + 1][c] == 1) {
                     grid[r + 1][c] = 2;
                     count--;
                     queue.add(new int[]{r + 1, c});
@@ -52,18 +51,16 @@ public class OrangesRotting {
                     count--;
                     queue.add(new int[]{r, c - 1});
                 }
-                if (c + 1 < N && grid[r][c + 1] == 1) {
+                if (c + 1 < n && grid[r][c + 1] == 1) {
                     grid[r][c + 1] = 2;
                     count--;
                     queue.add(new int[]{r, c + 1});
                 }
             }
         }
-
         if (count > 0) {
             return -1;
-        } else {
-            return round;
         }
+        return round;
     }
 }

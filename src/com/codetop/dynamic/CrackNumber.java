@@ -8,11 +8,6 @@ package com.codetop.dynamic;
  */
 public class CrackNumber {
 
-    public static void main(String[] args) {
-        int n = 216612;
-        crackNumber(n);
-    }
-
     //dp[i] = dp[i-1] 如果单位
     //dp[i] = dp[i-1] + dp[i-2]
     public static int crackNumber(int ciphertext) {
@@ -20,14 +15,12 @@ public class CrackNumber {
         int n = s.length();
         int[] dp = new int[n + 1];
         dp[0] = 1;
-        for (int i = 1; i <= n; i++) {
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
             dp[i] = dp[i - 1];
-            //如果能拆分成2位
-            if (i > 1) {
-                int val = Integer.parseInt(s.substring(i - 2, i));
-                if (val <= 25 && val >= 10) {
-                    dp[i] += dp[i - 2];
-                }
+            int val = Integer.valueOf(s.substring(i - 2, i));
+            if (val >= 10 && val <= 25) {
+                dp[i] += dp[i - 2];
             }
         }
         return dp[n];

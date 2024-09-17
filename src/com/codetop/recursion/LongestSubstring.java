@@ -37,7 +37,6 @@ public class LongestSubstring {
                 return res;
             }
         }
-
         // 没有找到小于k的字符，说明整个字符串都符合要求，返回其长度
         return n;
     }

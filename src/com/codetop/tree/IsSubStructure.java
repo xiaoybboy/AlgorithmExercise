@@ -8,11 +8,11 @@ import com.model.TreeNode;
  */
 public class IsSubStructure {
 
-    public boolean isSubStructure2(TreeNode A, TreeNode B) {
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
         if (A == null || B == null) {
             return false;
         }
-        return isContains(A, B) || isSubStructure2(A.left, B) || isSubStructure2(A.right, B);
+        return isContains(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
     }
 
     private boolean isContains(TreeNode A, TreeNode B) {
@@ -23,29 +23,5 @@ public class IsSubStructure {
             return false;
         }
         return isContains(A.left, B.left) && isContains(A.right, B.right);
-    }
-
-    public boolean isSubStructure(TreeNode A, TreeNode B) {
-        if (A == null || B == null) {
-            return false;
-        }
-        return (recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B));
-    }
-
-    /**
-     * A是否包含B
-     *
-     * @param A
-     * @param B
-     * @return
-     */
-    private boolean recur(TreeNode A, TreeNode B) {
-        if (B == null) {
-            return true;
-        }
-        if (A == null || A.val != B.val) {
-            return false;
-        }
-        return recur(A.left, B.left) && recur(A.right, B.right);
     }
 }

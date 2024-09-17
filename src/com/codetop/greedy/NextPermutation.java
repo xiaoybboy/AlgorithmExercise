@@ -16,18 +16,23 @@ import java.util.Arrays;
 public class NextPermutation {
 
     public void nextPermutation(int[] nums) {
-        int i = nums.length - 2;
+        int n = nums.length;
+        int i = n - 2;
+        //1.寻找第一个升序对13754
+        //从右往左找到第一个降序的元素,3和7
         while (i >= 0 && nums[i] >= nums[i + 1]) {
             i--;
         }
         if (i >= 0) {
-            int j = nums.length - 1;
-            while (j >= 0 && nums[i] >= nums[j]) {
+            //从右往左找到第一个大于3的元素
+            int j = n - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
                 j--;
             }
             swap(nums, i, j);
         }
-        Arrays.sort(nums, i + 1, nums.length);
+        //排序i后面的所有元素
+        Arrays.sort(nums, i + 1, n);
     }
 
     public void swap(int[] nums, int i, int j) {
