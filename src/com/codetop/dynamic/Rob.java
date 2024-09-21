@@ -80,22 +80,24 @@ public class Rob {
      */
     Map<TreeNode, Integer> memo = new HashMap<>();
 
-    public int rob(TreeNode root) {
-        if (root == null)
+    public int rob3(TreeNode root) {
+        if (root == null) {
             return 0;
-        if (memo.containsKey(root))
+        }
+        if (memo.containsKey(root)) {
             return memo.get(root);
-        //如果抢当前节点，那只能抢左右子树的左右节点
+        }
         int money = root.val;
+        //如果抢当前节点，那只能抢左右子树的左右节点
         if (root.left != null) {
-            money += rob(root.left.left) + rob(root.left.right);
+            money += rob3(root.left.left) + rob3(root.left.right);
         }
         if (root.right != null) {
-            money += rob(root.right.left) + rob(root.right.right);
+            money += rob3(root.right.left) + rob3(root.right.right);
         }
         //如果不抢当前节点，可以抢左节点或者右节点
-        int res = Math.max(money, rob(root.left) + rob(root.right));
-        memo.put(root, res);
-        return res;
+        int rest = Math.max(money, rob3(root.left) + rob3(root.right));
+        memo.put(root, rest);
+        return rest;
     }
 }

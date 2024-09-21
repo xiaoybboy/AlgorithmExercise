@@ -14,8 +14,8 @@ public class FindMaxLength {
     public int findMaxLength(int[] nums) {
         int len = nums.length;
 
-        Map<Integer, Integer> hashMap = new HashMap<>();
-        hashMap.put(0, -1);
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
         int preSum = 0;
         int res = 0;
         for (int i = 0; i < len; i++) {
@@ -24,13 +24,10 @@ public class FindMaxLength {
             } else {
                 preSum++;
             }
-
-            if (!hashMap.containsKey(preSum)) {
-                hashMap.put(preSum, i);
+            if (map.containsKey(preSum)) {
+                res = Math.max(res, i - map.get(preSum));
             } else {
-                // 因为求的是最长的长度，只记录前缀和第一次出现的下标，
-                // 注意：这里不需要加 1
-                res = Math.max(res, i - hashMap.get(preSum));
+                map.put(preSum, i);
             }
         }
         return res;

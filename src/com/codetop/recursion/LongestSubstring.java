@@ -7,30 +7,34 @@ package com.codetop.recursion;
  */
 public class LongestSubstring {
 
-    public int longestSubstring(String s, int k) {
+    public static void main(String[] args) {
+        String s = "aaabb";
+        longestSubstring(s, 3);
+    }
+
+    public static int longestSubstring(String s, int k) {
         int n = s.length();
-        // 特殊情况处理
         if (k == 1) {
             return n;
         }
         if (k > n) {
             return 0;
         }
-        // 统计整个字符串的字符个数
-        int[] counts = new int[26];
-        for (char ch : s.toCharArray()) {
-            counts[ch - 'a']++;
+        //统计整个字符串串中每个字符出现次数
+        int[] count = new int[26];
+        for (char c : s.toCharArray()) {
+            count[c - 'a']++;
         }
-
-        // 寻找字符个数小于k的字符
+        //找到任意一个出现次数<k的字符，这个循环不用执行完，其他情况，在子问题中会自动处理
+        //找到第一个即可
         for (int i = 0; i < 26; i++) {
-            if (counts[i] > 0 && counts[i] < k) {
+            if (count[i] > 0 && count[i] < k) {
+                char ch = (char) ('a' + i);
+                //按照这个字符串分割，并找到每个子串满足条件的最大长度
+                String[] array = s.split(String.valueOf(ch));
                 int res = 0;
-                char ch = (char) (i + 'a');
-                // 用这个字符把整个字符串分隔为几个部分，问题的解不可能超出这几个子部分
-                for (String ss : s.split(String.valueOf(ch))) {
-                    // 递归处理每个部分
-                    res = Math.max(res, longestSubstring(ss, k));
+                for (String s1 : array) {
+                    res = Math.max(res, longestSubstring(s1, k));
                 }
                 // 子部分的最值就是问题的解
                 // 并且这里，只要找到一个分隔字符即可，其余的在子问题中会得到处理。不需要过多的陷入递归嵌套之中。

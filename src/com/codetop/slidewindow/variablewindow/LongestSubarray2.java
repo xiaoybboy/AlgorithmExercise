@@ -1,6 +1,5 @@
 package com.codetop.slidewindow.variablewindow;
 
-import java.util.Comparator;
 import java.util.TreeMap;
 
 /**
@@ -11,22 +10,23 @@ import java.util.TreeMap;
 public class LongestSubarray2 {
 
     public int longestSubarray(int[] nums, int limit) {
-        int start = 0, maxLength = 0;
-        TreeMap<Integer, Integer> map = new TreeMap<>(Comparator.comparingInt(o -> o));
-        for (int end = 0; end < nums.length; end++) {
+        int start = 0;
+        int n = nums.length, ans = 0;
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        for (int end = 0; end < n; end++) {
             map.put(nums[end], map.getOrDefault(nums[end], 0) + 1);
-            //比较最大值和最小值
+            //窗口条件不满足的时候，调整左窗口
             while (map.lastKey() - map.firstKey() > limit) {
                 int count = map.getOrDefault(nums[start], 0) - 1;
-                if (count == 0) {
+                if (count <= 0) {
                     map.remove(nums[start]);
                 } else {
                     map.put(nums[start], count);
                 }
                 start++;
             }
-            maxLength = Math.max(maxLength, end - start + 1);
+            ans = Math.max(ans, end - start + 1);
         }
-        return maxLength;
+        return ans;
     }
 }
