@@ -13,7 +13,6 @@ import java.util.Map;
  * 子数组 指的是一个数组中一段连续非空的元素序列。
  */
 public class MaxSubarrayLength {
-
     public static int maxSubarrayLength(int[] nums, int k) {
         Map<Integer, Integer> tempMap = new HashMap<>();
         int start = 0, maxLength = 0;
@@ -30,10 +29,5 @@ public class MaxSubarrayLength {
             maxLength = Math.max(maxLength, end - start + 1);
         }
         return maxLength;
-    }
-
-    public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 2, 1, 3};
-        maxSubarrayLength(nums, 1);
     }
 }

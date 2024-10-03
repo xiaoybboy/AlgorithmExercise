@@ -4,7 +4,6 @@ import com.model.ListNode;
 
 /**
  * 给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。
- * <p>
  * 你应当 保留 两个分区中每个节点的初始相对位置。
  * <p>
  * 输入：head = [1,4,3,2,5,2], x = 3
@@ -16,14 +15,6 @@ import com.model.ListNode;
  */
 public class PartitionListNode {
 
-    /**
-     * 思路，把原链表分割成连两个链表
-     * 最后把两个链表连起来
-     *
-     * @param head
-     * @param x
-     * @return
-     */
     public ListNode partition(ListNode head, int x) {
         ListNode smlDummy = new ListNode(0);
         ListNode bigDummy = new ListNode(0);

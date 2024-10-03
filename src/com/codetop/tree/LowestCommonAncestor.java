@@ -7,28 +7,6 @@ import com.baseAlgorithm.tree.TreeNode;
  */
 public class LowestCommonAncestor {
 
-
-    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null || root == p || root == q) {
-            return root;
-        }
-        TreeNode left = lowestCommonAncestor2(root.left, p, q);
-        TreeNode right = lowestCommonAncestor2(root.right, p, q);
-        if (left == null && right == null) {
-            return null;
-        }
-        if (left != null && right == null) {
-            return left;
-        }
-        if (left == null && right != null) {
-            return right;
-        }
-        if (left != null && right != null) {
-            return root;
-        }
-        return root;
-    }
-
     //终止条件：
     //当越过叶节点，则直接返回 null ；
     //当 root 等于 p,q ，则直接返回 root ；

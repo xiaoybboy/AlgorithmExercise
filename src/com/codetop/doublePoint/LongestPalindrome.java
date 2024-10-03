@@ -5,12 +5,6 @@ package com.codetop.doublePoint;
  * 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
  */
 public class LongestPalindrome {
-
-    public static void main(String[] args) {
-        String s = "a";
-        longestPalindrome(s);
-    }
-
     /**
      * 双指针法-中心扩散
      * 如果回文串的长度为奇数，则它有一个中心字符；如果回文串的长度为偶数，则可以认为它有两个中心字符

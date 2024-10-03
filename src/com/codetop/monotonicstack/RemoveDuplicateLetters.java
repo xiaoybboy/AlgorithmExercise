@@ -11,33 +11,6 @@ import java.util.Set;
  */
 public class RemoveDuplicateLetters {
 
-    public String removeDuplicateLetters2(String s) {
-        int[] count = new int[256];
-        for (char c : s.toCharArray()) {
-            count[c]++;
-        }
-
-        Deque<Character> deque = new ArrayDeque<>();
-        Set<Character> set = new HashSet<>();
-        for (char c : s.toCharArray()) {
-            count[c]--;
-            if (set.contains(c)) {
-                continue;
-            }
-            while (!deque.isEmpty() && deque.peek() > c && count[c] > 0) {
-                deque.pop();
-                set.remove(c);
-            }
-            set.add(c);
-            deque.push(c);
-        }
-        StringBuilder builder = new StringBuilder();
-        while (!deque.isEmpty()) {
-            builder.append(deque.pollLast());
-        }
-        return builder.toString();
-    }
-
     public String removeDuplicateLetters(String s) {
         //1.记录每个字符出现的次数
         int[] chCount = new int[256];

@@ -11,26 +11,26 @@ import java.util.Map;
 public class Intersect {
 
     public int[] intersect(int[] nums1, int[] nums2) {
+        //1.排序
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         int n1 = nums1.length, n2 = nums2.length;
-        int[] intersect = new int[Math.min(n1, n2)];
-        int idx1 = 0, idx2 = 0, interIdx = 0;
-        while (idx1 < n1 && idx2 < n2) {
-            if (nums1[idx1] > nums2[idx2]) {
-                idx2++;
-            } else if (nums1[idx1] < nums2[idx2]) {
-                idx1++;
+        int[] ans = new int[Math.min(n1, n2)];
+        //2.双指针
+        int index1 = 0, index2 = 0, ansIndex = 0;
+        while (index1 < n1 && index2 < n2) {
+            if (nums1[index1] < nums2[index2]) {
+                index1++;
+            } else if (nums1[index1] > nums2[index2]) {
+                index2++;
             } else {
-                intersect[interIdx] = nums1[idx1];
-                intersect[interIdx] = nums1[idx1];
-                idx1++;
-                idx2++;
-                interIdx++;
+                ans[ansIndex] = nums1[index1];
+                index1++;
+                index2++;
+                ansIndex++;
             }
         }
-        //需要把多余的
-        return Arrays.copyOfRange(intersect, 0, interIdx);
+        return Arrays.copyOfRange(ans, 0, ansIndex);
     }
 
     /**
