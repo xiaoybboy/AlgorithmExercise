@@ -16,7 +16,9 @@ public class ZConvert {
             return s;
         }
         String[] rows = new String[numRows];
-        for (int i = 0; i < numRows; i++) rows[i] = "";
+        for (int i = 0; i < numRows; i++) {
+            rows[i] = "";
+        }
 
         boolean down = false;//循环中反向
         int rowIndex = 0;//字符串数组rows中的位置

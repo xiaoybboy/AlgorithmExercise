@@ -70,10 +70,10 @@ public class JumpMinStep {
             if (i > maxPosition) { // 无法到达 i
                 return false;
             }
-            if (maxPosition > n - 1) {
+            maxPosition = Math.max(maxPosition, i + nums[i]); // 从 i 最右可以跳到 i + nums[i]
+            if (maxPosition >= n - 1) {
                 return true;
             }
-            maxPosition = Math.max(maxPosition, i + nums[i]); // 从 i 最右可以跳到 i + nums[i]
         }
         return true;
     }

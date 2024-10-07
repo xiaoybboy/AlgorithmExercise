@@ -33,22 +33,26 @@ public class PathSum {
      * 叶子节点 是指没有子节点的节点。
      */
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        dfs(root, targetSum);
+        dfs(root, 0, targetSum);
         return result;
     }
 
-    public void dfs(TreeNode node, int sum) {
+    public void dfs(TreeNode node, int curSum, int targetSum) {
         if (node == null) {
             return;
         }
         tempList.add(node.val);
-        sum -= node.val;
-        if (node.left == null && node.right == null && sum == 0) {
-            result.add(new ArrayList<>(tempList));
-        } else {
-            dfs(node.left, sum);
-            dfs(node.right, sum);
+        curSum += node.val;
+        if (node.left == null && node.right == null) {
+            if (curSum == targetSum) {
+                result.add(new ArrayList<>(tempList));
+            }
+            //注意到叶子节点的时候，要把最后一个移除掉
+            tempList.removeLast();
+            return;
         }
+        dfs(node.left, curSum, targetSum);
+        dfs(node.right, curSum, targetSum);
         tempList.removeLast();
     }
 }

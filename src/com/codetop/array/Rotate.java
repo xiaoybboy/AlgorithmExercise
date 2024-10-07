@@ -16,13 +16,17 @@ public class Rotate {
         reverse(nums, k, nums.length - 1);
     }
 
-    public void reverse(int[] nums, int start, int end) {
+    void reverse(int[] nums, int start, int end) {
         while (start < end) {
-            int temp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = temp;
-            start += 1;
-            end -= 1;
+            swap(nums, start, end);
+            start++;
+            end--;
         }
+    }
+
+    void swap(int[] nums, int a, int b) {
+        int tmp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = tmp;
     }
 }

@@ -13,7 +13,7 @@ public class WordBreak {
 
     //dp[i]:s的前i个字符是否可以用字典拼出
     //dp[i] = dp[j] && check(s[j,i])
-    public static boolean wordBreak(String s, List<String> wordDict) {
+    public boolean wordBreak(String s, List<String> wordDict) {
         int n = s.length();
         Set<String> wordDictSet = new HashSet<>(wordDict);
         boolean[] dp = new boolean[n + 1];

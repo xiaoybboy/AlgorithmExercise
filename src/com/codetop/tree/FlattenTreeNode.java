@@ -2,8 +2,6 @@ package com.codetop.tree;
 
 import com.model.TreeNode;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -13,23 +11,6 @@ import java.util.Stack;
  * 展开后的单链表应该与二叉树 先序遍历 顺序相同。
  */
 public class FlattenTreeNode {
-
-    public void flatten2(TreeNode root) {
-        TreeNode pre = null;
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        deque.offer(root);
-        while (!deque.isEmpty()) {
-            TreeNode node = deque.pollFirst();
-            if (pre != null) {
-                pre.right = node;
-                pre.left = null;
-            }
-
-            if (node.left != null) {
-
-            }
-        }
-    }
 
     public void flatten(TreeNode root) {
         if (root == null) {

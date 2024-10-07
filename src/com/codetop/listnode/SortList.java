@@ -12,6 +12,7 @@ public class SortList {
         if (head == null || head.next == null) {
             return head;
         }
+        //找到中间节点
         ListNode fast = head, slow = head, pre = head;
         while (fast != null && fast.next != null) {
             pre = slow;

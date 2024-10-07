@@ -1,8 +1,6 @@
 package com.codetop.greedy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 
 /**
  * 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。
@@ -12,29 +10,21 @@ import java.util.PriorityQueue;
 public class LargestNumber {
 
     /**
-     * 贪心策略：
-     * <p>
      * 若拼接字符串 x+y>y+x ，则 x “大于” y 。
      * 反之，若 x+y<y+x ，则 x “小于” y 。
-     * <p>
-     *
-     * @param nums
-     * @return
      */
     public String largestNumber(int[] nums) {
-        PriorityQueue<String> heap = new PriorityQueue<>((x, y) -> (y + x).compareTo(x + y));
-        for (int x : nums) {
-            heap.offer(String.valueOf(x));
+        int n = nums.length;
+        String[] ss = new String[nums.length];
+        for (int i = 0; i < n; i++) {
+            ss[i] = String.valueOf(nums[i]);
         }
-        String res = "";
-        while (heap.size() > 0) {
-            res += heap.poll();
-        }
-        if (res.charAt(0) == '0') {
+        Arrays.sort(ss, (a, b) -> (b + a).compareTo(a + b));
+        if (ss[0].equals("0")) {
             return "0";
         }
-        return res;
+        StringBuilder sb = new StringBuilder();
+        for (String s : ss) sb.append(s);
+        return sb.toString();
     }
-
-
 }

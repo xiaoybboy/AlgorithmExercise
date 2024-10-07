@@ -12,38 +12,34 @@ public class CheckInclusion {
      * 滑动窗口-在上s2上一个长度为s1.length的滑动窗口，
      * 观察滑动窗口中的每个字符的数量，是否与s1 中每个字符数量一致。
      */
-    public boolean checkInclusion(String s1, String s2) {
-        if (s1.length() > s2.length()) {
+    public static boolean checkInclusion(String s1, String s2) {
+        int m = s1.length(), n = s2.length();
+        if (m > n) {
             return false;
         }
-        //S1,S2只有小写字母，创建一个包含26个字母的数组，数组的每一位是对应字母的数量
-        int[] need = new int[26];
-        for (int i = 0; i < s1.length(); i++) {
-            need[s1.charAt(i) - 'a']++;
+        int[] s1Count = new int[26];
+        for (char ch : s1.toCharArray()) {
+            s1Count[ch - 'a']++;
         }
-        int[] candidate = new int[26];
-        //先找到长度为s1.length的数组
-        for (int j = 0; j < s1.length(); j++) {
-            candidate[s2.charAt(j) - 'a']++;
-        }
-        if (check(need, candidate)) {
-            return true;
-        }
-        //开始在s2滑动，不断更新候选数组，并进行比较
-        for (int k = s1.length(); k < s2.length(); k++) {
-            //去除滑动窗口最左边的字符，并增加当前字符
-            candidate[s2.charAt(k - s1.length()) - 'a']--;
-            candidate[s2.charAt(k) - 'a']++;
-            if (check(need, candidate)) {
+        int start = 0;
+        int[] windowCount = new int[26];
+        for (int end = 0; end < s2.length(); end++) {
+            windowCount[s2.charAt(end) - 'a']++;
+            if (end < s1.length() - 1) {
+                continue;
+            }
+            if (isSame(s1Count, windowCount)) {
                 return true;
             }
+            windowCount[s2.charAt(start) - 'a']--;
+            start++;
         }
         return false;
     }
 
-    private boolean check(int[] need, int[] candidate) {
-        for (int i = 0; i < need.length; i++) {
-            if (need[i] != candidate[i]) {
+    private static boolean isSame(int[] s1Count, int[] s2Count) {
+        for (int i = 0; i < s1Count.length; i++) {
+            if (s1Count[i] != s2Count[i]) {
                 return false;
             }
         }

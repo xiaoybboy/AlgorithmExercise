@@ -11,32 +11,53 @@ import java.util.PriorityQueue;
  */
 public class ReorganizeString {
 
+    public class Node {
+        char ch;
+        Integer count = 0;
+
+        public Node() {
+        }
+
+        public Node(char ch, Integer count) {
+            this.ch = ch;
+            this.count = count;
+        }
+    }
+
     public String reorganizeString(String s) {
-        //1.统计每个字符出现的次数
-        Map<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        char[] arrays = s.toCharArray();
+        Map<Character, Node> map = new HashMap<>();
+        for (char c : arrays) {
+            Node node = map.getOrDefault(c, new Node());
+            node.ch = c;
+            node.count += 1;
+            map.put(c, node);
         }
-        //2,构造最大堆
-        PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<>((o1, o2) -> o2.getValue() - o1.getValue());
-        for (Map.Entry<Character, Integer> m : map.entrySet()) {
-            maxHeap.add(m);
+        PriorityQueue<Node> queue = new PriorityQueue<>((o1, o2) -> o2.count - o1.count);
+        for (Node node : map.values()) {
+            queue.offer(node);
         }
-        //3.每次取出频率最高的元素，然后后面插入一个其他元素，直到队列元素用完
-        //注意：如果最后没有与频率最高的元素匹配的其他字符，最高频元素会全部弹出，整个字符串的长度会小于s的长度
         StringBuilder builder = new StringBuilder();
-        Map.Entry<Character, Integer> pre = null;
-        while (!maxHeap.isEmpty()) {
-            Map.Entry<Character, Integer> cur = maxHeap.poll();
-            //注意这里，因为上一轮已经把频率最高的元素弹出了，这里取出来的是频率第二高的元素
-            if (pre != null && pre.getValue() > 0) {
-                maxHeap.offer(pre);
+        //出现频次最高的元素和出现频次第二高的元素，依次出队和入队
+        while (!queue.isEmpty()) {
+            Node first = queue.poll();
+            Node second = queue.poll();
+            //出现次数第一高的元素
+            builder.append(first.ch);
+            first.count--;
+            if (first.count > 0) {
+                queue.offer(first);
             }
-            //插入一个最高频元素，然后插入一个次高频元素
-            builder.append(cur.getKey());
-            cur.setValue(cur.getValue() - 1);
-            pre = cur;
+            //出现次数第二高的元素，有可能为空
+            if (second != null) {
+                builder.append(second.ch);
+                second.count--;
+                if (second.count > 0) {
+                    queue.offer(second);
+                }
+            } else {
+                break;
+            }
         }
         return builder.length() == s.length() ? builder.toString() : "";
     }

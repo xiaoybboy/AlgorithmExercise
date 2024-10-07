@@ -96,7 +96,8 @@ public class Rob {
             money += rob3(root.right.left) + rob3(root.right.right);
         }
         //如果不抢当前节点，可以抢左节点或者右节点
-        int rest = Math.max(money, rob3(root.left) + rob3(root.right));
+        int noRobMoney = rob3(root.left) + rob3(root.right);
+        int rest = Math.max(money, noRobMoney);
         memo.put(root, rest);
         return rest;
     }

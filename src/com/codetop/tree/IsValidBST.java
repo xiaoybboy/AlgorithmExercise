@@ -11,14 +11,14 @@ public class IsValidBST {
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    public boolean isValidBST(TreeNode node, long lower, long upper) {
-        if (node == null) {
+    public boolean isValidBST(TreeNode root, long lower, long higher) {
+        if (root == null) {
             return true;
         }
-        if (node.val <= lower || node.val >= upper) {
+        if (root.val <= lower || root.val >= higher) {
             return false;
         }
-        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
+        return isValidBST(root.left, lower, root.val) && isValidBST(root.right, root.val, higher);
     }
 }
 

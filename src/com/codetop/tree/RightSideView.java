@@ -1,34 +1,36 @@
-package com;
-
+package com.codetop.tree;
 
 import com.model.TreeNode;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Test {
-
-    public int widthOfBinaryTree(TreeNode root) {
-        int maxWidth = 0;
+/**
+ * 给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值
+ */
+public class RightSideView {
+    public List<Integer> rightSideView(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
         ArrayDeque<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
-        root.val = 1;
 
+        List<Integer> result = new ArrayList<>();
         while (!queue.isEmpty()) {
-            maxWidth = Math.max(maxWidth, queue.peekLast().val - queue.peekFirst().val + 1);
             int size = queue.size();
-
+            result.add(queue.peekLast().val);
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
                 if (node.left != null) {
-                    node.left.val = node.val * 2 - 1;
                     queue.offer(node.left);
                 }
                 if (node.right != null) {
-                    node.right.val = node.val * 2;
                     queue.offer(node.right);
                 }
             }
         }
-        return maxWidth;
+        return result;
     }
 }

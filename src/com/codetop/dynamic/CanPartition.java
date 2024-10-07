@@ -7,7 +7,6 @@ public class CanPartition {
 
     /**
      * 给定一个只包含正整数的非空数组 nums[0]，判断是否可以从数组中选出一些数字，使得这些数字的和等于整个数组的元素和的一半。
-     * <p>
      */
     public boolean canPartition(int[] nums) {
         int n = nums.length;
@@ -53,6 +52,4 @@ public class CanPartition {
         }
         return dp[n - 1][target];
     }
-
-
 }
